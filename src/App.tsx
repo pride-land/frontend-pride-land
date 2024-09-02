@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route,  Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/homeComponents/Layout";
 import Home from "./pages/Home";
 import AdminLogin from "./Admin/admin-components/AdminLogin";
@@ -12,35 +12,34 @@ import Volunteer from "./Admin/admin-pages/Volunteer";
 import Comments from "./Admin/admin-pages/Comments";
 import AdminControl from "./Admin/admin-pages/AdminControl";
 import Layouts from "./Admin/admin-pages/Layouts";
-
-
+import VolunteerPage from "./pages/VolunteerPage";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <AuthProvider>
-            <Routes>
-                <Route path="/" element={<Layout/>}>
-                    <Route index element={<Home />}/>
-                    <Route path="volunteers" element={<VolunteerPage/>}/>   
-                </Route>     
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="volunteers" element={<VolunteerPage />} />
+            </Route>
 
-                <Route path="login" element={<AdminLogin/>}/>
-                <Route path="register" element={<AdminRegistration/>} />
-                <Route path="admin-layout" element={<AdminLayout/>}>
-                      <Route index element={<Dashboard/>} />
-                      <Route path="blogs-admin" element={<BlogsAdmin/>} />
-                      <Route path="volunteer" element={<Volunteer/>} />
-                      <Route path="layouts" element={<Layouts/>} />
-                      <Route path="comments" element={<Comments/>} />
-                      <Route path="admin-controls" element={<AdminControl/>} />
-                </Route>
-            </Routes>
+            <Route path="login" element={<AdminLogin />} />
+            <Route path="register" element={<AdminRegistration />} />
+            <Route path="admin-layout" element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="blogs-admin" element={<BlogsAdmin />} />
+              <Route path="volunteer" element={<Volunteer />} />
+              <Route path="layouts" element={<Layouts />} />
+              <Route path="comments" element={<Comments />} />
+              <Route path="admin-controls" element={<AdminControl />} />
+            </Route>
+          </Routes>
         </AuthProvider>
       </BrowserRouter>
     </>
-  )
+  );
 };
 
 export default App;
