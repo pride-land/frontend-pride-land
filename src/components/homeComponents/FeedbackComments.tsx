@@ -46,7 +46,8 @@ const FeedbackComments: React.FC<Props> = (props) => {
         return <div id={"feedback-" + String(index+1)} key={feedback.name + index} className='m-4 flex flex-col justify-center'>
                 <div className="bg-white p-6 flex flex-col text-center text-md rounded-md drop-shadow-lg my-3">
                     <div>
-                        <img src={props.images[index].src}></img>
+                        
+                        {/* <img src={props.images[index].src}></img> */}
                     </div>
                     <div className=''>
                         <h1>{feedback.comment}</h1>

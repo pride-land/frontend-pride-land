@@ -5,14 +5,15 @@ import { format } from 'date-fns'
 
 interface ImageType {
    images: string,
-   alt: string
+   alt: string,
+   src? :string,
 }
 
 interface Props {
    images: ImageType []
 }
 
-const Blogs: React.FC<Props> = () => {
+const Blogs: React.FC<Props> = (props) => {
   const [blogs, setBlogs ] = useState<BlogsTypes[]>([]);
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const Blogs: React.FC<Props> = () => {
           <div className=" ">
                 <div className="bg-white my-4 shadow-md p-2 rounded-lg">
                 <img className="rounded-lg px-20 mt-5 " ></img>
-               
+                <img className="rounded-lg px-20 mt-5 " src={props.images[index].src}></img>
                 <div className="my-2 text-center">{blog.name}</div>
                 <div className="my-3 text-center">{blog.images}</div>
                 <div className="p-3">{blog.title}</div>

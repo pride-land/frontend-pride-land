@@ -30,7 +30,8 @@ export const AuthProvider = ({ children } : { children: ReactNode }) => {
         });
 
         let data = await response.json();
-        console.log('data:', data) //logs JWT tokens if login is successful
+        // console.log('data:', data) 
+        //logs JWT tokens if login is successful
         // With wrong credentials the code get stuck with parsing error message
         // because the response has text message not the access and request tocken in required format
         // performing a check on success of login will prevent this error.

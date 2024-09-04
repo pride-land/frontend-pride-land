@@ -6,25 +6,24 @@ import * as blogsApi from "../../api/blogs"
 import { format } from 'date-fns'
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useParams } from 'react-router-dom'
+import ImageUpload from "./ImageUpload";
 
 
-const BlogsAdmin = ( e: React.FormEvent<HTMLFormElement>) => {
+const BlogsAdmin = () => {
 const [open, setOpen] = useState(false)
-const { id } = useParams();
 const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
-const formData = new FormData(e.currentTarget);
 const navigate = useNavigate();
 
   useEffect(()=>{
-    fetchAllBlogs();
+    fetchAllBlogs()
   },[]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try{
+      const formData = new FormData(e.currentTarget);
       const response = await blogsPostApi.postBlogs(formData);
-      console.log("Success!", response)
+      console.log(response)
       navigate('/admin-layout/blogs-admin')
     } catch (error){
       console.log("error:" , error)
@@ -33,92 +32,96 @@ const navigate = useNavigate();
 
   const fetchAllBlogs = async() => {
       const response = await blogsApi.fetchAllBlogs();
-      setBlogs(response.reverse())
+      setBlogs(response)
   }
 
   const handleDelete = (id: number) => {
     try{
     Axios.delete(process.env.backend_url  + `blogs/${id}/`)
     }catch (error){
-      console.log()
+      console.log(error)
     }
   }
 
   return (
     <>
-
+    <ImageUpload />
     <div>
       <div>
-        <form name="blogPost" method="POST" onSubmit={handleSubmit}>
-          {/*  Blog Titles  choose events or blogs*/}
-          <div> 
-            <label >Title:</label>
-            <div>
-              <input 
-                    type="text" 
-                    id="name" 
-                    name="name"
-                    >
-                    </input>
-            </div>
-          </div>
-          {/* Blog Post */}
-          <div>
-            <label >Blog post:</label>
-            <div>
-              <textarea 
+            <form name="blogPost" method="POST" onSubmit={handleSubmit}>
+              
+              {/*  Blog Titles  choose events or blogs*/}
+              <div> 
+                <label htmlFor="title">Title:</label>
+                <div>
+                  <input 
+                        type="text" 
                         id="title" 
                         name="title"
                         >
-              </textarea>
-            </div>
-          </div>
+                  </input>
+                </div>
+              </div>
 
-          {/* Upload Photo */}
-          <div>
-            <label ></label>
-            <h2> Add image:</h2>
-            <input type="file" 
-                    id="images" 
-                    accept="image/*"
-                    name="images"
-                    >
-            </input>
-          </div>
+              {/* Blog Post */}
+              <div>
+                <label htmlFor="blog">Blog post:</label>
+                <div>
+                  <textarea 
+                            id="blog" 
+                            name="blog"
+                            >
+                  </textarea>
+                </div>
+              </div>
 
-           {/* Post Button */}
-           <div>
-            <label ></label>
-            <button type="submit" className="mt-2
-             bg-red-400 rounded-lg p-1">Post</button>
-          </div>
-        </form>
-      </div>
+              {/* Upload Photo */}
+              <div>
+                <label htmlFor="images"></label>
+                  <h2> Add image:</h2>
+                    <input type="file" 
+                            id="images" 
+                            accept="image/*"
+                            name="images"
+                            >
+                    </input>
+              </div>
+
+              {/* Post Button */}
+              <div>
+                <label ></label>
+                <button type="submit" className="mt-2
+                bg-red-400 rounded-lg p-1">Post
+                </button>
+              </div>
+            </form>
+        </div>
     </div>
     <hr className="my-3"/>
-   <div>
-    <div>
-      <h2 className="font-bold text-center">Blog List</h2>
-      <ul className="flex justify-between font-semibold text-gray-500 px-2">
-        <li>ID</li>
-        <li>Date</li>
-        <li>Title</li>
-        <li>Update</li>
-      </ul>
-      <div>{blogs.map((elt, index) => (
-          <div className="flex justify-between p-2  flex-row gap-5" id={"blogs-" + String(index+1)} key={elt.name + index} >
-                <div>{elt.id}</div>
-                <div className="text-center"><span>{format(elt.date_created, 'MM/dd/yyyy')}</span></div>
-                <div className="text-center"><span>{elt.name}</span></div>
-                <div className="flex gap-2
-                ">
-                <div><button onClick={() => setOpen(true) }className="bg-orange-400 p-1 rounded-md text-xs">Edit</button> </div>
-                <div><button onClick={() => handleDelete(elt.id)} className="bg-red-500 p-1 rounded-md text-xs">Delete</button> </div>
+
+        <div>
+            <div>
+                <h2 className="font-bold text-center">Blog List</h2>
+                    <ul className="flex justify-between font-semibold text-gray-500 px-2">
+                      <li>ID</li>
+                      <li>Date</li>
+                      <li>Title</li>
+                      <li>Update</li>
+                    </ul>
+                  <div>{blogs.map((elt, index) => (
+                      <div className="flex justify-between p-2  flex-row gap-5" id={"blogs-" + String(index+1)} key={index} >
+                            <div key={index}>{elt.id}</div>
+                            <div className="text-center"><span>{format(elt.date_created, 'MM/dd/yyyy')}</span></div>
+                            <div className="text-center"><span>{elt.title}</span></div>
+                            <div className="flex gap-2
+                            ">
+                            <div><button onClick={() => handleDelete(blogs.id)} className="bg-red-500 p-1 rounded-md text-xs">Delete</button> </div>
+                            <div><button onClick={() => setOpen(true) }className="bg-orange-400 p-1 rounded-md text-xs">Edit</button> </div>
+                        </div>
+                      </div>
+                  ))}</div>
             </div>
-          </div>
-      ))}</div>
-    </div>
-   </div>
+        </div>
 
     {/* Edit */}
   
@@ -154,7 +157,7 @@ const navigate = useNavigate();
                                     type="text" 
                                     id="name" 
                                     name="name"
-                                    value={blogs.name}
+                                    value={blogs.title}
                                     >
                                     </input>
                             </div>
@@ -167,7 +170,7 @@ const navigate = useNavigate();
                             <textarea 
                                         id="title" 
                                         name="title"
-                                        value={blogs.title}
+                                        value={blogs.blog}
                                         >
                             </textarea>
                             </div>
@@ -190,7 +193,16 @@ const navigate = useNavigate();
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+      <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button
+              type="button"
+              onClick={() => handleDelete(blogs.id)} 
+              className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm 
+              font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+            >
+     
+            Delete
+            </button>
             <button
               type="button"
               onClick={() => setOpen(false)}
