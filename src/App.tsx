@@ -16,8 +16,7 @@ import AdminControlDashboard from "./Admin/admin-components/AdminControlDashboar
 import AdminGallery from "./Admin/admin-components/AdminGallery";
 import CommentsPage from "./pages/CommentsPage";
 import AboutUsPage from "./pages/AboutUsPage";
-import { Context, createContext, useContext, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { createContext, useEffect, useState } from "react";
 
 
 const App = () => {
@@ -45,16 +44,16 @@ const App = () => {
                 <AuthProvider>
                     { currentLang &&
                     <Routes>
-                        <Route path="" element={<Layout setCurrentLang={setCurrentLang} currentLang={currentLang}/>}>
+                        <Route path="/" element={<Layout setCurrentLang={setCurrentLang} currentLang={currentLang}/>}>
                             <Route index element={<Home />} />
                             <Route path="blog" element={<BlogPage />} />
                             <Route path="contactus" element={<CommentsPage/>}/>
                             <Route path="aboutus" element={<AboutUsPage/>}/>
                             <Route path="volunteers" element={<VolunteerPage />} />
                         </Route>    
-                        <Route path="login" element={<AdminLogin/>}/>
-                        <Route path="register" element={<AdminRegistration/>} />
-                        <Route path="admin-layout" element={<AdminLayout/>}>
+                        <Route path="/login" element={<AdminLogin/>}/>
+                        <Route path="/register" element={<AdminRegistration/>} />
+                        <Route path="/admin-layout" element={<AdminLayout/>}>
                               <Route index element={<AdminDashboard/>} />
                               <Route path="blogs-admin" element={<AdminBlogs/>} />
                               <Route path="volunteer" element={<AdminVolunteer/>} />

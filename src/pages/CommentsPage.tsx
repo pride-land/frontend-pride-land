@@ -70,11 +70,13 @@ const CommentsPage = () => {
                 </div>
                 
             </div>
-            <div className="(Image) grid w-1/2 h-full">
+            <div>
+            <div className="(Image)  grid w-1/2 h-full">
                 <div className="m-auto w-96 h-40 text-center text-[80px] ">Contact Us</div>
             </div>
-            <div>
-            <div className="flex">
+
+    
+            <div className="">
                     <div className="m-auto ml-20 mb-20 text-center">
                         <h1 className="text-3xl">Contact Info</h1><br/>
                         <h2>
