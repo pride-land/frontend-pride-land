@@ -10,7 +10,7 @@ interface Props {
 
 const BlogHistoryList: React.FC<Props> = (props) => {
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [blogsPerPage] = useState<number>(5);
+    const [blogsPerPage] = useState<number>(7);
     
     const handlePagination = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -22,8 +22,8 @@ const BlogHistoryList: React.FC<Props> = (props) => {
 
     const createBlogNameList = currentBlogs.map((blog, index) => {
         return (
-            <div className="transition ease-in-out cursor-pointer max-w-72 hover:scale-110 duration-300" id={'blogs-' + String(index + 1)} key={index} onClick={() => props.setChosenBlog(blog)}>
-                <div className="bg-white my-4 shadow-md p-2 rounded-lg" >
+            <div className="transition ease-in-out cursor-pointer max-w-72 hover:scale-110 duration-300 opacity-25 hover:opacity-75" id={'blogs-' + String(index + 1)} key={index} onClick={() => props.setChosenBlog(blog)}>
+                <div className="bg-white my-2 shadow-md p-2 rounded-lg" >
                     <div className="my-2 text-center">{blog.title}</div>
                     <div className="text-center font-light">{blog.description}</div>
                     <div className="text-end font-thin">{formatDistanceToNow(blog.date_created)}</div>

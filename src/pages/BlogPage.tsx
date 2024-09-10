@@ -18,6 +18,7 @@ const BlogPage = () => {
     // Helper Functions
     const fetchAllBlogs = async () => {
         const response = await blogsApi.fetchAllBlogs();
+        response.sort((a:BlogsTypes, b:BlogsTypes) => b.id - a.id)
         setBlogs(response);
     };
     
