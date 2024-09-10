@@ -25,25 +25,34 @@ const Comments = () => {
     fetchFeedbacks();
   }
 
+  const handleDeletion = async(feedback:AdminFeedback) => {
+    await adminFeedbackApi.deleteFeedbacks(feedback.id)
+    const newFeedbacks = allFeedbacks?.filter((feedbackTile) => feedbackTile !== feedback);
+    newFeedbacks ? setFeedbacks(newFeedbacks) : null;
+  }
+
   const displayFeedbacks = allFeedbacks?.map((feedback) => 
-    <div className='relative mt-11 h-[21rem] bg-gray-200 border-black border border-solid rounded-lg p-5' key={feedback.id}>
-      <h1 className='font-medium'>Name:</h1>
-      <div className='mt-3 mb-5 font-bold text-3xl'>{feedback.name}</div>
+    <div className='relative h-[16rem] bg-gray-200 border-black border border-solid rounded-lg p-5' key={feedback.id}>
+      <div className='flex my-2'>
+        <h1 className='font-medium'>Name:</h1>
+        <h1 className='ml-3 mt-[-0.4rem] font-bold text-2xl'>{feedback.name}</h1>
+      </div>
       <h1 className='mb-5 font-medium'>Comment:</h1>
-      <div className='p-3 max-h-28 overflow-auto rounded-xl bg-gray-50'>
+      <div className='p-2 max-h-[5.5rem] overflow-auto rounded-xl bg-gray-50'>
         <h1 className='inline'>{feedback.comment}</h1>
       </div>
-      <div className='flex absolute bottom-0 my-5'>
-        <div className='font-medium w-28 mr-5'>{!feedback.is_accepted? "Not Displayed": "Displaying"}</div>
+      <div className='flex absolute bottom-5'>
+        <div className='font-medium w-28 mr-3'>{!feedback.is_accepted? "Not Displayed": "Displaying"}</div>
         <div>
           <input type='checkbox' name='checkbox' onChange={()=>handleStatus(feedback)} checked={feedback.is_accepted? true : false}></input>
         </div>
+        <button className='ml-6 text-sm bg-red-500 border border-gray-300 border-solid rounded-2xl px-2 py-1' type='button' name='delete-button' onClick={()=>handleDeletion(feedback)}>Delete</button>
       </div>
     </div>
   )
 
   return (
-    <div className='grid grid-cols-3 gap-x-10' id='feedbackStorage'>
+    <div className='mt-11 grid grid-cols-4 gap-x-3 gap-y-3' id='feedbackStorage'>
       {displayFeedbacks}
     </div>
   )
