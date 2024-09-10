@@ -11,37 +11,37 @@ import {
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
-		label: 'Dashboard',
+		label: 'ダッシュボード',
 		path: '/admin-layout',
 		icon: <HiOutlineViewGrid />
 	},
 	{
 		key: 'blogsadmin',
-		label: 'Blogs',
+		label: 'ブログ',
 		path: 'blogs-admin',
 		icon: <HiOutlineBookOpen />
 	},
 	{
 		key: 'volunteer',
-		label: 'Volunteer',
+		label: 'ボランティア',
 		path: 'volunteer',
 		icon: <HiOutlineDocumentText />
 	},
 	{
 		key: 'gallery',
-		label: 'Gallery',
+		label: 'ギャラリー',
 		path: 'gallery',
 		icon: <HiOutlineCollection />
 	},
 	{
 		key: 'comments',
-		label: 'Comments',
+		label: 'コメント',
 		path: 'comments',
 		icon: <HiOutlineAnnotation />
 	},
 	{
 		key: 'admin-controls',
-		label: 'Admin-controls',
+		label: 'サイト管理',
 		path: 'admin-controls',
 		icon: <HiOutlineCog />
 	}
@@ -50,7 +50,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
 	{
 		key: 'logout',
-		label: 'Logout',
+		label: 'ログアウト',
 		path:  'login',
 		icon: <HiOutlineCog />
 	},

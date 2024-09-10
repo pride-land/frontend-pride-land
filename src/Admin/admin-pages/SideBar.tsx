@@ -26,11 +26,11 @@ const SideBar = () => {
     <>
     <div className='bg-gray-500 flex flex-col w-64 p-2'>
         <div className='flex justify-center gap-2 items-center p-2'>
-            <span className='text-2xl font-mono font-bold text-white'>Prideland</span><PiFarm fontSize={30} />
+            <span className='text-2xl font-mono font-bold text-white'>ぷらいどらんど</span><PiFarm fontSize={30} />
         </div>
         <div className="mt-10 mb-0.5">
             <div className={classNames(' text-white hover:cursor-pointer ', linkClass)}><HiOutlineArchive />
-            <span className="text-[1rem] flex items-center"><Link to="/" >Main Page</Link></span>
+            <span className="text-[1rem] flex items-center"><Link to="/" >メインページ</Link></span>
             </div>
         </div>
 
@@ -41,7 +41,7 @@ const SideBar = () => {
         </div>
         <hr className="mb-3"/>
         <div><div className={classNames(' text-red-500 hover:cursor-pointer ', linkClass)} onClick={logoutUser}>
-            <span className="text-xl"><HiOutlineLogout /></span>Logout</div></div>
+            <span className="text-xl"><HiOutlineLogout /></span>ログアウト</div></div>
         </div>
 
     </>
