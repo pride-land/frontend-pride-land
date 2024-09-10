@@ -3,15 +3,15 @@ import * as volunteerApi from '../admin-api/admin-volunteers'
 import {AdminVolunteer} from '../admin-interface/AdminVolunteerType';
 import { format } from 'date-fns';
 
-const categories = [
-  "bamboo",
-  "vegetables",
-  "eggs",
-  "shiitake",
-  "bees",
-  "goats",
-  "construction"
-];
+// const categories = [
+//   "bamboo",
+//   "vegetables",
+//   "eggs",
+//   "shiitake",
+//   "bees",
+//   "goats",
+//   "construction"
+// ];
 
 const Volunteer = () => {
   const [volunteers, setVolunteers] = useState<AdminVolunteer[] | null> (null);
