@@ -3,7 +3,7 @@ import { Image } from '../admin-interface/AdminGalleryTypes';
 import * as layoutApi from '../admin-api/admin-layout';
 import { FaCircleXmark } from "react-icons/fa6";
 import ImageUpload from './ImageUpload';
-import CardEditor from '../admin-components/Card-Editor';
+// import CardEditor from '../admin-components/Card-Editor';
 
 
 
@@ -48,7 +48,7 @@ const Layout = () => {
 const handleRemoveImage = (image: Image) => {
   console.log('selectedImage: ', selectedImage);
 if (heroImages !== null) {
-  if (window.confirm("Are you sure you want to delete this image?")) {
+  if (window.confirm("削除します")) {
     deleteImage(selectedImage as Image);
     setHeroImages(heroImages.filter((img) => img.id !== image.id)); 
   };
@@ -57,11 +57,11 @@ if (heroImages !== null) {
 
 const handleSetSelectedImages = (image: Image) => {
   if (selectedImages?.length === 5) {
-    alert("You can only select 5 images");
+    alert("選択できる画像は５まいまで");
     return;
   }
   if (selectedImages?.find((selectedImage) => selectedImage.blob_img === image.blob_img)) {
-    alert("You have already selected this image");
+    alert("選択済みです他の画像からお選びください");
     return;
   }
   if (selectedImages !== null) {
@@ -82,9 +82,11 @@ removeHeroTagFromImg(selectedImage as Image);
 
   return (
     <div className='w-screen'>
+      <div className="m-12 mx-48">
         <ImageUpload/>
+        </div>
       <div className="(images container) w-5/6">
-        <h2>Please choose 5 images for your Top Images</h2>
+        <h2>画像を５枚選択して下さい</h2>
         <div className="snap-x snap-mandatory align-middle bg-gray-200 p-10 overflow-scroll rounded-md grid grid-rows-1 grid-flow-col gap-6 overflow-scroll">
           {/* made a container that holds all of the images in the db */}
           {/* created a method to click 5 of those images and set them as selected for the front page. */}
@@ -101,7 +103,7 @@ removeHeroTagFromImg(selectedImage as Image);
         )}
         </div>
         <div className="(hero container) w-full">
-        <h2>Your selected Images:</h2>
+        <h2>選択した画像</h2>
         <div className="flex grid grid-rows-a grid-flow-col bg-gray-200 overflow-scroll w-full">
           {selectedImages && selectedImages?.map((image) => 
           <div className="m-6 w-[400px] relative text-center">
