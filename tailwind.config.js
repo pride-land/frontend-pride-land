@@ -16,7 +16,11 @@ export default{
       'brown': '#582f0e',
       'secondary-800': '#de9e36',
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'pudding-background': "url('./src/assets/prideland.png')"
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin'),
