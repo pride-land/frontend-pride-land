@@ -28,15 +28,16 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   }
 
   return (
-    <Disclosure as="nav" className="bg-primary sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl sticky top-0 z-50">
       <div className="px-6 md:px-2">
-        <div className="relative flex h-24 items-center md:justify-between pl-36 sm:pl-72 md:px-0">
+        <div className="relative flex h-24 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <DisclosureButton className="inline-flex items-center justify-center p-2 text-white hover:bg-green-700 
+            focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition-transform transform hover:scale-105">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="text-secondary block h-8 w-8 group-data-[open]:hidden" />
-              <XMarkIcon aria-hidden="true" className="hidden text-secondary h-8 w-8 group-data-[open]:block" />
+              <Bars3Icon aria-hidden="true"className="h-8 w-8" />
+              <XMarkIcon aria-hidden="true"className="h-8 w-8 hidden" />
             </DisclosureButton>
           </div>
               <img
@@ -44,8 +45,8 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                 src='../src/assets/logo.png'
                 className="h-40 p-0 m-0"
               />
-              <div className='flex'>
-              <a key="home" href="./" className='hidden md:ml-2 md:block flex-1 items-center justify-center text-secondary text-lg hover:text-white px-10 py-6'>{t("navbar.home")}</a>
+              <div className='hidden md:flex md:items-center md:space-x-4'>
+              <a key="home" href="./" className='px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800 text-white text-md'>{t("navbar.home")}</a>
               </div>
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-end">
             <div className="hidden md:ml-6 md:block">
@@ -54,7 +55,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"Pride Farm"}
                     href={"#"}
                     className=
-                      'hover:text-white text-secondary px-4 py-6 text-md font-medium'
+                      'px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800 text-white text-md'
                   >
                     {t("navbar.prideFarm")}
                   </a>
@@ -62,7 +63,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"join"}
                     href={"/volunteers"}
                     className=
-                      'hover:text-white text-secondary px-4 py-6 text-md font-medium'
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800 text-white text-md'
                   >
                     {t("navbar.join")}
                   </a>
@@ -70,7 +71,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"About Us"}
                     href={"/aboutus"}
                     className=
-                      'hover:text-white text-secondary px-4 py-6 text-md font-medium'
+                      'px-4 py-6 text-lg font-medium rounded-lg  gap-2 transition-colors duration-300 hover:bg-green-800 text-white text-md'
                   >
                     {t("navbar.about")}
                   </a>
@@ -78,7 +79,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"shop"}
                     href={"#"}
                     className=
-                      'hover:text-white text-secondary px-4 py-6 text-md font-medium'
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800 text-white text-md'
                   >
                     {t("navbar.shop")}
                   </a>
@@ -86,7 +87,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"contact us"}
                     href={"/contactus"}
                     className=
-                      'hover:text-white text-secondary px-4 py-6 text-md font-medium'
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800 text-white text-md'
                       >
                     {t("navbar.contact")}
                       </a>
@@ -117,7 +118,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               className=
-                'bg-primary text-secondary block rounded-md px-3 py-2 text-lg font-medium'
+                'bg-green-700 text-white block rounded-md px-3 py-2 text-lg font-medium'
             > 
               {item.name}
             </DisclosureButton>
