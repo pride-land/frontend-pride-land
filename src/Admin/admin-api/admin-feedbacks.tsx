@@ -18,3 +18,13 @@ export const updateFeedbacks = async(id:number, data:FeedbackStatus) => {
         body: JSON.stringify(data),
     });
 }
+
+export const deleteFeedbacks = async(id:number) => {
+    const newEndpoint = endpoint + `${id}/`
+    await fetch(newEndpoint, {
+        method: "DELETE",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+    });
+}
