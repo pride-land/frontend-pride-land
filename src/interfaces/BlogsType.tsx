@@ -1,11 +1,9 @@
 export default interface Blogs {
-    id: BigInteger,
-    name: string,
+    id: number,
     title: string,
-    images?: string,
+    description: string,
+    content: string,
     date_created: Date,
-    text : string,
-    img_url : ImageData,
 }
 
 export interface BlogPageBlogs {

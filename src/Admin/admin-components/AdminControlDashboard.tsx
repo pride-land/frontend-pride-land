@@ -1,4 +1,3 @@
-import React from 'react'
 import AdminControl from '../admin-pages/AdminControl'
 
 const AdminControlDashboard = () => {

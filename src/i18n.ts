@@ -7,7 +7,7 @@ import de from "./i18n/locales/de.json";
 import pt from "./i18n/locales/pt.json";
 
 i18n.use(initReactI18next).init({
-   fallbackLng: "jp",
+   fallbackLng: checkSessionLang(),
    debug: true,
    resources: {
       en: {
@@ -27,5 +27,14 @@ i18n.use(initReactI18next).init({
       }
    },
 });
+
+
+function checkSessionLang() {
+   const lang = sessionStorage.getItem("lang");
+   if (lang) {
+      return lang;
+   } 
+      return "jp";
+}
 
 export default i18n;

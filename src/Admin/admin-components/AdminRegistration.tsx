@@ -1,39 +1,37 @@
 import { useNavigate } from "react-router-dom"
-import { useState, ReactNode } from "react";
+import { useState } from "react";
 import logo from '../../../src/assets/logo.png'
 import Axios from 'axios';
 import AdminRegistrationType from "../admin-interface/AdminRegistrationType";
 
-interface ErrorType {
-  error: ReactNode,
-  setError: string,
-}
 
-interface Props {
- success: string,
-}
 
-const AdminRegistration: React.FC<Props> = () => {
+
+const AdminRegistration: React.FC = () => {
+
 
     let navigate = useNavigate();
     const AUTH_REGISTER_URL = process.env.backend_auth_reg_url;
 
     const [isLoading, setIsLoading] = useState(false);
-    const [success, setSuccess] = useState(null);
-    const [error, setError] = useState<ErrorType | null>(null);
+    const [success, setSuccess] = useState<string | null>('');
+    const [error, setError] = useState<string | null>(null);
     const [formData, setFormData] = useState<AdminRegistrationType>({
         username: "",
         password1: "",
         password2: "",
     })
 
-    const handleRegisterChange = (e) => {
-      setFormData({
-        ...formData, [e.target.name]: e.target.value });
-    }
-   
-    const handleSumbitForm = async (e) =>{
-       e.preventDefault()
+    const handleRegisterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((formData) => ({
+        ...formData,
+        [event.target.name]: event.target.value,
+      }));
+    };
+
+    const handleSumbitForm = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
+       event.preventDefault()
+
        if(isLoading){
           return
        }
@@ -45,7 +43,7 @@ const AdminRegistration: React.FC<Props> = () => {
         navigate('/login');
        }
        catch (error){
-        console.log('Error:', error.message)
+        console.log('Error:', error)
         setError("エラー");
        }
        finally{
@@ -76,7 +74,7 @@ const AdminRegistration: React.FC<Props> = () => {
           <div className="mt-7 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#"  className="space-y-6 px-10">
               <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
                 ユーザー名
                 </label>
                 <div>
@@ -84,7 +82,7 @@ const AdminRegistration: React.FC<Props> = () => {
                     name="username"
                     type="text"
                     value={formData.username}
-                    onChange={handleRegisterChange}
+                    onChange={ handleRegisterChange }
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm 
                     ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
@@ -95,7 +93,7 @@ const AdminRegistration: React.FC<Props> = () => {
               {/* Password1 */}
               <div>
                 <div className="flex items-center justify-between">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="password1" className="block text-sm font-medium leading-6 text-gray-900">
                     パスワード
                   </label>
                 </div>
@@ -114,7 +112,7 @@ const AdminRegistration: React.FC<Props> = () => {
               {/* Password2 */}
               <div>
                 <div className="flex items-center justify-between">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
+                  <label htmlFor="password2" className="block text-sm font-medium leading-6 text-gray-900">
                     パスワード
                   </label>
                 </div>
@@ -144,7 +142,7 @@ const AdminRegistration: React.FC<Props> = () => {
                  アカウント登録
                 </button>
               </div>
-                  </form>
+            </form>
 
               {/* Redirect button to Login */}
               <div className="text-center text-sm font-semibold text-gray-500 mt-4">

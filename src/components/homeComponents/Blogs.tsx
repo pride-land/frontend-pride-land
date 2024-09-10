@@ -1,22 +1,12 @@
 import { useEffect, useState } from "react";
 import * as blogsApi from '../../api/blogs';
-import * as fetchBinaryImage from '../../api/fetchBinaryImage'
 import BlogsTypes from '../../interfaces/BlogsType';
 import Content from "../../Admin/admin-pages/Content";
 import { format } from 'date-fns'
 import parse from 'html-react-parser'
 
-interface ImageType {
-   images: string,
-   alt: string,
-   src? :string,
-}
 
-interface Props {
-   images: ImageType []
-}
-
-const Blogs: React.FC<Props> = (props) => {
+const Blogs = () => {
   const [blogs, setBlogs ] = useState<BlogsTypes[]>([]);
 
     useEffect(() => {

@@ -2,14 +2,13 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next';
 import Langs from '../../interfaces/LayoutType';
-import { JP, GB, IT, DE, PT } from 'country-flag-icons/react/3x2';
 
-const langs = {
-  en: { nativeName: 'English', flagIcon: <GB/>},
-  jp: { nativeName: '日本語', flagIcon: <JP/> },
-  it: { nativeName: 'Italiano', flagIcon: <IT/> },
-  de: { nativeName: 'Deutsch', flagIcon: <DE/> },
-  pt: { nativeName: 'Português', flagIcon: <PT/> },
+const langs: any = {
+  en: { nativeName: 'English'},
+  jp: { nativeName: '日本語'},
+  it: { nativeName: 'Italiano'},
+  de: { nativeName: 'Deutsch'},
+  pt: { nativeName: 'Português'},
 };
 
 const navigation = [
@@ -20,6 +19,13 @@ const navigation = [
 
 const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   const { t, i18n } = useTranslation();
+
+  const handleLangChange = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setCurrentLang(lang);
+    sessionStorage.setItem("lang", lang);
+    console.log(sessionStorage.getItem("lang"));
+  }
 
   return (
     <Disclosure as="nav" className="bg-primary sticky top-0 z-50">
@@ -89,13 +95,11 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
 
-<select defaultValue={currentLang} onChange={(e) => {i18n.changeLanguage(e.target.value); setCurrentLang(e.target.value);}} className="bg-white dark:bg-gray-700 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2">
-  {langs[currentLang].flagIcon}
+<select defaultValue={currentLang} onChange={(e) => handleLangChange(e.target.value)} className="bg-white dark:bg-gray-700 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2">
   <span className="ms-4 ">{langs[currentLang].nativeName} </span>
     // Dropdown items mapped from langs object
        {Object.keys(langs).map((lang) => (
     <option key={lang} value={lang}>
-        {langs[lang].flagIcon}
         <span className="ms-4">{langs[lang].nativeName}</span>
       </option>
     ))}

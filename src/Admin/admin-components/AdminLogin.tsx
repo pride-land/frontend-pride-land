@@ -4,9 +4,14 @@ import { useNavigate } from "react-router-dom";
 import logo from '../../../src/assets/logo.png'
 
 const AdminLogin: React.FC = () => {
-
   let navigate = useNavigate();
-  let { loginUser } = useContext(AuthContext);
+  const authContext = useContext(AuthContext)
+    
+  if (!authContext) {
+      throw new Error("useAuth must be used within an AuthProvider.");
+  }
+
+  let { loginUser } = authContext;
  
     return (
       <>

@@ -1,30 +1,27 @@
-import React, { ChangeEventHandler, useEffect } from 'react'
 import { useState } from 'react'
-import { AdminCardPropsType, HeroImage, AdminCardDataPropsType, AdminCardRefPropsType } from '../admin-interface/AdminGalleryTypes';
-import CardPropsType from '../../interfaces/CardType';
+import { Image, AdminCardDataPropsType, AdminCardPropsType } from '../admin-interface/AdminGalleryTypes';
 import * as layoutApi from '../admin-api/admin-layout';
 import AdminCard from '../admin-components/AdminCard';
 import { FaCircleXmark } from "react-icons/fa6";
-import { FaCirclePlus } from "react-icons/fa6";
 import axios from 'axios';
 import ImageUpload from './ImageUpload';
 
 
 const heroimages = [
-  { img: "../src/assets/chickens.jpg", alt: "chickens", dateAdded: "2022-01-01", href: "#" },
-  { img: "../src/assets/volunteers.jpg", alt: "Volunteers", dateAdded: "2022-01-02", href: "#" },
-  { img: "../src/assets/eggs.jpg", alt: "Eggs", dateAdded: "2022-01-03", href: "#" },
-  { img: "../src/assets/vegetable.jpg", alt: "farm work", dateAdded: "2022-01-04", href: "#" },
-  { img: "../src/assets/shiitake.jpg", alt: "mountain work", dateAdded: "2022-01-05", href: "#" },
-  { img: "../src/assets/pudding.png", alt: "pudding", dateAdded: "2022-01-06", href: "#" },
-  { img: "../src/assets/prideland.png", alt: "prideland", dateAdded: "2022-01-07", href: "#" },
+  { id: 1, blob_img: "../src/assets/chickens.jpg", alt_text: "chickens", date_created: "2022-01-01", set_as_hero: true },
+  { id: 2, blob_img: "../src/assets/volunteers.jpg", alt_text: "Volunteers", date_created: "2022-01-02", set_as_hero: true },
+  { id: 3, blob_img: "../src/assets/eggs.jpg", alt_text: "Eggs", date_created: "2022-01-03", set_as_hero: true },
+  { id: 4, blob_img: "../src/assets/vegetable.jpg", alt_text: "farm work", date_created: "2022-01-04", set_as_hero: true },
+  { id: 5, blob_img: "../src/assets/shiitake.jpg", alt_text: "mountain work", date_created: "2022-01-05", set_as_hero: true },
+  { id: 6, blob_img: "../src/assets/pudding.png", alt_text: "pudding", date_created: "2022-01-06", set_as_hero: true },
+  { id: 7, blob_img: "../src/assets/prideland.png", alt_text: "prideland", date_created: "2022-01-07", set_as_hero: true },
+
 ];
 
 const Layout = () => {
-  const [heroImages, setHeroImages] = useState<HeroImage[] | null>(heroimages);
-  const [newImage, setNewImage] = useState<string | ArrayBuffer | null>(null);
-  const [selectedImages, setSelectedImages] = useState<HeroImage[] | null>(null);
-  const [selectedCard, setSelectedCard] = useState<CardPropsType | null>(null);
+  const [heroImages, setHeroImages] = useState<Image[] | null>(heroimages);
+  const [newImage, setNewImage] = useState<Image | null>(null);
+  const [selectedImages, setSelectedImages] = useState<Image[] | null>(null);
   const [cardEditView, setCardEditView] = useState<string>("none");
   const [cardData, setCardData] = useState<AdminCardDataPropsType>({
     id: 0,
@@ -35,17 +32,16 @@ const Layout = () => {
     setCardEditView: () => {"none"},
 
   });
-  const [cardrefs, setCardRefs] = useState<AdminCardRefPropsType[]>([
-    { id: 1, title: "Gallery", description: "View our gallery of images", imgsrc: "../src/assets/cardassets/bamboo.png", link: "#", setCardEditView: () => {"imgsrc"}},
-    { id: 2, title: "Blog", description: "Read about what's happening on the farm", imgsrc: "../src/assets/cardassets/goat.png", link: "/blog", setCardEditView: () => {"imgsrc"}},
-    { id: 3, title: "Produce", description: "Learn about our produce", imgsrc: "../src/assets/cardassets/cucumber.png", link: "#", setCardEditView: () => {"imgsrc"}},
-    { id: 4, title: "Events", description: "View our upcoming events", imgsrc: "../src/assets/cardassets/chickens.png", link: "#", setCardEditView: () => {"imgsrc"}},
-    { id: 5, title: "Volunteer", description: "Learn about volunteer opportunities", imgsrc: "../src/assets/cardassets/yellowwall.png", link: "#", setCardEditView: () => {"imgsrc"}},
-    { id: 6, title: "Shop", description: "Shop our products", imgsrc: "../src/assets/prideland.png", link: "#", setCardEditView: () => {"imgsrc"}},
+  const [cardrefs, setCardRefs] = useState<AdminCardPropsType[]>([
+    { id: 1, title: "Gallery", description: "View our gallery of images", imgsrc: "../src/assets/cardassets/bamboo.png", link: "#", setCardEditView: () => {"imgsrc"}, setCardRefs: () => {"imgsrc"}, cardrefs: [],},
+    { id: 2, title: "Blog", description: "Read about what's happening on the farm", imgsrc: "../src/assets/cardassets/goat.png", link: "/blog", setCardEditView: () => {"imgsrc"}, setCardRefs: () => {"imgsrc"}, cardrefs: [],},
+    { id: 3, title: "Produce", description: "Learn about our produce", imgsrc: "../src/assets/cardassets/cucumber.png", link: "#", setCardEditView: () => {"imgsrc"}, setCardRefs: () => {"imgsrc"}, cardrefs: [],},
+    { id: 4, title: "Events", description: "View our upcoming events", imgsrc: "../src/assets/cardassets/chickens.png", link: "#", setCardEditView: () => {"imgsrc"}, setCardRefs: () => {"imgsrc"}, cardrefs: [],},
+    { id: 5, title: "Volunteer", description: "Learn about volunteer opportunities", imgsrc: "../src/assets/cardassets/yellowwall.png", link: "#", setCardEditView: () => {"imgsrc"}, setCardRefs: () => {"imgsrc"}, cardrefs: [],},
+    { id: 6, title: "Shop", description: "Shop our products", imgsrc: "../src/assets/prideland.png", link: "#", setCardEditView: () => {"imgsrc"}, setCardRefs: () => {"imgsrc"}, cardrefs: [],},
   ]);
-  // const [heroimages, setHeroImages] = useState<HeroImage[] | null>(null);
-  // const [cardrefs, setCardRefs] = useState<CardPropsType[] | null>(null);
 
+const media_url = process.env.media_url;
 
   let base64string : string = '';
 //   useEffect(() => {
@@ -65,34 +61,36 @@ const Layout = () => {
 //     setCardRefs(result);
 //   }
 
-const handleImageChange = (e: React.FormEvent<HTMLFormElement>) => {
-  const file = e.target.files[0];
+const handleImageChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const target = e.target as HTMLInputElement;
+  const file = target.files?.[0];
   const data = new FileReader();
   data.onloadend = () => {
-    const newImage = data.result;
-    setHeroImages((prevImages) => {
-      if (prevImages === null) {
-        return [{ img: newImage, alt: "new image", dateAdded: new Date().toISOString(), href: "#" }];
+    const newData = data.result as string;
+    setNewImage({blob_img: newData, alt_text: "new image", set_as_hero: true, date_created: "2024-5-14"});
+    if (heroImages === null) {
+    setHeroImages([newImage as Image]);
       }
-      return [...prevImages, { img: newImage, alt: "new image", dateAdded: new Date().toISOString(), href: "#" }];
-    });
-    setNewImage(newImage);
+    else {
+      return [...heroImages, newImage as Image];
+    };
   };
-  data.readAsDataURL(file);
+  data.readAsDataURL(file as Blob);
 }
+
 
 const handleNewImage = async() => {
   const formData = new FormData();
   formData.append('blob_img', base64string);
     try {
-      const response = await axios.post( UPLOAD_URL , formData);
+      const response = await axios.post((media_url + "upload-img/"), formData);
       console.log('Server Response:', response.data);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
 };
 
-const deleteImageFromDb = async(image: HeroImage) => {
+const deleteImageFromDb = async(image: Image) => {
   await layoutApi.deleteImage(image);
 }
 // const submitSelectedImages = async() => {
@@ -121,12 +119,12 @@ const handleFieldChange = (field: string, value: string) => {
   });
 };
 
-const handleSetSelectedImages = (image: HeroImage) => {
+const handleSetSelectedImages = (image: Image) => {
   if (selectedImages?.length === 5) {
     alert("You can only select 5 images");
     return;
   }
-  if (selectedImages?.find((selectedImage) => selectedImage.img === image.img)) {
+  if (selectedImages?.find((selectedImage) => selectedImage.blob_img === image.blob_img)) {
     alert("You have already selected this image");
     return;
   }
@@ -138,7 +136,7 @@ const handleSetSelectedImages = (image: HeroImage) => {
   }
 }
 
-const addHeroTagToImg = async(image: HeroImage) => {
+const addHeroTagToImg = async(image: Image) => {
   await layoutApi.addHeroTagToImg(image);
 }
 
@@ -212,10 +210,10 @@ const renderContent = () => {
         {heroImages?.map((image) => 
         <div className="m-6 w-[400px] relative text-center">
         <button className="m-6 w-[400px] focus:border-4 focus:border-indigo-400" onClick={() => {handleSetSelectedImages(image); addHeroTagToImg(image)}}>
-          <img src={image.img} alt={image.alt} className="rounded-md w-full"/>
-            <p>{image.alt}</p>
+          <img src={image.blob_img} alt={image.alt_text} className="rounded-md w-full"/>
+            <p>{image.alt_text}</p>
         </button>
-        <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute top-2 -right-10 cursor-pointer" onClick={() => {setHeroImages(heroImages.filter((selectedImage) => selectedImage.img !== image.img)); deleteImageFromDb(image)}}/>
+        <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute top-2 -right-10 cursor-pointer" onClick={() => {setHeroImages(heroImages.filter((selectedImage) => selectedImage.blob_img !== image.blob_img)); deleteImageFromDb(image)}}/>
           {/* change this onClick to add a remove image from db function with an alert */}
         </div>
         )}
@@ -229,9 +227,9 @@ const renderContent = () => {
         <div className="flex grid grid-rows-a grid-flow-col bg-gray-200 overflow-scroll w-5/6">
           {selectedImages?.map((image) => 
           <div className="m-6 w-[400px] relative text-center">
-            <img src={image.img} alt={image.alt} className="rounded-md w-full"/>
-            <p>{image.alt}</p>
-            <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute -top-4 -right-4 cursor-pointer" onClick={() => setSelectedImages(selectedImages.filter((selectedImage) => selectedImage.img !== image.img))}/>
+            <img src={image.blob_img} alt={image.alt_text} className="rounded-md w-full"/>
+            <p>{image.alt_text}</p>
+            <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute -top-4 -right-4 cursor-pointer" onClick={() => setSelectedImages(selectedImages.filter((selectedImage) => selectedImage.blob_img !== image.blob_img))}/>
           </div>
           )}
 
@@ -245,11 +243,10 @@ const renderContent = () => {
           {/* make a container that holds all of the categories in the db */}
           {/* create a method to click 6 of those categories and set them as selected for the front page. */}
           {/* add a button to add categories to the db */}
-        {cardrefs.map((card:AdminCardPropsType, index) => (
+        {cardrefs.map((card, index) => (
           <div className="m-6 w-[400px]" onClick={() => setCardData(card)}>
           <AdminCard
             setCardRefs={setCardRefs}
-            card={card}
             cardrefs={cardrefs}
             key={card.id}  
             id={index}

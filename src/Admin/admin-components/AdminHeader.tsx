@@ -1,14 +1,18 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import AuthContext from '../admin-authContext/AuthContext'
-import UserType from '../admin-interface/AdminHeaderType'
 
 
 
- const AdminHeader: React.FC<UserType>  = (  ) => {
+ const AdminHeader = () => {
 
-  let { user , logoutUser } = useContext(AuthContext)
+    const authContext = useContext(AuthContext)
+    
+    if (!authContext) {
+        throw new Error("useAuth must be used within an AuthProvider.");
+    }
+
+  const { user , logoutUser } = authContext
 
   return (
       <div className='font-mono w-dvw  bg-gray-400 flex flex-row justify-between p-5'>

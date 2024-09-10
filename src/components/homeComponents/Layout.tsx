@@ -9,7 +9,7 @@ const Layout = ({ setCurrentLang, currentLang }: Langs) => {
 
   return (
     <section>
-       <Navbar />
+       <Navbar setCurrentLang={setCurrentLang} currentLang={currentLang} />
         <Outlet />
         <Footer/>
     </section>

@@ -1,9 +1,11 @@
-export interface HeroImage {
-img: string,
-alt: string,
-Hero: boolean,
-dateCreated: string,
+export interface Image {
+id?: number,
+blob_img: string,
+alt_text: string,
+set_as_hero: boolean,
+date_created: string,
 }
+
 export interface AdminCardPropsType {
 id: number,
 title: string,
@@ -12,7 +14,6 @@ imgsrc: string,
 link: string,
 setCardEditView: (imgsrc: string) => void,
 setCardRefs: (cardrefs: AdminCardPropsType[]) => void,
-card: AdminCardPropsType,
 cardrefs: AdminCardPropsType[],
 }
 
@@ -22,7 +23,8 @@ export interface AdminCardRefPropsType {
     description: string,
     imgsrc: string, 
     link: string, 
-    setCardEditView: (imgsrc: string) => void 
+    setCardEditView: (imgsrc: string) => void
+    setCardRefs: (cardrefs: AdminCardRefPropsType[]) => void
 }
 
 export interface AdminCardDataPropsType {

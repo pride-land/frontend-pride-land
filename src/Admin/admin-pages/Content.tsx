@@ -1,9 +1,15 @@
-const Content = ({ content } ) => {
-  return (
-      <div>
-          {content}
-      </div>
-  )
+import React, { ReactNode } from 'react';
+
+interface ContentProps {
+  content: ReactNode;
 }
 
-export default Content
+const Content: React.FC<ContentProps> = ({ content }) => {
+  return (
+    <div>
+      {content}
+    </div>
+  );
+};
+
+export default Content;

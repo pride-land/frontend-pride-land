@@ -7,24 +7,28 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import ImageUpload from "./ImageUpload";
 import AdminPostBlog from "../admin-components/AdminPostBlog";
 
-const BlogsAdmin = ( e: React.FormEvent<HTMLFormElement> ) => {
+const BlogsAdmin = () => {
 
   
   const [open, setOpen] = useState(false);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
+  const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
   
   useEffect(()=>{
     fetchAllBlogs()
   },[]);
 
-  const handleUpdate = (id: number) => {
+  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if(selectedBlogId !== null){
     try{
       const formData = new FormData(e.currentTarget)
-      Axios.put(process.env.backend_url  + `blogs/${id}/`, formData)
+      Axios.put(process.env.backend_url  + `blogs/${selectedBlogId}/`, formData)
         console.log("succesfully updated!")
       }catch (error) {
         console.log(error);
       }
+  }
   }
 
   const fetchAllBlogs = async() => {
@@ -58,14 +62,18 @@ const BlogsAdmin = ( e: React.FormEvent<HTMLFormElement> ) => {
         <li>Update</li>
       </ul>
       <div>{blogs.map((elt, index) => (
-            <div className="flex justify-between p-2  flex-row gap-5" id={"blogs-" + String(index+1)} key={elt.name + index} >
+            <div className="flex justify-between p-2  flex-row gap-5" id={"blogs-" + String(index+1)} key={index} >
                 <div>{elt.id}</div>
                 <div className="text-center"><span>{format(elt.date_created, 'MM/dd/yyyy')}</span></div>
            
                 <div className="text-center">{elt.title}</div>
                 <div className="flex gap-2">
-                <div><button onClick={() => setOpen(true) }className="bg-orange-400 p-1 rounded-md text-xs">Edit</button> </div>
-                <div><button onClick={() => handleDelete(elt.id)} className="bg-red-500 p-1 rounded-md text-xs">Delete</button> </div>
+                <div><button onClick={() => {
+                  setOpen(true);  setSelectedBlogId(elt.id); 
+                }}
+                className="bg-orange-400 p-1 rounded-md text-xs">Edit</button> </div>
+                <div><button onClick={() => handleDelete(elt.id)}
+                  className="bg-red-500 p-1 rounded-md text-xs">Delete</button> </div>
             </div>
           </div>
       ))}</div>
@@ -75,7 +83,7 @@ const BlogsAdmin = ( e: React.FormEvent<HTMLFormElement> ) => {
 
     {/* Edit */}
   
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
     <DialogBackdrop
       transition
       className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 
@@ -98,7 +106,7 @@ const BlogsAdmin = ( e: React.FormEvent<HTMLFormElement> ) => {
                   Edit Blog
                 </DialogTitle>
                 <div className="mt-2">
-                  <form >
+                  <form onSubmit={handleUpdate}>
                    {/*  Blog Titles  choose events or blogs*/}
                         <div> 
                             <label htmlFor='name'>Title:</label>
@@ -132,16 +140,14 @@ const BlogsAdmin = ( e: React.FormEvent<HTMLFormElement> ) => {
           <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
             <button
               type="button"
-              onSubmit={() => handleUpdate}
               onClick={() => setOpen(false)}
               className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm 
               font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
             >
-             Update
+             Close
             </button>
             <button
               type="button"
-              data-autofocus
               onClick={() => setOpen(false)}
               className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm 
               font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 

@@ -1,10 +1,9 @@
-import React from 'react'
 import BlogsAdmin from '../admin-pages/BlogsAdmin'
 
 const AdminBlogs = () => {
   return (
     <div>
-        <BlogsAdmin />
+        <BlogsAdmin  />
     </div>
   )
 }

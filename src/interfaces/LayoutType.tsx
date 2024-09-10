@@ -1,4 +1,4 @@
 export default interface Langs {
-   setCurrentLang: any,
+   setCurrentLang: (lang: string) => void,
    currentLang: string
  }

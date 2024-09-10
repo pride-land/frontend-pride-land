@@ -15,8 +15,12 @@ const linkClass =
 	'flex items-center gap-2 font-light px-3 py-2 hover:bg-gray-400 hover:no-underline active:bg-gray-400 rounded-sm text-base'
 
 const SideBar = () => {
+    const authContext = useContext(AuthContext)
+    if (!authContext) {
+        throw new Error("useAuth must be used within an AuthProvider.");
+    }
 
-    let {  logoutUser } = useContext(AuthContext)
+    let {  logoutUser } = authContext
 
   return (
     <>
@@ -44,7 +48,7 @@ const SideBar = () => {
   )
 }
 
-function SideBarLink({ elt }) {
+function SideBarLink({ elt }: SideBar) {
 
     const { pathname }= useLocation();
 

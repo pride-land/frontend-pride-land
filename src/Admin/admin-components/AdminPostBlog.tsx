@@ -8,9 +8,9 @@ export default function Home() {
 
   const endpoint = process.env.backend_url;
   
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
   const modules = {
     toolbar: [
@@ -37,13 +37,12 @@ export default function Home() {
     "color",
   ];
 
-  function handleTitle(e) {
+  function handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
     const newTitle = e.target.value;
     setTitle(newTitle);
   }
   
- const handleSubmit = async (e) => {
- 
+ const handleSubmit = async () => {
       const formData = {
         title,
         description,
@@ -105,7 +104,7 @@ export default function Home() {
                 </label>
                 <textarea
                   id="description"
-                  rows="4"
+                  rows={4}
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500 "

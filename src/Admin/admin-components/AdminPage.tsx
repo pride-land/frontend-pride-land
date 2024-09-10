@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom"
 import AdminHeader from "./AdminHeader"
-import AdminSideBar from "./AdminSideBar"
+import SideBar from "../admin-pages/SideBar"
 
 const AdminPage: React.FC = () => {
   return (
     <>
     <AdminHeader/>
-    <AdminSideBar />
+    <SideBar />
     <Outlet/>
     </>
   )
