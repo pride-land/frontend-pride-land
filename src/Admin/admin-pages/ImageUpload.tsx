@@ -34,7 +34,7 @@ const ImageUpload: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (image) {
-      const base64string = (image as string).replace('data:image/jpeg;base64,', ''); 
+      const base64string = (image as string).split(',')[1]; 
       const formData = new FormData();
       formData.append('blob_img', base64string);
       try {

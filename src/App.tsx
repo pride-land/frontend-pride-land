@@ -46,7 +46,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Layout setCurrentLang={setCurrentLang} currentLang={currentLang}/>}>
                             <Route index element={<Home />} />
-                            <Route path="blog" element={<BlogPage />} />
+                            <Route path="blogs" element={<BlogPage />} />
                             <Route path="contactus" element={<CommentsPage/>}/>
                             <Route path="aboutus" element={<AboutUsPage/>}/>
                             <Route path="volunteers" element={<VolunteerPage />} />
