@@ -3,7 +3,7 @@ import { Image } from "../admin-interface/AdminGalleryTypes";
 const endpoint = process.env.backend_url
 
 export const deleteImage = async(image: Image) => {
-    const request = await fetch(endpoint + `medias/${image.id}`, {
+    const request = await fetch(endpoint + `medias/${image.id}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export const getCardRefs = async() => {
 }
 
 export const addHeroTagToImg = async(image: Image) => {
-    const request = await fetch(endpoint + `medias/${image.id}`, {
+    const request = await fetch(endpoint + `medias/${image.id}/`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const addHeroTagToImg = async(image: Image) => {
     }
 
 export const removeHeroTagFromImg = async(image: Image) => {
-    const request = await fetch(endpoint + `medias/${image.id}`, {
+    const request = await fetch(endpoint + `medias/${image.id}/`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
