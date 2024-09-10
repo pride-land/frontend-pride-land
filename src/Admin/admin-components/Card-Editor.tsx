@@ -3,7 +3,7 @@
 // import AdminCard from './AdminCard';
 
 
-const CardEditor = () => {
+// const CardEditor = () => {
 //   const [cardEditView, setCardEditView] = useState<string>("none");
 //   const [cardrefs, setCardRefs] = useState<AdminCardPropsType[] | null>(null);
 //   const [cardData, setCardData] = useState<AdminCardDataPropsType>({
@@ -85,16 +85,16 @@ const CardEditor = () => {
 //       );
 //   }
 // };
-return (
-   <div>
-<h2>Create Cards for your Activities Portal</h2>
-<div className="snap-x snap-mandatory align-middle bg-gray-200 p-10 overflow-scroll rounded-md grid grid-rows-1 grid-flow-col gap-6 overflow-scroll w-5/6">
-  {/* create a method to click 6 of those categories and set them as selected for the front page. */}
-  {/* add a button to add categories to the db */}
-{cardrefs.map((card, index) => (
-  <div className="m-6 w-[400px]" onClick={() => setCardData(card)}>
+// return (
+//    <div>
+// <h2>Create Cards for your Activities Portal</h2>
+// <div className="snap-x snap-mandatory align-middle bg-gray-200 p-10 overflow-scroll rounded-md grid grid-rows-1 grid-flow-col gap-6 overflow-scroll w-5/6">
+//   {/* create a method to click 6 of those categories and set them as selected for the front page. */}
+//   {/* add a button to add categories to the db */}
+// {cardrefs.map((card, index) => (
+//   <div className="m-6 w-[400px]" onClick={() => setCardData(card)}>
 
-//   <AdminCard
+// //   <AdminCard
 //     setCardRefs={setCardRefs}
 //     cardrefs={cardrefs}
 //     key={card.id}  
@@ -111,9 +111,9 @@ return (
 // </div>
 // {renderContent()}
 // </div>
-);
+// );
 
 
-}
+// }
 
-export default CardEditor;
+// export default CardEditor;
