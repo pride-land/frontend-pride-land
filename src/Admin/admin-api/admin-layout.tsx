@@ -2,8 +2,8 @@ import { Image } from "../admin-interface/AdminGalleryTypes";
 
 const endpoint = process.env.backend_url
 
-export const getHeroImages = async() => {
-    const request = await fetch(endpoint + "heroimages/");
+export const getAllImages = async() => {
+    const request = await fetch(endpoint + "media/");
     const result = await request.json();
     return result;
 }
@@ -20,7 +20,7 @@ export const addHeroTagToImg = async(image: Image) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(image)
+        body: JSON.stringify({set_as_hero: true})
 
         });
     const result = await request.json();

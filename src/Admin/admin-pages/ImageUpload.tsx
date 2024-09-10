@@ -9,7 +9,7 @@ interface Image {
 
 const ImageUpload: React.FC = () => {
   const UPLOAD_URL = `${process.env.media_url}upload-img/`;
-  const GET_URL = `${process.env.backend_url}medias/`;
+  const GET_URL = `${process.env.backend_url}media/`;
   
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const [imageData, setImageData] = useState<Image[]>([]);
