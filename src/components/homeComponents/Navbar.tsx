@@ -46,7 +46,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                 className="h-40 p-0 m-0"
               />
               <div className='hidden md:flex md:items-center md:space-x-4'>
-              <a key="home" href="./" className='px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800 text-white text-md'>{t("navbar.home")}</a>
+              <a key="home" href="./" className='px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800 hover:text-yellow-200 text-white text-md'>{t("navbar.home")}</a>
               </div>
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-end">
             <div className="hidden md:ml-6 md:block">
@@ -55,7 +55,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"Pride Farm"}
                     href={"#"}
                     className=
-                      'px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800 text-white text-md'
+                      'px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
                   >
                     {t("navbar.prideFarm")}
                   </a>
@@ -63,7 +63,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"join"}
                     href={"/volunteers"}
                     className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800 text-white text-md'
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
                   >
                     {t("navbar.join")}
                   </a>
@@ -71,7 +71,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"About Us"}
                     href={"/aboutus"}
                     className=
-                      'px-4 py-6 text-lg font-medium rounded-lg  gap-2 transition-colors duration-300 hover:bg-green-800 text-white text-md'
+                      'px-4 py-6 text-lg font-medium rounded-lg  gap-2 transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
                   >
                     {t("navbar.about")}
                   </a>
@@ -79,7 +79,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"shop"}
                     href={"#"}
                     className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800 text-white text-md'
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
                   >
                     {t("navbar.shop")}
                   </a>
@@ -87,7 +87,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
                     key={"contact us"}
                     href={"/contactus"}
                     className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800 text-white text-md'
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
                       >
                     {t("navbar.contact")}
                       </a>
