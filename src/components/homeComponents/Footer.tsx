@@ -35,18 +35,18 @@ export default function Footer() {
               href="https://www.facebook.com/prideland4u"
               className="cursor-pointer duration-150 flex items-center text-white hover:text-yellow-300 transition-colors ">
               <FaFacebookF className="text-xl mr-2" />
-              {t("footer.facebook")}
+              <h1>{t("footer.facebook")}</h1>
             </a>
             <a
               href="https://github.com/pride-land"
               className="cursor-pointer duration-150  flex items-center text-white hover:text-yellow-300 transition-colors ">
               <FaGithub className="text-xl mr-2" />
-              {t("footer.github")}
+              <h1>{t("footer.github")}</h1>
             </a>
             <a href="https://www.youtube.com/channel/UCInYpCvSPY0ezO-gDb7R75Q"
               className="cursor-pointer duration-150 flex items-center text-white hover:text-yellow-300 transition-colors ">
               <FaYoutube className="text-xl mr-2" />
-              {t("footer.Youtube")}
+              <h1>{t("footer.Youtube")}</h1>
             </a>
           </div>
         </div>

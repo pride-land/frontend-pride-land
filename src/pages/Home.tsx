@@ -32,15 +32,7 @@ function Home() {
       <MissionStatement/>
       <section id="cards" className={"min-h-80 flex flex-col px-4"}>
         <div className="flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
-        <CardGallery/>
-      </section>
-      <section id="map" className={"min-h-80 flex flex-col"}>
-        <div className="flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
-        <img
-          src="./src/assets/map.png"
-          alt="map"
-          className="mx-auto lg:mx-24 lg:flex w-[80%] rounded-lg drop-shadow-xl"
-        ></img>
+        {/* <CardGallery/> */}
       </section>
       <section id="blogs" className={"min-h-80 flex flex-col px-4"}>
         <div className="flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
