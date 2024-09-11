@@ -42,7 +42,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
           </div>
               <img
                 alt="プライドランドロゴ"
-                src='../src/assets/logo.png'
+                src='~assets/logo.png'
                 className="h-40 p-0 m-0"
               />
               <div className='hidden md:flex md:items-center md:space-x-4'>
