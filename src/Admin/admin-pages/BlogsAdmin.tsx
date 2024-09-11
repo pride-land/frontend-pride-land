@@ -4,16 +4,18 @@ import BlogsTypes from "../../interfaces/BlogsType"
 import * as blogsApi from "../../api/blogs"
 import { format } from 'date-fns'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-
+import AdminPostBlog from "../admin-components/AdminPostBlog";
 
 const BlogsAdmin = () => {
 
+  
   const [open, setOpen] = useState(false);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
   
   useEffect(()=>{
     fetchAllBlogs()
   },[]);
+
 
   const fetchAllBlogs = async() => {
     const response = await blogsApi.fetchAllBlogs();
@@ -30,7 +32,9 @@ const BlogsAdmin = () => {
   }
 
   return (
-    <> 
+    <>
+    <AdminPostBlog/>
+ 
   <hr className="my-3"/>
    <div>
     <div>
