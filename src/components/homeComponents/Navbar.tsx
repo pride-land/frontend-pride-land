@@ -52,6 +52,14 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
             <div className="hidden md:ml-6 md:block">
               <div className="flex">
                   <a
+                    key={"game"}
+                    href={"https://game-front-z50x.onrender.com/"}
+                    className=
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
+                  >
+                    {t("navbar.game")}
+                  </a>
+                  <a
                     key={"blog"}
                     href={"/blogs"}
                     className=

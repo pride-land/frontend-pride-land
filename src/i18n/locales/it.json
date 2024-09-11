@@ -1,11 +1,12 @@
 {
    "navbar": {
       "home": "Pride Farm",
-      "shop": "negozio",
-      "contact": "contatti",
+      "shop": "Negozio",
+      "contact": "Contatti",
       "join": "Unisciti a noi",
       "blog": "Blog",
-      "about": "Su di noi"
+      "about": "Su di noi",
+      "game": "Gioco"
    },
    "main": {
       "sloganBR": "Trova il tuo",
