@@ -88,7 +88,7 @@ export default function Home() {
                     name="title"
                     id="title"
                     autoComplete="given-name"
-                    className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm sm:leading-6"
                     placeholder="Type the Course title"
                   />
                 </div>
@@ -107,7 +107,7 @@ export default function Home() {
                   rows={4}
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500 "
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-green-300 focus:border-green-300 "
                   placeholder="Write your thoughts here..."
                 ></textarea>
               </div>
@@ -130,7 +130,7 @@ export default function Home() {
             </div>
             <button
               type="submit"
-              className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-500 rounded-lg focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-900 hover:bg-purple-800"
+              className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-500 rounded-lg focus:ring-4 focus:ring-purple-200 hover:bg-green-500"
             >
               <Plus className="w-5 h-5 mr-2" />
               <span>Create Blog Post</span>
