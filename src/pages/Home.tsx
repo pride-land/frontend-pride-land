@@ -1,28 +1,33 @@
 import Blogs from "../components/homeComponents/Blogs";
+import { useState, useEffect } from "react";
 import CardGallery from "../components/homeComponents/CardGallery";
 import FeedbackComments from "../components/homeComponents/FeedbackComments";
-
+import { Image } from '../Admin/admin-interface/AdminGalleryTypes';
+import * as layoutApi from '../Admin/admin-api/admin-layout';
 import HeroCarousel from "../components/homeComponents/HeroCarousel";
 import MissionStatement from "../components/homeComponents/MissionStatement";
-// import Navbar from "../components/Navbar";
 import Slogan from "../components/homeComponents/Slogan";
 
 
 function Home() {
+  const [images, setHeroImages] = useState<Image[] | null>(null);
+
+  useEffect(() => {
+    fetchHeroImages();
+  }, [])
   
 
-  const images = [
-    { src: "../src/assets/chickens.jpg", alt: "chickens" },
-    { src: "../src/assets/volunteers.jpg", alt: "Volunteers" },
-    { src: "../src/assets/eggs.jpg", alt: "Eggs" },
-    { src: "../src/assets/vegetable.jpg", alt: "farm work" },
-    { src: "../src/assets/shiitake.jpg", alt: "mountain work" },
-  ];
+  const fetchHeroImages = async () => {
+    const images = await layoutApi.getHeroImages();
+    setHeroImages(images);
+};
 
   return (
     <div className="bg-gradient-to-br from-green-300 to-white font-sans">
       <div className="w-full m-auto"></div>
+      {images &&
       <HeroCarousel images={images}></HeroCarousel>
+}
       <Slogan></Slogan>
       <MissionStatement/>
       <section id="cards" className={"min-h-80 flex flex-col px-4"}>
@@ -35,9 +40,7 @@ function Home() {
       </section>
       <section id="kuchikomi" className={"min-h-80 flex px-4"}>
         <div className="flex max-w-[1400] mx-auto w-full ">
-          <FeedbackComments 
-            images = {images}
-          />
+          <FeedbackComments/>
         </div>
       </section>
     </div>

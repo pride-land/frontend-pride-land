@@ -4,32 +4,16 @@ import BlogsTypes from "../../interfaces/BlogsType"
 import * as blogsApi from "../../api/blogs"
 import { format } from 'date-fns'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import ImageUpload from "./ImageUpload";
-import AdminPostBlog from "../admin-components/AdminPostBlog";
+
 
 const BlogsAdmin = () => {
 
-  
   const [open, setOpen] = useState(false);
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
-  const [selectedBlogId, setSelectedBlogId] = useState<number | null>(null);
   
   useEffect(()=>{
     fetchAllBlogs()
   },[]);
-
-  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if(selectedBlogId !== null){
-    try{
-      const formData = new FormData(e.currentTarget)
-      Axios.put(process.env.backend_url  + `blogs/${selectedBlogId}/`, formData)
-        console.log("succesfully updated!")
-      }catch (error) {
-        console.log(error);
-      }
-  }
-  }
 
   const fetchAllBlogs = async() => {
     const response = await blogsApi.fetchAllBlogs();
@@ -46,37 +30,40 @@ const BlogsAdmin = () => {
   }
 
   return (
-    <>
-    <AdminPostBlog/>
-    <ImageUpload/> 
-
-
-    <hr className="my-3"/>
+    <> 
+  <hr className="my-3"/>
    <div>
     <div>
       <h2 className="font-bold text-center">Blog List</h2>
-      <ul className="flex justify-between font-semibold text-gray-500 px-2">
-        <li>ID</li>
-        <li>Date</li>
-        <li>Title</li>
-        <li>Update</li>
-      </ul>
-      <div>{blogs.map((elt, index) => (
-            <div className="flex justify-between p-2  flex-row gap-5" id={"blogs-" + String(index+1)} key={index} >
-                <div>{elt.id}</div>
-                <div className="text-center"><span>{format(elt.date_created, 'MM/dd/yyyy')}</span></div>
-           
-                <div className="text-center">{elt.title}</div>
-                <div className="flex gap-2">
-                <div><button onClick={() => {
-                  setOpen(true);  setSelectedBlogId(elt.id); 
-                }}
-                className="bg-orange-400 p-1 rounded-md text-xs">Edit</button> </div>
-                <div><button onClick={() => handleDelete(elt.id)}
-                  className="bg-red-500 p-1 rounded-md text-xs">Delete</button> </div>
-            </div>
-          </div>
-      ))}</div>
+
+
+   <div>
+      <div>
+        <table className="hover:table-fixed">
+          <thead>
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Id</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+            </tr>
+          </thead>
+            <tbody>
+              {blogs?.map((blog) => (  
+                <tr key={blog.id} className="border-b border-gray-200 hover:bg-gray-50">
+                <td className="px-6 py-4  text-sm text-gray-500">{blog.id}</td>
+                <td className="px-6 py-4  text-sm text-gray-500">{format(blog.date_created, 'MM/dd/yyyy')}</td>
+                <td className="px-6 py-4  text-sm  text-gray-500">{blog.title}</td>
+                <td className="px-6 py-4  text-sm line-clamp-1 text-gray-500">{blog.description}</td>
+                <td className="px-6 py-4  text-sm text-gray-500"><button onClick={() => handleDelete(blog.id)}
+                    className="bg-red-400 hover:bg-red-500 p- rounded-md text-white text-xs">Delete</button> </td>
+              </tr> 
+              ))}
+            </tbody>
+        </table>    
+      </div>
+    </div>
     </div>
    </div>
 
@@ -106,7 +93,7 @@ const BlogsAdmin = () => {
                   Edit Blog
                 </DialogTitle>
                 <div className="mt-2">
-                  <form onSubmit={handleUpdate}>
+                  <form>
                    {/*  Blog Titles  choose events or blogs*/}
                         <div> 
                             <label htmlFor='name'>Title:</label>

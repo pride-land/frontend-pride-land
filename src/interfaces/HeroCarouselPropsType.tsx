@@ -1,3 +1,6 @@
-export default interface HeroCarouselProps {
-    images: { src: string; alt: string }[];
+import { Image } from '../Admin/admin-interface/AdminGalleryTypes'
+
+
+export interface HeroCarouselProps {
+    images: Image[];
 }
