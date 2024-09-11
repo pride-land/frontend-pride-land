@@ -24,8 +24,8 @@ const BlogPage = () => {
         if(fromIndexData.state) {
             const blogFromIndex = fromIndexData.state.blog;
             setChosenBlog(blogFromIndex)
+            window.scrollTo({top: 500, behavior: "smooth"});
         };
-        window.scrollTo({top: 500, behavior: "smooth"});
     }, [])
     
     // Helper Functions
