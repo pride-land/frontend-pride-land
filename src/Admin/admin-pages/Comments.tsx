@@ -32,21 +32,22 @@ const Comments = () => {
   }
 
   const displayFeedbacks = allFeedbacks?.map((feedback) => 
-    <div className='relative h-[16rem] bg-gray-200 border-black border border-solid rounded-lg p-5' key={feedback.id}>
+    <div className='relative h-[16rem] bg-gray-200 border-gray-300 border border-solid rounded-lg p-5' key={feedback.id}>
       <div className='flex my-2'>
-        <h1 className='font-medium'>Name:</h1>
-        <h1 className='ml-3 mt-[-0.4rem] font-bold text-2xl'>{feedback.name}</h1>
+        <h1 className='font-medium text-gray-500'>Name:</h1>
+        <h1 className='ml-3 mt-[-0.4rem] font-bold text-xl'>{feedback.name}</h1>
       </div>
-      <h1 className='mb-5 font-medium'>Comment:</h1>
-      <div className='p-2 max-h-[5.5rem] overflow-auto rounded-xl bg-gray-50'>
-        <h1 className='inline'>{feedback.comment}</h1>
+      <h1 className='mb-1 font-medium text-gray-500'>Comment:</h1>
+      <div className='p-2 max-h-[6rem] overflow-auto rounded-md bg-gray-100'>
+        <h1 className='inline text-sm'>{feedback.comment}</h1>
       </div>
       <div className='flex absolute bottom-5'>
-        <div className='font-medium w-28 mr-3'>{!feedback.is_accepted? "Not Displayed": "Displaying"}</div>
+        <div className='font-medium w-28 mr-3 text-gray-500'>{!feedback.is_accepted? "Not Displayed": "Displaying"}</div>
         <div>
-          <input type='checkbox' name='checkbox' onChange={()=>handleStatus(feedback)} checked={feedback.is_accepted? true : false}></input>
+          <input type='checkbox' name='checkbox' className="h-4 w-4 text-green-500
+                                     border-gray-300 rounded focus:ring-green-300 transition duration-150 ease-in-out"onChange={()=>handleStatus(feedback)} checked={feedback.is_accepted? true : false}></input>
         </div>
-        <button className='ml-6 text-sm bg-red-500 border border-gray-300 border-solid rounded-2xl px-2 py-1' type='button' name='delete-button' onClick={()=>handleDeletion(feedback)}>Delete</button>
+        <button className='ml-6 text-sm bg-gray-400 border hover:bg-red-400 text-white border-gray-300 border-solid rounded-md px-2 py-1' type='button' name='delete-button' onClick={()=>handleDeletion(feedback)}>Delete</button>
       </div>
     </div>
   )

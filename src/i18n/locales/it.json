@@ -1,11 +1,12 @@
 {
    "navbar": {
-      "home": "HOME",
-      "shop": "negozio",
-      "contact": "contatti",
+      "home": "Pride Farm",
+      "shop": "Negozio",
+      "contact": "Contatti",
       "join": "Unisciti a noi",
-      "prideFarm": "Pride Farm",
-      "about": "Su di noi"
+      "blog": "Blog",
+      "about": "Su di noi",
+      "game": "Gioco"
    },
    "main": {
       "sloganBR": "Trova il tuo",
@@ -37,5 +38,13 @@
    },
    "AboutUs": {
       "ImageText": "Su di noi"
-   }
+   },
+   "ContactUs": {
+         "ImageText": "Contatto",
+         "FeedbackFormHeader": "Commenti o feedback sono benvenuti!",
+         "Name": "Nome",
+         "Comments": "Commenti",
+         "FieldInput": "Inserire qui",
+         "SubmitFeedback": "Invia il feedback"
+      }
 }

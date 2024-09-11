@@ -1,11 +1,12 @@
 {
    "navbar": {
-      "home": "HOME",
+      "home": "Pride Farm",
       "shop": "Shop",
       "contact": "Kontakt",
       "join": "Beitreten",
-      "prideFarm": "Pride Farm",
-      "about": "Über uns"
+      "blog": "Blog",
+      "about": "Über uns",
+      "game": "Spiel"
    },
    "main": {
       "sloganBR": "Finde deine",
@@ -37,5 +38,13 @@
    },
    "AboutUs": {
       "ImageText": "Über uns"
+   },
+   "ContactUs": {
+         "ImageText": "Kontakt",
+         "FeedbackFormHeader": "Kommentare oder Feedback sind willkommen!",
+         "Name": "Name",
+         "Comments": "Kommentare",
+         "FieldInput": "Eingabe",
+         "SubmitFeedback": "Feedback abgeben"
    }
 }

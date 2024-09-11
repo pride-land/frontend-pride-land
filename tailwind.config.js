@@ -21,6 +21,9 @@ export default{
         'pudding-background': "url('./src/assets/prideland.png')"
       }
     },
+    fontFamily: {
+      'roboto' : ['Roboto', 'sans-serif']
+    }
   },
   plugins: [
     require('flowbite/plugin'),

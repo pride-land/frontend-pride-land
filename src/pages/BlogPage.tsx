@@ -3,18 +3,33 @@ import * as blogsApi from "../api/blogs";
 import BlogsTypes from "../interfaces/BlogsType";
 import BlogFocus from "../components/blogComponents/blogFocus";
 import BlogHistoryList from "../components/blogComponents/blogHistoryList";
+import { useLocation } from "react-router-dom";
 
 const BlogPage = () => {
-
+    
     // useStates
     const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
     const [chosenBlog, setChosenBlog] = useState<BlogsTypes | null>(null);
+
+
+    //info from index page
+    const fromIndexData = useLocation();
 
     // useEffects
     useEffect(() => {
         fetchAllBlogs();
     }, []);
 
+    useEffect(() => {
+        if(fromIndexData.state) {
+            const blogFromIndex = fromIndexData.state.blog;
+            setChosenBlog(blogFromIndex)
+            window.scrollTo({top: 500, behavior: "smooth"});
+        } else {
+            setChosenBlog(blogs[0]);
+        }
+    }, [blogs])
+    
     // Helper Functions
     const fetchAllBlogs = async () => {
         const response = await blogsApi.fetchAllBlogs();
@@ -39,8 +54,7 @@ const BlogPage = () => {
                     />
                 </div>
                 {chosenBlog && (
-                <div className="(Selected Month's Blog Posts) m-10 w-full">
-                    <h1 className="(Selected Month Placeholder) m-auto"></h1>
+                <div className="(Selected Month's Blog Posts) m-10 w-full">  
                     <BlogFocus chosenBlog={chosenBlog} />
                 </div>
                 )}
