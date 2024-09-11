@@ -1,6 +1,6 @@
 import Blogs from "../components/homeComponents/Blogs";
 import { useState, useEffect } from "react";
-import CardGallery from "../components/homeComponents/CardGallery";
+// import CardGallery from "../components/homeComponents/CardGallery";
 import FeedbackComments from "../components/homeComponents/FeedbackComments";
 import { Image } from '../Admin/admin-interface/AdminGalleryTypes';
 import * as layoutApi from '../Admin/admin-api/admin-layout';
