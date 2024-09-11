@@ -1,10 +1,10 @@
 {
    "navbar": {
-      "home": "HOME",
+      "home": "Pride Farm",
       "shop": "negozio",
       "contact": "contatti",
       "join": "Unisciti a noi",
-      "prideFarm": "Pride Farm",
+      "blog": "Blog",
       "about": "Su di noi"
    },
    "main": {
@@ -37,5 +37,13 @@
    },
    "AboutUs": {
       "ImageText": "Su di noi"
-   }
+   },
+   "ContactUs": {
+         "ImageText": "Contatto",
+         "FeedbackFormHeader": "Commenti o feedback sono benvenuti!",
+         "Name": "Nome",
+         "Comments": "Commenti",
+         "FieldInput": "Inserire qui",
+         "SubmitFeedback": "Invia il feedback"
+      }
 }

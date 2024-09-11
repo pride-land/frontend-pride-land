@@ -1,10 +1,10 @@
 {
       "navbar": {
-         "home": "ホーム",
+         "home": "プライドファーム",
          "shop": "ショップ",
          "contact": "コンタクト",
          "join": "ジョイン",
-         "prideFarm": "プライドファーム",
+         "blog": "ブログ",
          "about": "プライドランド"
       },
       "main": {
@@ -26,7 +26,7 @@
       "footer": {
          "tm-header": "プライドファーム",
          "trademark": "NPO法人ぷらいどらんど",
-         "support": "サッポート",
+         "support": "サポート",
          "contact": "コンタクト",
          "about": "プライドランドについて",
          "mission": "ミッション",
@@ -39,6 +39,14 @@
       "AboutUs": {
          "ImageText": "私たちのプライドランド"
          
+      },
+      "ContactUs": {
+         "ImageText": "コンタクト",
+         "FeedbackFormHeader": "コメントやフィードバックは歓迎です！",
+         "Name": "名前",
+         "Comments": "コメント",
+         "FieldInput": "入力してください",
+         "SubmitFeedback": "フィードバック送信"
       }
 
 }
