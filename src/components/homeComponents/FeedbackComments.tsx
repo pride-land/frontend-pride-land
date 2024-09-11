@@ -4,15 +4,7 @@ import FeedbackType from '../../interfaces/FeedbackType';
 import Feedback from '../../interfaces/FeedbackType';
 
 
-interface ImageType {
-    src: string,
-    alt: string
-}
-interface Props {
-    images: ImageType []
-}
-
-const FeedbackComments: React.FC<Props> = () => {
+const FeedbackComments: React.FC = () => {
 
     const [feedbacks, setFeedbacks] = useState<FeedbackType []>([]);
     
