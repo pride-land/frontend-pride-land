@@ -18,7 +18,7 @@ export default{
     },
     extend: {
       backgroundImage: {
-        'pudding-background': "url('~/assets/prideland.png')"
+        'pudding-background': "url('/prideland.png')"
       }
     },
     fontFamily: {
