@@ -1,8 +1,7 @@
-
-import HeroCarouselPropsType from "../../interfaces/HeroCarouselPropsType";
+import { HeroCarouselProps } from '../../interfaces/HeroCarouselPropsType';
 import { useState } from "react";
 
-export default function HeroCarousel({images}: HeroCarouselPropsType) {
+const HeroCarousel = ({images}: HeroCarouselProps) => {
 
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
@@ -21,7 +20,7 @@ export default function HeroCarousel({images}: HeroCarouselPropsType) {
     <div className="overflow-hidden relative">
   <div className="flex transition ease-out duration-700 xl:w-1/2" style={{ transform: `translateX(-${currentSlide * 150}%)` }}>
         {images.map((image, index) => (
-            <img key={index} src={image.src} alt={image.alt} className="xl:ml-[50%]"/>
+            <img key={index} src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className="xl:ml-[50%]"/>
           
         ))}
     </div>
@@ -30,7 +29,7 @@ export default function HeroCarousel({images}: HeroCarouselPropsType) {
             <button
                 key={index} 
                 type="button" 
-                id={image.alt} 
+                id={image.alt_text} 
                 className="w-10 h-10 rounded-full" 
                 aria-current={index === currentSlide ? "true" : "false"} 
                 aria-label={`Got to slide ${index + 1}`} 
@@ -70,3 +69,5 @@ export default function HeroCarousel({images}: HeroCarouselPropsType) {
     </>
       );
 }
+
+export default HeroCarousel;

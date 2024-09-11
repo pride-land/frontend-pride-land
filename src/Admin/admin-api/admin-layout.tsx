@@ -1,6 +1,7 @@
 import { Image } from "../admin-interface/AdminGalleryTypes";
 
 const endpoint = process.env.backend_url
+const media_url = process.env.media_url
 
 export const deleteImage = async(image: Image) => {
     const request = await fetch(endpoint + `medias/${image.id}/`, {
@@ -56,3 +57,9 @@ export const removeHeroTagFromImg = async(image: Image) => {
     return result;
     }
 
+    export const getHeroImages = async() => {
+        const request = await fetch(media_url + "heroes/");
+        const result = await request.json();
+        console.log(result);
+        return result;
+    }
