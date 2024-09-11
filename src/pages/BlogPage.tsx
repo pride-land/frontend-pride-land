@@ -25,8 +25,10 @@ const BlogPage = () => {
             const blogFromIndex = fromIndexData.state.blog;
             setChosenBlog(blogFromIndex)
             window.scrollTo({top: 500, behavior: "smooth"});
-        };
-    }, [])
+        } else {
+            setChosenBlog(blogs[0]);
+        }
+    }, [blogs])
     
     // Helper Functions
     const fetchAllBlogs = async () => {
