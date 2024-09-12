@@ -17,6 +17,7 @@ import AdminGallery from "./Admin/admin-components/AdminGallery";
 import CommentsPage from "./pages/CommentsPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import { createContext, useEffect, useState } from "react";
+import MushroomGame from "./pages/MushroomGame";
 
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
                             <Route path="contactus" element={<CommentsPage/>}/>
                             <Route path="aboutus" element={<AboutUsPage/>}/>
                             <Route path="volunteers" element={<VolunteerPage />} />
+                            <Route path="pridefarmgame" element={<MushroomGame />} />
                         </Route>    
                         <Route path="/login" element={<AdminLogin/>}/>
                         <Route path="/register" element={<AdminRegistration/>} />
