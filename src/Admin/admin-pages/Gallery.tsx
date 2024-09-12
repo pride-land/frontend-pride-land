@@ -73,11 +73,10 @@ const handleSetSelectedImages = (image: Image) => {
 }
 
 const handleRemoveHeroTagImage = (image: Image) => {
-  setSelectedImage(image);
-if (selectedImages !== null) {
+if (selectedImage !== null  && selectedImages !== null) {
   setSelectedImages(selectedImages.filter((selectedImage) => selectedImage.blob_img !== image.blob_img))
+  removeHeroTagFromImg(selectedImage as Image);
 }
-removeHeroTagFromImg(selectedImage as Image);
 }
 
   return (
@@ -98,7 +97,7 @@ removeHeroTagFromImg(selectedImage as Image);
           <img src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className="rounded-md w-full"/>
             <p>{image.alt_text}</p>
         </button>
-        <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute top-2 -right-10 cursor-pointer" onClick={() => {console.log(image); setSelectedImage(image); handleRemoveImage(image)}}/>
+        <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute top-2 -right-10 cursor-pointer" onClick={() => {console.log(image); handleRemoveImage(image)}}/>
                   </div>
         )}
         </div>
@@ -109,7 +108,7 @@ removeHeroTagFromImg(selectedImage as Image);
           <div className="m-6 w-[400px] relative text-center">
             <img src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className="rounded-md w-full"/>
             <p>{image.alt_text}</p>
-            <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute -top-4 -right-4 cursor-pointer" onClick={() => handleRemoveHeroTagImage(image)}/>
+            <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute -top-4 -right-4 cursor-pointer" onClick={() => {setSelectedImage(image); handleRemoveHeroTagImage(image)}}/>
           </div>
           )}
 

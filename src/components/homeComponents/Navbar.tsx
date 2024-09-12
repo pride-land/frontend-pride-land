@@ -11,22 +11,33 @@ const langs: any = {
   pt: { nativeName: 'Português'},
 };
 
-const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'About', href: '/about', current: false },
-  { name: 'Contact', href: '/contact', current: false },
-];
+interface Navigation  { 
+  name: any;
+  href: string;
+  current: boolean;
+};
 
 const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   const { t, i18n } = useTranslation();
-
+  
   const handleLangChange = (lang: string) => {
     i18n.changeLanguage(lang);
     setCurrentLang(lang);
     sessionStorage.setItem("lang", lang);
     console.log(sessionStorage.getItem("lang"));
   }
+  
+  const navigation: Navigation[] = [
+    { name: t('navbar.home'), href: '/', current: true },
+    { name: t("navbar.about"), href: '/aboutus', current: false },
+    { name: t("navbar.contact"), href: '/contactus', current: false },
+    { name: t("navbar.game"), href: "/pridefarmgame", current: false },
+    { name: t("navbar.join"), href: "/volunteers", current: false},
+    { name: t("navbar.blog"), href: "/blogs", current: false},
 
+  ];
+  
+  
   return (
     <Disclosure as="nav" className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl sticky top-0 z-50">
       <div className="px-6 md:px-2">

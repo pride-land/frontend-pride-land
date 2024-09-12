@@ -45,6 +45,7 @@ const ImageUpload: React.FC = () => {
         console.error('Error uploading image:', error);
       }
     }
+    
   };
 
   // const handleDataChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -78,11 +79,18 @@ const ImageUpload: React.FC = () => {
             </select>
           </div> */}
           <div>
+              <div className="flex m-4">
             <form name="imageForm" onSubmit={handleSubmit}>
-            <button className="bg-blue-400 p-4" onClick={handleClick}>画像を選択してください</button>
+            <button className="bg-blue-400 p-4 m-4" onClick={handleClick}>画像を選択してください</button>
               <input type="file" id='blob_img' style={{ display: "none" }}  onChange={handleFileChange} />
+             {image && 
+             <div>
+              <img src={image as string} alt="preview" className="w-1/4 h-1/4 m-4"/>
               <button className='bg-gray-400 rounded-sm p-2 mx-2' type="submit">画像アップロード</button>
+              </div>
+              }
             </form>
+            </div>
           </div>
         </div>
       </div>
