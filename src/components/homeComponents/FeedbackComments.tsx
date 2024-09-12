@@ -52,7 +52,7 @@ const FeedbackComments: React.FC = () => {
     })
 
   return (
-    <div id='all-feedbacks' className='mx-auto max-w-full flex gap-10'>
+    <div id='all-feedbacks' className='mx-auto max-w-full flex flex-col md:flex-row  md:gap-6 lg:gap-10'>
         {createFeedbackDiv}
     </div>
   )
