@@ -7,6 +7,19 @@ import Feedback from '../../interfaces/FeedbackType';
 const FeedbackComments: React.FC = () => {
 
     const [feedbacks, setFeedbacks] = useState<FeedbackType []>([]);
+    const [currentCard, setCurrentCard] = useState<number>(0);
+    const [mousedOver, setMousedOver] = useState<boolean>(false);
+  
+    useEffect(() => {
+      let timer: NodeJS.Timeout;
+      if (!mousedOver) {
+        timer = setInterval(() => {
+          setCurrentCard((prevCard) => (prevCard + 1) % (feedbacks.length -1));
+        }, 2000);
+      }
+  
+      return () => clearInterval(timer);
+    }, [mousedOver, currentCard, feedbacks]);
     
     useEffect(() => {
         fetchAllFeedbacks();
@@ -25,7 +38,7 @@ const FeedbackComments: React.FC = () => {
         if(feedbackArr.length < 5){
             emptyArr = feedbackArr;
         } else {
-            while(emptyArr.length < 5){
+            while(emptyArr.length <= feedbackArr.length){
                 let chosen = feedbackArr[Math.floor(Math.random() * feedbackArr.length)];
                 feedbackArr.splice(feedbackArr.indexOf(chosen), 1);
                 emptyArr.push(chosen);
@@ -35,11 +48,7 @@ const FeedbackComments: React.FC = () => {
     }
     
     const createFeedbackDiv = feedbacks.map((feedback, index) => {
-        return <div id={"feedback-" + String(index+1)} key={feedback.name + index} className='m-4 flex flex-col justify-center'>
-                <div className="bg-white p-6 flex flex-col text-center text-md rounded-md drop-shadow-lg my-3">
-                    <div>
-                        {/* <img src={props.images[index].src}></img> */}
-                    </div>
+        return <div id={"feedback-" + String(index+1)} key={feedback.name + index} className="bg-white p-6 flex flex-col text-center text-md rounded-md drop-shadow-lg my-3 justify-center m-12">
                     <div className=''>
                         <h1>{feedback.comment}</h1>
                     </div>
@@ -47,13 +56,18 @@ const FeedbackComments: React.FC = () => {
                         <p>{feedback.name}</p>
                     </div>
                 </div>
-            </div>
-
     })
 
   return (
-    <div id='all-feedbacks' className='mx-auto max-w-full flex flex-col md:flex-row  md:gap-6 lg:gap-10'>
+    <div className="md:overflow-hidden relative">
+    <div
+      className="flex transition ease-out duration-700"
+      style={{ transform: `translateX(-${currentCard * 20}%)` }}
+      onMouseOver={() => setMousedOver(true)}
+      onMouseOut={() => setMousedOver(false)}
+    >
         {createFeedbackDiv}
+    </div>
     </div>
   )
 }

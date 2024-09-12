@@ -26,7 +26,7 @@ const CommentsPage = () => {
     const handleIsSubmittedPageView = () => {
         setCommentsPageView(
             <div className="h-full w-full grid">
-                <div className="m-auto">Thank you for submitting your feedback!</div>
+                <div className="m-auto">{t("ContactUs.completedForm")}</div>
             </div>
         )
     }

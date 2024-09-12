@@ -45,7 +45,9 @@
          "Name": "Name",
          "Comments": "Comentários",
          "FieldInput": "Introduzir aqui",
-         "SubmitFeedback": "Enviar comentários"
+         "SubmitFeedback": "Enviar comentários",
+         "completedForm": "Obrigado por enviar seu feedback!"
+
    },
 
    "volunteer": {
