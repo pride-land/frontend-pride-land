@@ -1,15 +1,38 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { IRefPhaserGame, PhaserGame } from '../game/PhaserGame';
 import { MainMenu } from '../game/scenes/MainMenu';
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase.ts";
+import Auth from '../game/Authentication.tsx';
 
-function MushroomGame()
-{
+function MushroomGame() {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+          setUser(authUser);
+        }); 
+    
+        return () => unsubscribe();
+      }, []);
+
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
 
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
+
+      // Signing in with Google using Popup
+  const signInWithGooglePopup = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      return response;
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+      throw error;
+    }
+  };
 
     const changeScene = () => {
 
@@ -81,6 +104,22 @@ function MushroomGame()
     }
 
     return (
+        <>
+        <Auth />
+      <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: "100px",
+      }}
+    >
+      <h1>Firebase Authentication</h1>
+      <br />
+      <h4>{user ? user.displayName : "Not signed in"}</h4>
+      <button onClick={signInWithGooglePopup}>Sign in With Google</button> </div>
+        
         <div id="game-container" className='w-full flex align-center m-12 mx-auto'>
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
             <div>
@@ -98,6 +137,7 @@ function MushroomGame()
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
