@@ -1,4 +1,3 @@
-// src/Auth.tsx
 import React, { useState, useEffect } from 'react';
 import { logIn, signUp } from './auth';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -67,7 +66,6 @@ const Auth: React.FC = () => {
         </DialogTitle>
             <div>
               <div className='p-2'>
-            
               <form onSubmit={handleSubmit}>
               <div className='text-left w-[15rem]'>
                 <label>Email:</label>
@@ -93,15 +91,13 @@ const Auth: React.FC = () => {
                 <div className='flex justify-center'>
                 <button className="mt-3 flex hover:bg-gray-200 border-width:1px bg-gray-300 p-2 rounded-md " onClick={signInWithGooglePopup}> <FcGoogle className='h-6 mr-2'/>Sign in With Google </button>
                 </div><br/>
-            
               </div>
               </div>           
             </div>
           </div>
         </div>
       </div>
-        
-          </DialogPanel>
+      </DialogPanel>
         </div>
       </div>
     </Dialog>

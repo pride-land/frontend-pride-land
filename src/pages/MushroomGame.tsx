@@ -6,13 +6,11 @@ import Auth from '../game/Authentication.tsx';
 import { onAuthStateChanged } from 'firebase/auth';
 
 function MushroomGame() {
-   
     const [user, setUser] = useState<string | any>(null);
 
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
-        setUser(user);
-      });
+        setUser(user)});
     return () => unsubscribe();
     }, []);
   
