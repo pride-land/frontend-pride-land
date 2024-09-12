@@ -1,9 +1,19 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { IRefPhaserGame, PhaserGame } from '../game/PhaserGame';
 import { MainMenu } from '../game/scenes/MainMenu';
+import { auth } from "../firebase.ts";
+import Auth from '../game/Authentication.tsx';
+import { onAuthStateChanged } from 'firebase/auth';
 
-function MushroomGame()
-{
+function MushroomGame() {
+    const [user, setUser] = useState<string | any>(null);
+
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user)});
+    return () => unsubscribe();
+    }, []);
+  
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
 
@@ -81,6 +91,16 @@ function MushroomGame()
     }
 
     return (
+        <>
+        <div>
+            {user ? (
+                <div className='flex justify-between mx-5 my-2'>
+                    <h1 className='font-thin font-roboto'>Welcome, {user.name || user.email}</h1>
+                    <button className='bg-gray-400 rounded-md p-1' onClick={() => auth.signOut()}>Sign Out</button>
+                </div>
+            ) : (<Auth />)}
+        </div>
+        
         <div id="game-container" className='w-full flex align-center m-12 mx-auto'>
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
             <div>
@@ -98,6 +118,7 @@ function MushroomGame()
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
