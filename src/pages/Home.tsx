@@ -30,10 +30,10 @@ function Home() {
 }
       <Slogan></Slogan>
       <MissionStatement/>
-      <section id="cards" className={"min-h-80 flex flex-col px-4"}>
+      {/* <section id="cards" className={"min-h-80 flex flex-col px-4"}>
         <div className="flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
-        {/* <CardGallery/> */}
-      </section>
+        <CardGallery/>
+      </section> */}
       <section id="blogs" className={"min-h-80 flex flex-col px-4"}>
         <div className="flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
         <Blogs />

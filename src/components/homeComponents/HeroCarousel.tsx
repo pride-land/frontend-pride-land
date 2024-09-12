@@ -18,7 +18,7 @@ const HeroCarousel = ({images}: HeroCarouselProps) => {
     <>
 
     <div className="overflow-hidden relative">
-  <div className="flex transition ease-out duration-700 xl:w-1/2" style={{ transform: `translateX(-${currentSlide * 150}%)` }}>
+  <div className="flex transition ease-out duration-700 xl:w-1/2"  style={{transform: `translateX(-${currentSlide * (window.innerWidth < 640 ? 100 : 150)}%)`,}}>
         {images.map((image, index) => (
             <img key={index} src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className="xl:ml-[50%]"/>
           
