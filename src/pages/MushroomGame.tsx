@@ -1,38 +1,27 @@
 import { useRef, useState, useEffect } from 'react';
 import { IRefPhaserGame, PhaserGame } from '../game/PhaserGame';
 import { MainMenu } from '../game/scenes/MainMenu';
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../firebase.ts";
+import { auth } from "../firebase.ts";
 import Auth from '../game/Authentication.tsx';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function MushroomGame() {
-    const [user, setUser] = useState(null);
+   
+    const [user, setUser] = useState<string | any>(null);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-          setUser(authUser);
-        }); 
-    
-        return () => unsubscribe();
-      }, []);
-
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+      });
+    return () => unsubscribe();
+    }, []);
+  
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
 
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
-
-      // Signing in with Google using Popup
-  const signInWithGooglePopup = async () => {
-    try {
-      const response = await signInWithPopup(auth, provider);
-      return response;
-    } catch (error) {
-      console.error("Error signing in with Google:", error);
-      throw error;
-    }
-  };
 
     const changeScene = () => {
 
@@ -105,20 +94,14 @@ function MushroomGame() {
 
     return (
         <>
-        <Auth />
-      <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingTop: "100px",
-      }}
-    >
-      <h1>Firebase Authentication</h1>
-      <br />
-      <h4>{user ? user.displayName : "Not signed in"}</h4>
-      <button onClick={signInWithGooglePopup}>Sign in With Google</button> </div>
+        <div>
+            {user ? (
+                <div className='flex justify-between mx-5 my-2'>
+                    <h1 className='font-thin font-roboto'>Welcome, {user.name || user.email}</h1>
+                    <button className='bg-gray-400 rounded-md p-1' onClick={() => auth.signOut()}>Sign Out</button>
+                </div>
+            ) : (<Auth />)}
+        </div>
         
         <div id="game-container" className='w-full flex align-center m-12 mx-auto'>
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
