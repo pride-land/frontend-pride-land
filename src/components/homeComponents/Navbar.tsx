@@ -29,8 +29,12 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   
   const navigation: Navigation[] = [
     { name: t('navbar.home'), href: '/', current: true },
-    { name: t("navbar.about"), href: '/about', current: false },
-    { name: t("navbar.contact"), href: '/contact', current: false },
+    { name: t("navbar.about"), href: '/aboutus', current: false },
+    { name: t("navbar.contact"), href: '/contactus', current: false },
+    { name: t("navbar.game"), href: "/pridefarmgame", current: false },
+    { name: t("navbar.join"), href: "/volunteers", current: false},
+    { name: t("navbar.blog"), href: "/blogs", current: false},
+
   ];
   
   
