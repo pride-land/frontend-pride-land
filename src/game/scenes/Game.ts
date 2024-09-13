@@ -311,16 +311,16 @@ export class Game extends Scene
         mushroom.setImmovable(false).setInteractive({draggable: true});
 
         //make mushrooms draggable
-        this.input.on('dragstart', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
+        this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
             gameObject.setTint(0xff0000)
         });
 
-        this.input.on('drag', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
+        this.input.on('drag', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
             gameObject.x = dragX
             gameObject.y = dragY
         });
 
-        this.input.on('dragend', (pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
+        this.input.on('dragend', (_pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
             gameObject.clearTint();
             
             if(!gameObject.tweenPlayed){

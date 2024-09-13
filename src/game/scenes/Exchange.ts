@@ -14,7 +14,7 @@ export class Exchange extends Scene
         super(handle + 'Exchange')
     }
 
-    create(data: {mushroomCurrency: number})
+    create(_data: {mushroomCurrency: number})
     {
         this.todayRate = Math.Between(10, 50);
         //set-up exchange rate background
