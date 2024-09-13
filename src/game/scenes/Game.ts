@@ -1,6 +1,6 @@
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 import { EventBus } from '../EventBus';
-import { Math, Scene } from 'phaser';
+import { Scene } from 'phaser';
 import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
@@ -12,36 +12,41 @@ interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
 
 export class Game extends Scene
 {
-    camera: Phaser.Cameras.Scene2D.Camera;
-    background: Phaser.GameObjects.Image;
-    gameText: Phaser.GameObjects.Text;
-    rexUI: UIPlugin;
-    tutorialTextBox: TextBox;
-    realLogGroup: Phaser.Physics.Arcade.StaticGroup
-    realLog: Phaser.Physics.Arcade.Sprite
-    waterProgressBar: Phaser.GameObjects.Shape
-    waterFillProgressBar: Phaser.GameObjects.Shape
+    camera?: Phaser.Cameras.Scene2D.Camera;
+    background?: Phaser.GameObjects.Image;
+    gameText?: Phaser.GameObjects.Text;
+    rexUI?: UIPlugin;
+    tutorialTextBox?: TextBox;
+    realLogGroup?: Phaser.Physics.Arcade.StaticGroup
+    realLog?: Phaser.Physics.Arcade.Sprite
+    waterProgressBar?: Phaser.GameObjects.Shape
+    waterFillProgressBar?: Phaser.GameObjects.Shape
     //set up flags and checks
-    isTextDone: boolean;
-    hasRun: boolean;
-    isLogFull: boolean;
-    isLogFullHasRun: boolean;
-    isMushroomDone: boolean;
-    isCurrentBatchHarvested: boolean;
+    isTextDone?: boolean;
+    hasRun?: boolean;
+    isLogFull?: boolean;
+    isLogFullHasRun?: boolean;
+    isMushroomDone?: boolean;
+    isCurrentBatchHarvested?: boolean;
     
-    waterDropListener: Phaser.Input.InputPlugin;
-    tutorialTimerText: Phaser.GameObjects.Text;
-    tutorialTimerHarvest: Phaser.Time.TimerEvent;
-    mushroomSprite: Phaser.Physics.Arcade.Sprite;
-    mushroomTween: Phaser.Tweens.Tween | null;
-    mushroomCurrency: number;
-    mushroomCurrencyText: Phaser.GameObjects.Text;
-    numberOfMushrooms: number;
-    mushroomGroup: Phaser.Physics.Arcade.StaticGroup;
+    waterDropListener?: Phaser.Input.InputPlugin;
+    tutorialTimerText?: Phaser.GameObjects.Text;
+    tutorialTimerHarvest?: Phaser.Time.TimerEvent;
+    mushroomSprite?: Phaser.Physics.Arcade.Sprite;
+    mushroomTween?: Phaser.Tweens.Tween | null;
+    mushroomCurrency?: number;
+    mushroomCurrencyText?: Phaser.GameObjects.Text;
+    numberOfMushrooms?: number;
+    mushroomGroup?: Phaser.Physics.Arcade.StaticGroup;
     count: number
+<<<<<<< HEAD
     shopContainer: Phaser.GameObjects.Container;
     shopScene: Phaser.Scene | null;
     exchangeShopIcon: Phaser.GameObjects.Image;
+=======
+    shopContainer?: Phaser.GameObjects.Container;
+    shopScene: any;
+>>>>>>> dd83f80 (typescript fixes)
     constructor ()
     {
         super('Game');
