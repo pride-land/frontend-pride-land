@@ -3,18 +3,18 @@ import { Math, Scene } from 'phaser';
 
 export class Exchange extends Scene
 {
-    shopBackground?: Phaser.GameObjects.Image;
-    todayRateText?: Phaser.GameObjects.Text;
-    todayRate?: number;
-    mushroomExchangeRateTimer?: Phaser.Time.TimerEvent;
-    exchangeButton?: Phaser.GameObjects.Image;
+    shopBackground: Phaser.GameObjects.Image;
+    todayRateText: Phaser.GameObjects.Text;
+    todayRate: number;
+    mushroomExchangeRateTimer: Phaser.Time.TimerEvent;
+    exchangeButton: Phaser.GameObjects.Image;
 
     constructor(handle: string)
     {
         super(handle + 'Exchange')
     }
 
-    create(data: {mushroomCurrency: number})
+    create(_data: {mushroomCurrency: number})
     {
         this.todayRate = Math.Between(10, 50);
         //set-up exchange rate background

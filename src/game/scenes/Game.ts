@@ -13,32 +13,32 @@ interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
 
 export class Game extends Scene
 {
-    camera?: Phaser.Cameras.Scene2D.Camera;
-    background?: Phaser.GameObjects.Image;
-    gameText?: Phaser.GameObjects.Text;
-    rexUI?: UIPlugin;
-    tutorialTextBox?: TextBox;
-    realLogGroup?: Phaser.Physics.Arcade.StaticGroup
-    realLog?: Phaser.Physics.Arcade.Sprite
-    waterProgressBar?: Phaser.GameObjects.Shape
-    waterFillProgressBar?: Phaser.GameObjects.Shape
+    camera: Phaser.Cameras.Scene2D.Camera;
+    background: Phaser.GameObjects.Image;
+    gameText: Phaser.GameObjects.Text;
+    rexUI: UIPlugin;
+    tutorialTextBox: TextBox;
+    realLogGroup: Phaser.Physics.Arcade.StaticGroup
+    realLog: Phaser.Physics.Arcade.Sprite
+    waterProgressBar: Phaser.GameObjects.Shape
+    waterFillProgressBar: Phaser.GameObjects.Shape
     //set up flags and checks
-    isTextDone?: boolean;
-    hasRun?: boolean;
-    isLogFull?: boolean;
-    isLogFullHasRun?: boolean;
-    isMushroomDone?: boolean;
-    isCurrentBatchHarvested?: boolean;
+    isTextDone: boolean;
+    hasRun: boolean;
+    isLogFull: boolean;
+    isLogFullHasRun: boolean;
+    isMushroomDone: boolean;
+    isCurrentBatchHarvested: boolean;
     
-    waterDropListener?: Phaser.Input.InputPlugin;
-    tutorialTimerText?: Phaser.GameObjects.Text;
-    tutorialTimerHarvest?: Phaser.Time.TimerEvent;
-    mushroomSprite?: Phaser.Physics.Arcade.Sprite;
-    mushroomTween?: Phaser.Tweens.Tween | null;
-    mushroomCurrency?: number;
-    mushroomCurrencyText?: Phaser.GameObjects.Text;
-    numberOfMushrooms?: number;
-    mushroomGroup?: Phaser.Physics.Arcade.StaticGroup;
+    waterDropListener: Phaser.Input.InputPlugin;
+    tutorialTimerText: Phaser.GameObjects.Text;
+    tutorialTimerHarvest: Phaser.Time.TimerEvent;
+    mushroomSprite: Phaser.Physics.Arcade.Sprite;
+    mushroomTween: Phaser.Tweens.Tween | null;
+    mushroomCurrency: number;
+    mushroomCurrencyText: Phaser.GameObjects.Text;
+    numberOfMushrooms: number;
+    mushroomGroup: Phaser.Physics.Arcade.StaticGroup;
     count: number
     shopContainer: Phaser.GameObjects.Container;
     coins: number;
@@ -311,16 +311,16 @@ export class Game extends Scene
         mushroom.setImmovable(false).setInteractive({draggable: true});
 
         //make mushrooms draggable
-        this.input.on('dragstart', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
+        this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
             gameObject.setTint(0xff0000)
         });
 
-        this.input.on('drag', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
+        this.input.on('drag', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
             gameObject.x = dragX
             gameObject.y = dragY
         });
 
-        this.input.on('dragend', (pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
+        this.input.on('dragend', (_pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
             gameObject.clearTint();
             
             if(!gameObject.tweenPlayed){
