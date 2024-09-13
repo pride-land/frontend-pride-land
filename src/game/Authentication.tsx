@@ -30,6 +30,7 @@ const Auth: React.FC = () => {
     }
   };
 
+
 //   Signing in with Google using Popup
   const signInWithGooglePopup = async () => {
     try {
@@ -41,7 +42,7 @@ const Auth: React.FC = () => {
     }
   };
   console.log(user)
-  return (
+return (
    <>
   <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
     <DialogBackdrop
@@ -69,13 +70,13 @@ const Auth: React.FC = () => {
               <form onSubmit={handleSubmit}>
               <div className='text-left w-[15rem]'>
                 <label>Email:</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} 
+                <input type="email" value={email} required onChange={(e) => setEmail(e.target.value)} 
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm
                          focus:ring-green-300 focus:border-green-300 sm:text-sm"/>
               </div>
               <div className='text-left w-[15rem]'>
                 <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
+                <input type="password" value={password} required onChange={(e) => setPassword(e.target.value)} 
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm
                          focus:ring-green-300 focus:border-green-300 sm:text-sm"/>
               </div>
