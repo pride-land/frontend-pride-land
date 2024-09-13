@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { logIn, signUp } from './auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
-import { FireBaseDialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Dialog as FireBaseDialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { signInWithPopup } from "firebase/auth";
 import { provider } from "../firebase.ts";
 import { FcGoogle } from "react-icons/fc";
