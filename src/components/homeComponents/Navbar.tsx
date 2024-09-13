@@ -3,9 +3,11 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next';
 import Langs from '../../interfaces/LayoutType';
 
+
+
 const langs: any = {
   en: { nativeName: 'English'},
-  jp: { nativeName: '日本語'},
+  jp: { nativeName: '日本語'}, 
   it: { nativeName: 'Italiano'},
   de: { nativeName: 'Deutsch'},
   pt: { nativeName: 'Português'},

@@ -19,6 +19,7 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "firebase": "^10.13.1",
+    "flag-icons": "^7.2.3",
     "flowbite": "^2.5.1",
     "flowbite-react": "^0.10.1",
     "html-react-parser": "^5.1.15",

@@ -47,7 +47,9 @@
          "Name": "名前",
          "Comments": "コメント",
          "FieldInput": "入力してください",
-         "SubmitFeedback": "フィードバック送信"
+         "SubmitFeedback": "フィードバック送信",
+         "completedForm": "ご意見をお寄せいただき、ありがとうございました"
+
       },
 
       "volunteer": {

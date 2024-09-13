@@ -48,7 +48,8 @@
          "Name": "Name",
          "Comments": "Comments",
          "FieldInput": "Input here",
-         "SubmitFeedback": "Submit Feedback"
+         "SubmitFeedback": "Submit Feedback",
+         "completedForm": "Thank you for submitting your feedback!"
       },
 
       "volunteer": {

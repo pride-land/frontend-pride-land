@@ -1,9 +1,14 @@
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 import { EventBus } from '../EventBus';
-import { Scene } from 'phaser';
+import { Math, Scene } from 'phaser';
 import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
+import { Exchange } from './Exchange';
 
+//to appease custom property on the mushroom counter error;
+interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
+    tweenPlayed?: boolean;  // Optional custom property
+}
 
 export class Game extends Scene
 {
@@ -15,17 +20,32 @@ export class Game extends Scene
     realLogGroup: Phaser.Physics.Arcade.StaticGroup
     realLog: Phaser.Physics.Arcade.Sprite
     waterProgressBar: Phaser.GameObjects.Shape
+    waterFillProgressBar: Phaser.GameObjects.Shape
     //set up flags and checks
     isTextDone: boolean;
     hasRun: boolean;
     isLogFull: boolean;
     isLogFullHasRun: boolean;
+    isMushroomDone: boolean;
+    isCurrentBatchHarvested: boolean;
+    
+    waterDropListener: Phaser.Input.InputPlugin;
     tutorialTimerText: Phaser.GameObjects.Text;
     tutorialTimerHarvest: Phaser.Time.TimerEvent;
-    isMushroomDone: boolean;
+    mushroomSprite: Phaser.Physics.Arcade.Sprite;
+    mushroomTween: Phaser.Tweens.Tween | null;
+    mushroomCurrency: number;
+    mushroomCurrencyText: Phaser.GameObjects.Text;
+    numberOfMushrooms: number;
+    mushroomGroup: Phaser.Physics.Arcade.StaticGroup;
+    count: number
+    shopContainer: Phaser.GameObjects.Container;
+    shopScene: any;
     constructor ()
     {
         super('Game');
+
+        this.count = 0;
     }
 
     //create method to makes as much textboxes as wanted
@@ -91,10 +111,23 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        
+        this.mushroomCurrency = 0;
         this.isTextDone = false;
+
+        //intro textbox text check
         this.hasRun = false;
+
+        //tutorial log filled check
+        this.isLogFull = false;
+        this.isLogFullHasRun = false;
+        
         this.camera = this.cameras.main;
         
+        this.mushroomCurrencyText = this.add.text(10, 70, "", {
+            color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+        }).setDepth(200)
+
         if(data.fadeIn){
             this.camera.fadeIn(2000, 0, 0, 0);
         }
@@ -103,8 +136,15 @@ export class Game extends Scene
         this.background = this.add.image(512, 300, 'shed');
         let cardShopIcon = this.add.image(950, 70, 'cardshopicon');
         cardShopIcon.setScale(0.15);
+
         let exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
-        exchangeShopIcon.setScale(0.16);
+        exchangeShopIcon.setScale(0.16).setInteractive().setDepth(701);
+        exchangeShopIcon.on('pointerup', () => {
+            if(!this.shopScene) this.shopScene = this.createShopScene(Exchange);
+            else this.shopScene.setVisible(true);
+            this.scene.pause();
+        })
+        
 
         //set up log as an physical object
         this.realLogGroup = this.physics.add.staticGroup();
@@ -113,24 +153,57 @@ export class Game extends Scene
 
         this.tutorialTextBox = this.createTextBox();
         
-        this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
         // this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE, () => {
         // });
+        this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
         // English Text: 
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
         
         EventBus.emit('current-scene-ready', this);
     }
+    
+    createShopScene(func: any)
+    {
+        const x = 512;
+        const y = 400;
+
+        const handle = 'window' + this.count++;
+        const win = this.add.zone(x, y, 300, 300).setInteractive().setOrigin(0);
+        const demo = new func(handle, win);
+
+        this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
+    }
+    
     update() 
     {
+        
+        //number of mushrooms on the log
+        // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
+        // console.log(this.numberOfMushrooms)
+        
+        if(this.mushroomGroup?.getChildren().length === 0 && !this.isCurrentBatchHarvested) {
+
+            this.isCurrentBatchHarvested = true;
+            this.isLogFull = false;
+            this.isLogFullHasRun = false;
+            this.time.delayedCall(2000, () => {
+                this.startWatering();
+            });
+        };
+
         if(this.isTextDone && !this.hasRun) {
             this.hasRun = true;
             this.startWatering();
             console.log('waterupdate')
         };
+        
 
         if(this.isLogFull && !this.isLogFullHasRun){
             this.isLogFullHasRun = true;
+            this.time.delayedCall(2000, () => {
+                this.waterProgressBar.destroy();
+                this.waterFillProgressBar.destroy();
+            });
             this.startHarvesting();
             console.log('logfull update')
         };
@@ -138,49 +211,53 @@ export class Game extends Scene
         if(this.tutorialTimerText && !this.isMushroomDone){
             this.tutorialTimerText.setText(`Time Left: ${this.tutorialTimerHarvest.getRemainingSeconds().toString().substring(0, 1)}`);
         };
-
+        //currency setup
+        this.mushroomCurrencyText.setText(`Mushroom count: ${this.mushroomCurrency}`)
+        //pause background if shop open
+        
     }
     startWatering()
     {
         //waterprogress bar filling
         this.waterProgressBar = this.add.rectangle(512, 100, 468, 32).setStrokeStyle(1, 0xffffff);  //outline
-        const fillWaterBar = this.add.rectangle(512-230, 100, 4, 28, 0xffffff);                     //actual bar filling needs to finish 464px
+        this.waterFillProgressBar = this.add.rectangle(512-230, 100, 4, 28, 0xffffff);                     //actual bar filling needs to finish 464px
 
         const addProgress = (waterdrop: Phaser.Physics.Arcade.Sprite ) => {
             waterdrop.destroy();
-            if(fillWaterBar.width < 468) fillWaterBar.width += 29;
+            if(this.waterFillProgressBar.width < 468) this.waterFillProgressBar.width += 232;
             else this.isLogFull = true;
         }
-        this.input.on('pointerdown',  (pointer: MouseEvent) => {
+        this.waterDropListener = this.input.on('pointerdown',  (pointer: MouseEvent) => {
             let waterdrop = this.physics.add.sprite(pointer.x, pointer.y, 'waterdrop');
+
             waterdrop
             .setBounce(0.03)
             .setScale(0.15)
             .setCollideWorldBounds(false)
-            
         
             this.physics.add.collider(waterdrop, this.realLog);
             this.physics.add.overlap(waterdrop, this.realLog, () => addProgress(waterdrop), undefined, this)
             
         }, this);
 
+        this.isMushroomDone = false;
     }
     startHarvesting()
     {
-        !this.isTextDone ? this.isTextDone : !this.isTextDone;
+
         //disable waterdroplets when progress is done
         this.input.removeAllListeners();
         const harvestText = this.createTextBox();
-
+        
         this.time.delayedCall(2000, () => {
-            harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。タイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
+            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。タイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
             // English:
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
-            if(this.isTextDone){
-                this.tutorialTimerText = this.add.text(10, 40, 'Time Remaining: ', {
+            if(this.isTextDone === true || this.mushroomGroup){
+                if(!this.tutorialTimerText) this.tutorialTimerText = this.add.text(10, 40, '', {
                     color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
                 }).setDepth(200);
-                this.tutorialTimerHarvest = this.time.delayedCall(7000, () => {
+                this.tutorialTimerHarvest = this.time.delayedCall(1000, () => {
                     this.isMushroomDone = true;
                     this.mushroomGrowth();
                 })
@@ -189,8 +266,68 @@ export class Game extends Scene
         })
         
     }
-    mushroomGrowth(){
-        console.log('pop')
+    
+    createMushrooms(): Phaser.Physics.Arcade.Sprite
+    {
+        const mushroom = this.physics.add.staticSprite(
+            Phaser.Math.Between(265, 777) , 
+            Phaser.Math.Between(563,671),
+            'star'
+        ).setScale(0);
+
+        this.tweens.add({
+            targets: mushroom,
+            scale: {
+                value: 0.7,
+                duration: 1500,
+                ease: 'Bounce.easeOut'
+            }
+        });
+
+        mushroom.setImmovable(false).setInteractive({draggable: true});
+
+        //make mushrooms draggable
+        this.input.on('dragstart', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
+            gameObject.setTint(0xff0000)
+        });
+
+        this.input.on('drag', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
+            gameObject.x = dragX
+            gameObject.y = dragY
+        });
+
+        this.input.on('dragend', (pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
+            gameObject.clearTint();
+            
+            if(!gameObject.tweenPlayed){
+                gameObject.tweenPlayed = true;
+                this.tweens.add({
+                    targets: gameObject,
+                    y: {
+                        value: 800,
+                        duration: 1000,
+                    }
+                }).on('complete', () => {
+                    this.mushroomCurrency++;
+                    gameObject.destroy();
+                })
+            } 
+        });
+        
+
+        return mushroom;
+    }
+    mushroomGrowth()
+    {
+        if(!this.mushroomGroup) this.mushroomGroup = this.physics.add.staticGroup(this.mushroomSprite);
+        for(let i=0; i<Phaser.Math.Between(1, 2); i++){
+            this.mushroomSprite = this.createMushrooms();
+            this.mushroomGroup.add(this.mushroomSprite);
+        }
+        console.log(this.mushroomGroup.getChildren())
+        this.isCurrentBatchHarvested = false;
+        // this.realLog.setInteractive().on('pointerdown', (pointer:PointerEvent) => console.log(pointer.x , pointer.y))
+        //leftmost growth 265 most bottom 671 rightmost 777 topmost 563
     }
     changeScene ()
     {

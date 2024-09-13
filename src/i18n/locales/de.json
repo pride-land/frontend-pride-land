@@ -45,7 +45,9 @@
          "Name": "Name",
          "Comments": "Kommentare",
          "FieldInput": "Eingabe",
-         "SubmitFeedback": "Feedback abgeben"
+         "SubmitFeedback": "Feedback abgeben",
+         "completedForm": "Vielen Dank, dass Sie uns Ihr Feedback geschickt haben!"
+
    },
 
    "volunteer": {
