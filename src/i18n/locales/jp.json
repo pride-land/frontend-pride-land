@@ -16,8 +16,8 @@
          "subheadingBR2": "みんな同じ仲間",
          "subheadingGR2": "力を合わせれば",
          "subheadingBR3": "きっと何でも出来る",
-         "subheadingGR3": "プライド ",
-         "subheadingBR4": "ランド",
+         "subheadingGR3": "プライドランド",
+         "subheadingBR4": "",
          "vision": "誰もが、本来のありのままの姿で輝き、その在り方が周りにも幸せをもたらす多様が活きるイノベーティブな社会",
          "category": "私たちは：",
          "list1": "イキイキ・ワクワク、一生を喜怒哀楽と共に過ごせ",
@@ -31,7 +31,7 @@
          "contact": "コンタクト",
          "about": "プライドランドについて",
          "mission": "ミッション",
-         "follow": "SMS",
+         "follow": "SNS",
          "facebook": "フェイスブック",
          "github": "開発チーム",
          "Youtube": "ユーチューブ"
@@ -47,7 +47,36 @@
          "Name": "名前",
          "Comments": "コメント",
          "FieldInput": "入力してください",
-         "SubmitFeedback": "フィードバック送信"
+         "SubmitFeedback": "フィードバック送信",
+         "completedForm": "ご意見をお寄せいただき、ありがとうございました"
+
+      },
+
+      "volunteer": {
+         "slug": "プライドファームコミュニティに参加しませんか？",
+         "applicationHeader": "プライドファームのボランティアに応募しましょう！",
+         "volunteerStatus": "ボランティアとして希望する役割を選んでください：",
+         "once": "一度だけのボランティア",
+         "regular": "レギュラーボランティア",
+         "name": "名前:",
+         "email": "メール:",
+         "start": "いつから開始しますか？",
+         "category": "何に興味がありますか？",
+         "subcategory": " (該当するものすべてにチェック)",
+         "bamboo": "竹林仕事",
+         "vegetables": "畑仕事",
+         "eggs": "卵収穫",
+         "goats": "動物の世話",
+         "shiitake": "しいたけ栽培",
+         "bees": "蜂の世話",
+         "construction": "大工仕事",
+         "shop": "店の仕事",
+         "restrictions": "事前に共有しておきたい内容はありますか？",
+         "askRestrictions": "もしあれば、こちらに記載ください。",
+         "submit": "送信",
+         "afterSubmit": "お申し込みありがとうございます",
+         "notify": " ご登録いただいたアドレスにメールが届きます。",
+         "startDate": "お申し込みが正しい日付になっているか今一度ご確認ください:"
       }
 
 }

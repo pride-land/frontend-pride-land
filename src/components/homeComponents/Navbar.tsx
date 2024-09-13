@@ -3,30 +3,43 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next';
 import Langs from '../../interfaces/LayoutType';
 
+
+
 const langs: any = {
   en: { nativeName: 'English'},
-  jp: { nativeName: '日本語'},
+  jp: { nativeName: '日本語'}, 
   it: { nativeName: 'Italiano'},
   de: { nativeName: 'Deutsch'},
   pt: { nativeName: 'Português'},
 };
 
-const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'About', href: '/about', current: false },
-  { name: 'Contact', href: '/contact', current: false },
-];
+interface Navigation  { 
+  name: any;
+  href: string;
+  current: boolean;
+  key: string;
+};
 
 const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   const { t, i18n } = useTranslation();
-
+  
   const handleLangChange = (lang: string) => {
     i18n.changeLanguage(lang);
     setCurrentLang(lang);
     sessionStorage.setItem("lang", lang);
     console.log(sessionStorage.getItem("lang"));
   }
+  
+  const navigation: Navigation[] = [
+    { name: t("navbar.game"), href: "/pridefarmgame", current: false, key: "game" },
+    { name: t("navbar.join"), href: "/volunteers", current: false, key: "join"},
+    { name: t("navbar.blog"), href: "/blogs", current: false, key: "blog"},
+    { name: t("navbar.about"), href: '/aboutus', current: false, key: "about" },
+    { name: t("navbar.contact"), href: '/contactus', current: false, key: "contact" },
 
+  ];
+  
+  
   return (
     <Disclosure as="nav" className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl sticky top-0 z-50">
       <div className="px-6 md:px-2">
@@ -51,54 +64,8 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-end">
             <div className="hidden md:ml-6 md:block">
               <div className="flex">
-                  <a
-                    key={"game"}
-                    href={"https://game-front-z50x.onrender.com/"}
-                    className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
-                  >
-                    {t("navbar.game")}
-                  </a>
-                  <a
-                    key={"blog"}
-                    href={"/blogs"}
-                    className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
-                  >
-                    {t("navbar.blog")}
-                  </a>
-                  <a
-                    key={"join"}
-                    href={"/volunteers"}
-                    className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
-                  >
-                    {t("navbar.join")}
-                  </a>
-                  <a
-                    key={"About Us"}
-                    href={"/aboutus"}
-                    className=
-                      'px-4 py-6 text-lg font-medium rounded-lg  gap-2 transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
-                  >
-                    {t("navbar.about")}
-                  </a>
-                  <a
-                    key={"shop"}
-                    href={"#"}
-                    className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
-                  >
-                    {t("navbar.shop")}
-                  </a>
-                  <a
-                    key={"contact us"}
-                    href={"/contactus"}
-                    className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2 transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'
-                      >
-                    {t("navbar.contact")}
-                      </a>
+                {navigation.map((nav) => <a key={nav.key} href={nav.href}  className=
+                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'>{nav.name}</a> )}
               </div>
             </div>
           </div>
