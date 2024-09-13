@@ -2,13 +2,16 @@
   "compilerOptions": {
     "lib": ["dom", "ES6"],
     "outDir": "./lib/cjs/",
+    "skipLibCheck": true,
+    "composite": true,
     "sourceMap": true,
     "declaration": true,
     "noImplicitAny": true,
-    "module": "Preserve",
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
     "target": "ES6",
     "allowJs": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     
 
@@ -25,7 +28,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "composite": true
   },
   //added .json files to include for the internationalization
   "include": ["src/**/*.ts*", "src/**/*.json", "vite.config.ts",  "./**/*", "src/**/*"],
