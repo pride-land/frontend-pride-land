@@ -13,6 +13,7 @@
     "allowJs": true,
     "moduleResolution": "bundler",
     "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     
 
     /* Bundler mode */
