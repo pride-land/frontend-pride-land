@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "ES6"],
+    "lib": ["dom", "ES6", "ScriptHost"],
     "outDir": "./lib/cjs/",
     "skipLibCheck": true,
     "composite": true,
