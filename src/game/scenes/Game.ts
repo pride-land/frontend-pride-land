@@ -39,14 +39,8 @@ export class Game extends Scene
     numberOfMushrooms?: number;
     mushroomGroup?: Phaser.Physics.Arcade.StaticGroup;
     count: number
-<<<<<<< HEAD
-    shopContainer: Phaser.GameObjects.Container;
-    shopScene: Phaser.Scene | null;
-    exchangeShopIcon: Phaser.GameObjects.Image;
-=======
     shopContainer?: Phaser.GameObjects.Container;
     shopScene: any;
->>>>>>> dd83f80 (typescript fixes)
     constructor ()
     {
         super('Game');
