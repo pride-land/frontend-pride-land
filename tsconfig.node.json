@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "ES6"],
+    "lib": ["dom", "ES6", "ScriptHost"],
     "outDir": "./lib/cjs/",
     "skipLibCheck": true,
     "composite": true,
@@ -29,6 +29,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   //added .json files to include for the internationalization
   "include": ["src/**/*.ts*", "src/**/*.json", "vite.config.ts",  "./**/*", "src/**/*"],
