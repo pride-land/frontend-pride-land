@@ -37,6 +37,9 @@ const config: Phaser.Types.Core.GameConfig = {
             gravity: { x: 0, y: 300 },
             debug: true
         }
+    },
+    dom: {
+        createContainer: true,
     }
 };
 

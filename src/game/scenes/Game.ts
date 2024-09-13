@@ -179,6 +179,12 @@ export class Game extends Scene
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
         
         EventBus.emit('current-scene-ready', this);
+
+        //IMPORANT when main game receives this exact signal; increase/decrease user currencies
+        EventBus.on('currency updated', (newMushroomCount: number, newCoinCount: number) => {
+            this.mushroomCurrency = newMushroomCount; 
+            this.coins = newCoinCount;
+        });
     }
     
     createShopScene(func: any)
@@ -190,7 +196,7 @@ export class Game extends Scene
         const win = this.add.zone(x, y, 300, 300).setInteractive().setOrigin(0);
         const demo = new func(handle, win);
         if(!this.shopScene){
-            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
+            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency, coins: this.coins});
         } 
         else {
             this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
@@ -199,7 +205,7 @@ export class Game extends Scene
     
     update() 
     {
-       
+
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)
@@ -334,6 +340,9 @@ export class Game extends Scene
                 }).on('complete', () => {
                     this.mushroomCurrency++;
                     gameObject.destroy();
+
+                    //tell Other scenes that a mushroom was added to the account
+                    EventBus.emit('mushroom added', this.mushroomCurrency)
                 })
             } 
         });
@@ -344,11 +353,11 @@ export class Game extends Scene
     mushroomGrowth()
     {
         if(!this.mushroomGroup) this.mushroomGroup = this.physics.add.staticGroup(this.mushroomSprite);
-        for(let i=0; i<Phaser.Math.Between(1, 2); i++){
+        for(let i=0; i<Phaser.Math.Between(25, 50); i++){
             this.mushroomSprite = this.createMushrooms();
             this.mushroomGroup.add(this.mushroomSprite);
         }
-        console.log(this.mushroomGroup.getChildren())
+        
         this.isCurrentBatchHarvested = false;
         // this.realLog.setInteractive().on('pointerdown', (pointer:PointerEvent) => console.log(pointer.x , pointer.y))
         //leftmost growth 265 most bottom 671 rightmost 777 topmost 563

@@ -39,6 +39,10 @@ export class Preloader extends Scene
         this.load.image('exchangeshopicon', 'exchangeshopicon.png');
         this.load.image('cardshopicon', 'cardshopicon.png');
         this.load.image('waterdrop', 'waterdrop.webp');
+        this.load.image('mushroom4', 'mushroom4.png');
+        this.load.image('coin', 'coin.png');
+        this.load.html('mushroomForm', 'mushroomForm.html');
+        this.load.audio('purchase', 'purchase.mp3');
     }
 
     create ()
