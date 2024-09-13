@@ -19,9 +19,10 @@ const AdminControl = () => {
 
   return (
     <>
-    <div>
+    <div> 
+      <h1 className='text-3xl m-5 mt-0'>Admin List</h1>
       <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-        <thead >
+        <thead className="bg-gray-100 border-b border-gray-200" >
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Id</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Name</th>
@@ -34,7 +35,7 @@ const AdminControl = () => {
         </thead>
         <tbody>
           {staff?.map((elt) => (
-            <tr key={elt.id}>
+            <tr key={elt.id}  className="border-b border-gray-200 hover:bg-gray-50">
               <td className="px-6 py-4  text-sm font-medium text-gray-900">{elt.id}</td>
               <td className="px-6 py-4  text-sm text-gray-500">{elt.first_name}</td>
               <td className="px-6 py-4  text-sm text-gray-500">{elt.last_name}</td>

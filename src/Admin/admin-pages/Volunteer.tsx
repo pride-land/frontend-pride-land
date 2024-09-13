@@ -38,7 +38,8 @@ const Volunteer = () => {
   }
 
   return (
-    <div className="p-4">
+    <div>
+    <h1 className='text-3xl m-5 mt-0'>Volunteer List</h1>
     <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
       <thead className="bg-gray-300 border-b border-gray-200">
         <tr>
