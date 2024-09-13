@@ -40,7 +40,8 @@ export class Game extends Scene
     mushroomGroup: Phaser.Physics.Arcade.StaticGroup;
     count: number
     shopContainer: Phaser.GameObjects.Container;
-    shopScene: any;
+    shopScene: Phaser.Scene | null;
+    exchangeShopIcon: Phaser.GameObjects.Image;
     constructor ()
     {
         super('Game');
@@ -137,14 +138,13 @@ export class Game extends Scene
         let cardShopIcon = this.add.image(950, 70, 'cardshopicon');
         cardShopIcon.setScale(0.15);
 
-        let exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
-        exchangeShopIcon.setScale(0.16).setInteractive().setDepth(701);
-        exchangeShopIcon.on('pointerup', () => {
-            if(!this.shopScene) this.shopScene = this.createShopScene(Exchange);
-            else this.shopScene.setVisible(true);
+        this.exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
+        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(701);
+        this.exchangeShopIcon.on('pointerup', () => {
+            if (!this.shopScene) this.createShopScene(Exchange);
+            else this.shopScene.scene.setVisible(true);
             this.scene.pause();
         })
-        
 
         //set up log as an physical object
         this.realLogGroup = this.physics.add.staticGroup();
@@ -170,13 +170,17 @@ export class Game extends Scene
         const handle = 'window' + this.count++;
         const win = this.add.zone(x, y, 300, 300).setInteractive().setOrigin(0);
         const demo = new func(handle, win);
-
-        this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
+        if(!this.shopScene){
+            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
+        } 
+        // else {
+        //     this.cardShop = this.scene.add(handle, demo, true, {coinCurrency: this.coinCurrency});
+        // }
     }
     
     update() 
     {
-        
+       
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)
