@@ -4,6 +4,7 @@ import { Math, Scene } from 'phaser';
 import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
+import { CardShop } from './CardShop';
 
 //to appease custom property on the mushroom counter error;
 interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
@@ -40,13 +41,16 @@ export class Game extends Scene
     mushroomGroup: Phaser.Physics.Arcade.StaticGroup;
     count: number
     shopContainer: Phaser.GameObjects.Container;
+    coins: number;
+    coinsText: Phaser.GameObjects.Text;
     shopScene: Phaser.Scene | null;
+    cardShopScene: Phaser.Scene | null;
     exchangeShopIcon: Phaser.GameObjects.Image;
+    cardShopIcon: Phaser.GameObjects.Image;
     constructor ()
     {
         super('Game');
 
-        this.count = 0;
     }
 
     //create method to makes as much textboxes as wanted
@@ -112,7 +116,7 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
-        
+        this.coins = 0;
         this.mushroomCurrency = 0;
         this.isTextDone = false;
 
@@ -129,20 +133,34 @@ export class Game extends Scene
             color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
         }).setDepth(200)
 
+        this.coinsText = this.add.text(10, 100, "", {
+            color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+        }).setDepth(200)
+
         if(data.fadeIn){
             this.camera.fadeIn(2000, 0, 0, 0);
         }
 
         //set up assets
         this.background = this.add.image(512, 300, 'shed');
-        let cardShopIcon = this.add.image(950, 70, 'cardshopicon');
-        cardShopIcon.setScale(0.15);
+
+        this.cardShopIcon = this.add.image(950, 70, 'cardshopicon').setVisible(false);
+        this.cardShopIcon.setScale(0.15).setInteractive().setDepth(701);
+        this.cardShopIcon.on('pointerup', () => {
+            if (!this.cardShopScene) this.createShopScene(CardShop);
+            else {
+                this.cardShopScene.scene.setVisible(true);
+            }
+            this.scene.pause();
+        })
 
         this.exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
-        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(701);
+        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(702);
         this.exchangeShopIcon.on('pointerup', () => {
             if (!this.shopScene) this.createShopScene(Exchange);
-            else this.shopScene.scene.setVisible(true);
+            else {
+                this.shopScene.scene.setVisible(true);
+            }
             this.scene.pause();
         })
 
@@ -173,9 +191,9 @@ export class Game extends Scene
         if(!this.shopScene){
             this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
         } 
-        // else {
-        //     this.cardShop = this.scene.add(handle, demo, true, {coinCurrency: this.coinCurrency});
-        // }
+        else {
+            this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
+        }
     }
     
     update() 
@@ -217,7 +235,8 @@ export class Game extends Scene
         };
         //currency setup
         this.mushroomCurrencyText.setText(`Mushroom count: ${this.mushroomCurrency}`)
-        //pause background if shop open
+        this.coinsText.setText(`Coins: ${this.coins}`)
+        if(this.shopScene) this.cardShopIcon.setVisible(true);
         
     }
     startWatering()
