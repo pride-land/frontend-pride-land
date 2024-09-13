@@ -22,7 +22,6 @@ export class Exchange extends Scene
         let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
-            this.input.disable(this.exchangeButton);
             this.scene.resume('Game');
         })
         this.todayRateText = this.add.text(270, 100, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black' });
@@ -43,6 +42,8 @@ export class Exchange extends Scene
     }
     update()
     {   
+        if(this.scene.isVisible()) this.input.enable(this.exchangeButton);
+        else this.input.disable(this.exchangeButton);
         console.log(this.todayRate)
         if(this.scene) this.todayRateText.setText(`Todays exchange rate is: ${this.todayRate} per mushroom`);
 
