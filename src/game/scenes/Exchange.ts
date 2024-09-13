@@ -34,8 +34,11 @@ export class Exchange extends Scene
             delay: 5000, // 1000 = 1 second
             loop: true
         });
+        
         this.exchangeButton = this.add.image(512, 300, 'star').setInteractive();
         this.exchangeButton.on('pointerdown', () => console.log('bought!'));
+
+
         EventBus.emit('current-scene-ready', this);
     }
     update()
