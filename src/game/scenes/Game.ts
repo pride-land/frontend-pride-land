@@ -179,11 +179,10 @@ export class Game extends Scene
         
         EventBus.emit('current-scene-ready', this);
 
-        //update main scene currency
+        //IMPORANT when main game receives this exact signal; increase/decrease user currencies
         EventBus.on('currency updated', (newMushroomCount: number, newCoinCount: number) => {
             this.mushroomCurrency = newMushroomCount; 
             this.coins = newCoinCount;
-            console.log(`Currency updated to: ${newMushroomCount} mushrooms and ${newCoinCount} coins`);
         });
     }
     
@@ -340,6 +339,8 @@ export class Game extends Scene
                 }).on('complete', () => {
                     this.mushroomCurrency++;
                     gameObject.destroy();
+
+                    //tell Other scenes that a mushroom was added to the account
                     EventBus.emit('mushroom added', this.mushroomCurrency)
                 })
             } 
@@ -355,7 +356,7 @@ export class Game extends Scene
             this.mushroomSprite = this.createMushrooms();
             this.mushroomGroup.add(this.mushroomSprite);
         }
-        console.log(this.mushroomGroup.getChildren())
+        
         this.isCurrentBatchHarvested = false;
         // this.realLog.setInteractive().on('pointerdown', (pointer:PointerEvent) => console.log(pointer.x , pointer.y))
         //leftmost growth 265 most bottom 671 rightmost 777 topmost 563
