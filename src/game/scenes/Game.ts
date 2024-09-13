@@ -1,6 +1,6 @@
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 import { EventBus } from '../EventBus';
-import { Math, Scene } from 'phaser';
+import { Scene } from 'phaser';
 import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
@@ -8,7 +8,7 @@ import { CardShop } from './CardShop';
 
 //to appease custom property on the mushroom counter error;
 interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
-    tweenPlayed?: boolean;  // Optional custom property
+    tweenPlayed: boolean;  // Optional custom property
 }
 
 export class Game extends Scene
@@ -47,6 +47,7 @@ export class Game extends Scene
     cardShopScene: Phaser.Scene | null;
     exchangeShopIcon: Phaser.GameObjects.Image;
     cardShopIcon: Phaser.GameObjects.Image;
+
     constructor ()
     {
         super('Game');

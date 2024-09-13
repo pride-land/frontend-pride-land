@@ -6,10 +6,10 @@ import { TextButton } from '../game-objects/text-button';
 export class MainMenu extends Scene
 {
     //set types here
-    background: GameObjects.Image;
-    logo: GameObjects.Image;
-    startButton: GameObjects.Text;
-    logoTween: Phaser.Tweens.Tween | null;
+    background?: GameObjects.Image;
+    logo?: GameObjects.Image;
+    startButton?: GameObjects.Text;
+    logoTween?: Phaser.Tweens.Tween | null;
 
     constructor ()
     {
