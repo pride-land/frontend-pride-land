@@ -3,11 +3,11 @@ import { Math, Scene } from 'phaser';
 
 export class Exchange extends Scene
 {
-    shopBackground?: Phaser.GameObjects.Image;
-    todayRateText?: Phaser.GameObjects.Text;
-    todayRate?: number;
-    mushroomExchangeRateTimer?: Phaser.Time.TimerEvent;
-    exchangeButton?: Phaser.GameObjects.Image;
+    shopBackground: Phaser.GameObjects.Image;
+    todayRateText: Phaser.GameObjects.Text;
+    todayRate: number;
+    mushroomExchangeRateTimer: Phaser.Time.TimerEvent;
+    exchangeButton: Phaser.GameObjects.Image;
 
     constructor(handle: string)
     {
