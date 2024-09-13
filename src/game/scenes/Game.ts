@@ -178,6 +178,13 @@ export class Game extends Scene
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
         
         EventBus.emit('current-scene-ready', this);
+
+        //update main scene currency
+        EventBus.on('currency updated', (newMushroomCount: number, newCoinCount: number) => {
+            this.mushroomCurrency = newMushroomCount; 
+            this.coins = newCoinCount;
+            console.log(`Currency updated to: ${newMushroomCount} mushrooms and ${newCoinCount} coins`);
+        });
     }
     
     createShopScene(func: any)
@@ -189,7 +196,7 @@ export class Game extends Scene
         const win = this.add.zone(x, y, 300, 300).setInteractive().setOrigin(0);
         const demo = new func(handle, win);
         if(!this.shopScene){
-            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
+            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency, coins: this.coins});
         } 
         else {
             this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
@@ -198,7 +205,7 @@ export class Game extends Scene
     
     update() 
     {
-       
+
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)
@@ -310,16 +317,16 @@ export class Game extends Scene
         mushroom.setImmovable(false).setInteractive({draggable: true});
 
         //make mushrooms draggable
-        this.input.on('dragstart', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
+        this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
             gameObject.setTint(0xff0000)
         });
 
-        this.input.on('drag', (pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
+        this.input.on('drag', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
             gameObject.x = dragX
             gameObject.y = dragY
         });
 
-        this.input.on('dragend', (pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
+        this.input.on('dragend', (_pointer: Phaser.Input.Pointer , gameObject: ExtendedSprite) => {
             gameObject.clearTint();
             
             if(!gameObject.tweenPlayed){
@@ -333,6 +340,7 @@ export class Game extends Scene
                 }).on('complete', () => {
                     this.mushroomCurrency++;
                     gameObject.destroy();
+                    EventBus.emit('mushroom added', this.mushroomCurrency)
                 })
             } 
         });
@@ -343,7 +351,7 @@ export class Game extends Scene
     mushroomGrowth()
     {
         if(!this.mushroomGroup) this.mushroomGroup = this.physics.add.staticGroup(this.mushroomSprite);
-        for(let i=0; i<Phaser.Math.Between(1, 2); i++){
+        for(let i=0; i<Phaser.Math.Between(25, 50); i++){
             this.mushroomSprite = this.createMushrooms();
             this.mushroomGroup.add(this.mushroomSprite);
         }
