@@ -16,9 +16,9 @@ export default function Home() {
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
+      ["align"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link", "color", "image"],
-      ["clean"],
     ],
   };
   const formats = [
@@ -83,6 +83,7 @@ export default function Home() {
                 <div className="mt-2">
                   <input
                     onChange={handleTitle}
+                    required
                     type="text"
                     value={title}
                     name="title"
@@ -105,6 +106,7 @@ export default function Home() {
                 <textarea
                   id="description"
                   rows={4}
+                  required
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-green-300 focus:border-green-300 "
@@ -139,7 +141,7 @@ export default function Home() {
         </div>
 
 
-        <div className=" blog-view w-full max-w-3xl p-8 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
+        <div className=" blog-view w-full max-w-3xl text-ellipsis p-8 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
           <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5 ">
            Preview
           </h2>
@@ -155,12 +157,10 @@ export default function Home() {
             </div>
             {/* Description */}
             <div className="sm:col-span-2">
-            
               <p>{description}</p>
             </div>
             <div className="sm:col-span-full">
-          
-              {parse(content)}
+              <p className="text-ellipsis">{parse(content)}</p>
             </div>
           </div>
         </div>
