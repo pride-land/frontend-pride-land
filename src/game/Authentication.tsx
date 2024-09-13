@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { logIn, signUp } from './auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Dialog as FireBaseDialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { signInWithPopup } from "firebase/auth";
 import { provider } from "../firebase.ts";
 import { FcGoogle } from "react-icons/fc";
@@ -44,7 +44,7 @@ const Auth: React.FC = () => {
   console.log(user)
 return (
    <>
-  <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
+  <FireBaseDialog open={open} onClose={() => setOpen(false)} className="relative z-10">
     <DialogBackdrop
       transition
       className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 
@@ -101,7 +101,7 @@ return (
       </DialogPanel>
         </div>
       </div>
-    </Dialog>
+    </FireBaseDialog>
   </>
   );
 };
