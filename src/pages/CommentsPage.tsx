@@ -43,7 +43,7 @@ const CommentsPage = () => {
         }
     }
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const initialPageView = (
         <div className="h-full w-full shadow-2xl rounded-md p-16 bg-white">
@@ -61,7 +61,7 @@ const CommentsPage = () => {
               <span>{t("ContactUs.SubmitFeedback")}</span>
             </button>
             </form>
-            <p> For all other inquiries please contact us at: info@pridefarm.org</p>
+            <p> {t("ContactUs.inquiries")}</p>
         </div>
     )
 

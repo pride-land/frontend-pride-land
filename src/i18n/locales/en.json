@@ -50,7 +50,8 @@
          "Comments": "Comments",
          "FieldInput": "Input here",
          "SubmitFeedback": "Submit Feedback",
-         "completedForm": "Thank you for submitting your feedback!"
+         "completedForm": "Thank you for submitting your feedback!",
+         "inquiries": "For all other inquiries please contact us at: info@pridefarm.org"
       },
 
       "volunteer": {

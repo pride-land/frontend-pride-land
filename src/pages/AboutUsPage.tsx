@@ -3,7 +3,7 @@ const AboutUsPage = () => {
         <div className="w-screen">
         <div className="(Image) grid w-full h-[40rem] bg-aboutus-background bg-cover bg-top rounded-sm opacity-80">
 
-            <div className="ml-[40%] w-96 h-auto text-left text-7xl text-black font-serif">
+            <div className="ml-[40%] lg:w-96 h-auto w-auto text-left text-2xl lg:text-7xl text-black font-serif">
                 About Us
             </div>
 
