@@ -34,8 +34,9 @@
          "follow": "Follow Us",
          "facebook": "Facebook",
          "github": "Github",
-         "Youtube": "Youtube" 
-
+         "Youtube": "Youtube",
+         "pridelandInfo": "Contact•Access",
+         "emailContact": "Pride land ltd. Kawasaki-shi, Asao-ku Hayano393-3 TEL&FAX 044-281-0305 / email: info@pridefarm.org"
       },
       "AboutUs": {
          "ImageText": "About Us"
@@ -49,7 +50,8 @@
          "Comments": "Comments",
          "FieldInput": "Input here",
          "SubmitFeedback": "Submit Feedback",
-         "completedForm": "Thank you for submitting your feedback!"
+         "completedForm": "Thank you for submitting your feedback!",
+         "inquiries": "For all other inquiries please contact us at: info@pridefarm.org"
       },
 
       "volunteer": {

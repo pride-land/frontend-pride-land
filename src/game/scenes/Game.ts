@@ -1,10 +1,11 @@
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 import { EventBus } from '../EventBus';
-import { Scene } from 'phaser';
+import { Math, Scene } from 'phaser';
 import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
 import { CardShop } from './CardShop';
+import { Inventory } from './Inventory';
 
 //to appease custom property on the mushroom counter error;
 interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
@@ -47,7 +48,9 @@ export class Game extends Scene
     cardShopScene: Phaser.Scene | null;
     exchangeShopIcon: Phaser.GameObjects.Image;
     cardShopIcon: Phaser.GameObjects.Image;
-
+    inventoryIcon: Phaser.GameObjects.Image;
+    inventoryScene: Phaser.Scene | null;
+    userInventory: string [];
     constructor ()
     {
         super('Game');
@@ -117,6 +120,19 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        this.userInventory = [];
+        // this.userInventory.push('redcard01');
+        // for(let i = 0; i<23; i++) {
+        //     this.userInventory.push('greencard01');
+
+        // }
+
+        //orders user inventory by rarity
+        let sortOrder = ['gre', 'blu', 'yel', 'red'];
+        this.userInventory.sort((a,b) => {
+            return sortOrder.indexOf(a.slice(0,3)) - sortOrder.indexOf(b.slice(0,3))
+        })
+
         this.coins = 0;
         this.mushroomCurrency = 0;
         this.isTextDone = false;
@@ -131,11 +147,11 @@ export class Game extends Scene
         this.camera = this.cameras.main;
         
         this.mushroomCurrencyText = this.add.text(10, 70, "", {
-            color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+            color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
         }).setDepth(200)
 
         this.coinsText = this.add.text(10, 100, "", {
-            color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+            color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
         }).setDepth(200)
 
         if(data.fadeIn){
@@ -165,10 +181,20 @@ export class Game extends Scene
             this.scene.pause();
         })
 
+        this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false);
+        this.inventoryIcon.setInteractive()
+        .on('pointerup', () => {
+            if (!this.inventoryScene) this.createShopScene(Inventory);
+            else {
+                this.inventoryScene.scene.restart();
+            }
+            this.scene.pause();
+        })
+
         //set up log as an physical object
         this.realLogGroup = this.physics.add.staticGroup();
         this.realLog = this.realLogGroup.create(512, 640, 'log')
-        this.realLog.setScale(0.6).refreshBody();
+        this.realLog.setScale(0.6).refreshBody().setDepth(300);
 
         this.tutorialTextBox = this.createTextBox();
         
@@ -179,6 +205,18 @@ export class Game extends Scene
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
         
         EventBus.emit('current-scene-ready', this);
+
+        //IMPORANT when main game receives this exact signal; increase/decrease user currencies
+        EventBus.on('currency updated', (newMushroomCount: number, newCoinCount: number) => {
+            this.mushroomCurrency = newMushroomCount; 
+            this.coins = newCoinCount;
+        });
+
+        //update when selling acrd
+        EventBus.on('card sold', (newInventory: string [], newCoinCount: number) => {
+            this.userInventory = newInventory;
+            this.coins = newCoinCount;
+        })
     }
     
     createShopScene(func: any)
@@ -190,16 +228,18 @@ export class Game extends Scene
         const win = this.add.zone(x, y, 300, 300).setInteractive().setOrigin(0);
         const demo = new func(handle, win);
         if(!this.shopScene){
-            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency});
+            this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency, coins: this.coins});
         } 
-        else {
+        else if(!this.cardShopScene){
             this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
+        } else {
+            this.inventoryScene = this.scene.add(handle, demo, true, {userInventory: this.userInventory, coins: this.coins});
         }
     }
     
     update() 
     {
-       
+        
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)
@@ -237,7 +277,10 @@ export class Game extends Scene
         //currency setup
         this.mushroomCurrencyText.setText(`Mushroom count: ${this.mushroomCurrency}`)
         this.coinsText.setText(`Coins: ${this.coins}`)
+
+        if(this.tutorialTimerText) this.exchangeShopIcon.setVisible(true);
         if(this.shopScene) this.cardShopIcon.setVisible(true);
+        if(this.cardShopScene) this.inventoryIcon.setVisible(true);
         
     }
     startWatering()
@@ -279,7 +322,7 @@ export class Game extends Scene
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
                 if(!this.tutorialTimerText) this.tutorialTimerText = this.add.text(10, 40, '', {
-                    color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+                    color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
                 }).setDepth(200);
                 this.tutorialTimerHarvest = this.time.delayedCall(1000, () => {
                     this.isMushroomDone = true;
@@ -296,19 +339,19 @@ export class Game extends Scene
         const mushroom = this.physics.add.staticSprite(
             Phaser.Math.Between(265, 777) , 
             Phaser.Math.Between(563,671),
-            'star'
-        ).setScale(0);
+            `mushroom${Math.Between(1,4)}`
+        ).setScale(0).setDepth(301);
 
         this.tweens.add({
             targets: mushroom,
             scale: {
-                value: 0.7,
+                value: 0.2,
                 duration: 1500,
                 ease: 'Bounce.easeOut'
             }
         });
 
-        mushroom.setImmovable(false).setInteractive({draggable: true});
+        mushroom.setImmovable(false).setInteractive({draggable: true}).refreshBody();
 
         //make mushrooms draggable
         this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
@@ -334,6 +377,9 @@ export class Game extends Scene
                 }).on('complete', () => {
                     this.mushroomCurrency++;
                     gameObject.destroy();
+
+                    //tell Other scenes that a mushroom was added to the account
+                    EventBus.emit('mushroom added', this.mushroomCurrency)
                 })
             } 
         });
@@ -344,11 +390,11 @@ export class Game extends Scene
     mushroomGrowth()
     {
         if(!this.mushroomGroup) this.mushroomGroup = this.physics.add.staticGroup(this.mushroomSprite);
-        for(let i=0; i<Phaser.Math.Between(1, 2); i++){
+        for(let i=0; i<Phaser.Math.Between(25, 50); i++){
             this.mushroomSprite = this.createMushrooms();
             this.mushroomGroup.add(this.mushroomSprite);
         }
-        console.log(this.mushroomGroup.getChildren())
+        
         this.isCurrentBatchHarvested = false;
         // this.realLog.setInteractive().on('pointerdown', (pointer:PointerEvent) => console.log(pointer.x , pointer.y))
         //leftmost growth 265 most bottom 671 rightmost 777 topmost 563

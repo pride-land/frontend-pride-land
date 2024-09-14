@@ -31,12 +31,11 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   }
   
   const navigation: Navigation[] = [
-    { name: t("navbar.game"), href: "/pridefarmgame", current: false, key: "game" },
-    { name: t("navbar.join"), href: "/volunteers", current: false, key: "join"},
     { name: t("navbar.blog"), href: "/blogs", current: false, key: "blog"},
-    { name: t("navbar.about"), href: '/aboutus', current: false, key: "about" },
+    { name: t("navbar.join"), href: "/volunteers", current: false, key: "join"},
     { name: t("navbar.contact"), href: '/contactus', current: false, key: "contact" },
-
+    { name: t("navbar.about"), href: '/aboutus', current: false, key: "about" },
+    { name: t("navbar.game"), href: "/pridefarmgame", current: false, key: "game" },
   ];
   
   
@@ -65,7 +64,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
             <div className="hidden md:ml-6 md:block">
               <div className="flex">
                 {navigation.map((nav) => <a key={nav.key} href={nav.href}  className=
-                      'px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'>{nav.name}</a> )}
+                      ' px-4 py-6 text-lg font-medium rounded-lg gap-2  transition-colors duration-300 hover:bg-green-800  hover:text-yellow-200 text-white text-md'>{nav.name}</a> )}
               </div>
             </div>
           </div>
