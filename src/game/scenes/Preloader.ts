@@ -49,7 +49,9 @@ export class Preloader extends Scene
         this.load.image('inventoryBackground', 'inventoryBackground.png');
         this.load.html('mushroomForm', 'mushroomForm.html');
         this.load.audio('purchase', 'purchase.mp3');
-        
+        this.load.image('cardshopbackground', 'cardshopbackground.png');
+        this.load.image('mysterycard', 'mysterycard.png');
+        this.load.image('cardback', 'cardback.png');
         //cards
         this.load.image('redcard01', 'cardAssets/redCards/galaxyChicken.png');
         this.load.image('greencard01', 'cardAssets/greenCards/eggsGreen.png');
