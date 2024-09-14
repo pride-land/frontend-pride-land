@@ -76,7 +76,7 @@ export class Exchange extends Scene
         });
 
         //on submit / confirm their trade
-        this.exchangeButton = this.add.image(512, 650, 'star').setInteractive();
+        this.exchangeButton = this.add.image(512, 650, 'sellicon').setInteractive().setScale(0.2);
         this.exchangeButton.on('pointerdown', () => {
             if (this.currentMushrooms > 0 && this.currentMushrooms >= this.numberInputValue){
                 this.errorText.setVisible(false);
