@@ -5,6 +5,7 @@ import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
 import { CardShop } from './CardShop';
+import { Inventory } from './Inventory';
 
 //to appease custom property on the mushroom counter error;
 interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
@@ -47,7 +48,8 @@ export class Game extends Scene
     cardShopScene: Phaser.Scene | null;
     exchangeShopIcon: Phaser.GameObjects.Image;
     cardShopIcon: Phaser.GameObjects.Image;
-
+    inventory: Phaser.GameObjects.Image;
+    inventoryScene: Phaser.Scene | null;
     constructor ()
     {
         super('Game');
@@ -165,6 +167,16 @@ export class Game extends Scene
             this.scene.pause();
         })
 
+        this.inventory = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false);
+        this.inventory.setInteractive()
+        .on('pointerup', () => {
+            if (!this.inventoryScene) this.createShopScene(Inventory);
+            else {
+                this.inventoryScene.scene.setVisible(true);
+            }
+            this.scene.pause();
+        })
+
         //set up log as an physical object
         this.realLogGroup = this.physics.add.staticGroup();
         this.realLog = this.realLogGroup.create(512, 640, 'log')
@@ -198,8 +210,10 @@ export class Game extends Scene
         if(!this.shopScene){
             this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency, coins: this.coins});
         } 
-        else {
+        else if(!this.cardShopScene){
             this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
+        } else {
+            this.inventoryScene = this.scene.add(handle, demo, true);
         }
     }
     
@@ -243,7 +257,9 @@ export class Game extends Scene
         //currency setup
         this.mushroomCurrencyText.setText(`Mushroom count: ${this.mushroomCurrency}`)
         this.coinsText.setText(`Coins: ${this.coins}`)
+
         if(this.shopScene) this.cardShopIcon.setVisible(true);
+        if(this.cardShopScene) this.inventory.setVisible(true);
         
     }
     startWatering()
