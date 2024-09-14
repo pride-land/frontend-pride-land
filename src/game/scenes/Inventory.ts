@@ -27,6 +27,7 @@ export class Inventory extends Scene
         let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
+            this.scene.stop('Inventory');
             this.scene.resume('Game');
         });
 
@@ -52,12 +53,12 @@ export class Inventory extends Scene
     {
         if(this.scene.isVisible()) {
             this.scene.bringToTop();
-            this.scene.resume('Inventory');
-            this.input.enable(this.sellText);
+            // this.scene.resume('Inventory');
+            // this.input.enable(this.sellText);
         } else {
             this.scene.sendToBack();
-            this.scene.pause('Inventory');
-            this.input.disable(this.sellText)
+            // this.scene.pause('Inventory');
+            // this.input.disable(this.sellText)
         };
         
     }

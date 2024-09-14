@@ -121,11 +121,11 @@ export class Game extends Scene
     create (data: { fadeIn: boolean })
     {
         this.userInventory = [];
-        this.userInventory.push('redcard01');
-        for(let i = 0; i<23; i++) {
-            this.userInventory.push('greencard01');
+        // this.userInventory.push('redcard01');
+        // for(let i = 0; i<23; i++) {
+        //     this.userInventory.push('greencard01');
 
-        }
+        // }
 
         //orders user inventory by rarity
         let sortOrder = ['gre', 'blu', 'yel', 'red'];
@@ -186,7 +186,7 @@ export class Game extends Scene
         .on('pointerup', () => {
             if (!this.inventoryScene) this.createShopScene(Inventory);
             else {
-                this.inventoryScene.scene.setVisible(true);
+                this.inventoryScene.scene.restart();
             }
             this.scene.pause();
         })
