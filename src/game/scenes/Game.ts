@@ -122,7 +122,7 @@ export class Game extends Scene
     {
         this.userInventory = [];
         this.userInventory.push('redcard01');
-        for(let i = 0; i<20; i++) {
+        for(let i = 0; i<23; i++) {
             this.userInventory.push('greencard01');
 
         }
