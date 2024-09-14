@@ -194,7 +194,7 @@ export class Game extends Scene
         //set up log as an physical object
         this.realLogGroup = this.physics.add.staticGroup();
         this.realLog = this.realLogGroup.create(512, 640, 'log')
-        this.realLog.setScale(0.6).refreshBody();
+        this.realLog.setScale(0.6).refreshBody().setDepth(300);
 
         this.tutorialTextBox = this.createTextBox();
         
@@ -272,6 +272,7 @@ export class Game extends Scene
         this.mushroomCurrencyText.setText(`Mushroom count: ${this.mushroomCurrency}`)
         this.coinsText.setText(`Coins: ${this.coins}`)
 
+        if(this.tutorialTimerText) this.exchangeShopIcon.setVisible(true);
         if(this.shopScene) this.cardShopIcon.setVisible(true);
         if(this.cardShopScene) this.inventoryIcon.setVisible(true);
         
@@ -333,7 +334,7 @@ export class Game extends Scene
             Phaser.Math.Between(265, 777) , 
             Phaser.Math.Between(563,671),
             'star'
-        ).setScale(0);
+        ).setScale(0).setDepth(301);
 
         this.tweens.add({
             targets: mushroom,

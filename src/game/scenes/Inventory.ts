@@ -6,7 +6,6 @@ export class Inventory extends Scene
 {
     background: Phaser.GameObjects.Image;
     userInventory: string [];
-    cardpic: Phaser.GameObjects.Image
     scrollMenu: GridTable;
     currentPage: number;
     currentCardObjects: Phaser.GameObjects.Image [] = []; //cards that are displayed on the page which are gonna be destroyed later
@@ -33,7 +32,13 @@ export class Inventory extends Scene
     }
     update()
     {
-        
+        if(this.scene.isVisible()) {
+            this.scene.bringToTop();
+            this.scene.resume('Inventory');
+        } else {
+            this.scene.sendToBack();
+            this.scene.pause('Inventory');
+        };
     }
     pagination()
     {
@@ -72,6 +77,7 @@ export class Inventory extends Scene
             let ownX = 100 + xSpacePerCard;
             let currentCard: Phaser.GameObjects.Image = this.add.image(ownX, ownY, card).setScale(0.1).setInteractive();
             this.currentCardObjects.push(currentCard)
+            if(currentCard.texture.key.slice(0,3) === 'red') currentCard.preFX?.addShine();
             currentCard.on('pointerdown', () => {
                 if(currentCard.scale === 0.1) currentCard.setScale(0.5).setPosition(512, 384).setDepth(700);
                 else currentCard.setScale(0.1).setPosition(ownX, ownY).setDepth(0);
