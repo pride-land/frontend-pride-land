@@ -1,6 +1,6 @@
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 import { EventBus } from '../EventBus';
-import { Scene } from 'phaser';
+import { Math, Scene } from 'phaser';
 import TextBox from 'phaser3-rex-plugins/templates/ui/textbox/TextBox';
 import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
@@ -339,19 +339,19 @@ export class Game extends Scene
         const mushroom = this.physics.add.staticSprite(
             Phaser.Math.Between(265, 777) , 
             Phaser.Math.Between(563,671),
-            'star'
+            `mushroom${Math.Between(1,4)}`
         ).setScale(0).setDepth(301);
 
         this.tweens.add({
             targets: mushroom,
             scale: {
-                value: 0.7,
+                value: 0.2,
                 duration: 1500,
                 ease: 'Bounce.easeOut'
             }
         });
 
-        mushroom.setImmovable(false).setInteractive({draggable: true});
+        mushroom.setImmovable(false).setInteractive({draggable: true}).refreshBody();
 
         //make mushrooms draggable
         this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
