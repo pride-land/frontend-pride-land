@@ -61,6 +61,7 @@ const CommentsPage = () => {
               <span>{t("ContactUs.SubmitFeedback")}</span>
             </button>
             </form>
+            <p> For all other inquiries please contact us at: info@pridefarm.org</p>
         </div>
     )
 
