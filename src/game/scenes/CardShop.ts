@@ -1,6 +1,6 @@
 import { EventBus } from '../EventBus';
 import { Math, Scene } from 'phaser';
-import pick from 'pick-random-weighted'
+import pick from 'pick-random-weighted';
 
 export class CardShop extends Scene 
 {
