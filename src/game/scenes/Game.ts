@@ -48,8 +48,9 @@ export class Game extends Scene
     cardShopScene: Phaser.Scene | null;
     exchangeShopIcon: Phaser.GameObjects.Image;
     cardShopIcon: Phaser.GameObjects.Image;
-    inventory: Phaser.GameObjects.Image;
+    inventoryIcon: Phaser.GameObjects.Image;
     inventoryScene: Phaser.Scene | null;
+    userInventory: string [];
     constructor ()
     {
         super('Game');
@@ -119,6 +120,19 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        this.userInventory = [];
+        this.userInventory.push('redcard01');
+        for(let i = 0; i<20; i++) {
+            this.userInventory.push('greencard01');
+
+        }
+
+        //orders user inventory by rarity
+        let sortOrder = ['gre', 'blu', 'yel', 'red'];
+        this.userInventory.sort((a,b) => {
+            return sortOrder.indexOf(a.slice(0,3)) - sortOrder.indexOf(b.slice(0,3))
+        })
+
         this.coins = 0;
         this.mushroomCurrency = 0;
         this.isTextDone = false;
@@ -167,8 +181,8 @@ export class Game extends Scene
             this.scene.pause();
         })
 
-        this.inventory = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false);
-        this.inventory.setInteractive()
+        this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false);
+        this.inventoryIcon.setInteractive()
         .on('pointerup', () => {
             if (!this.inventoryScene) this.createShopScene(Inventory);
             else {
@@ -213,13 +227,13 @@ export class Game extends Scene
         else if(!this.cardShopScene){
             this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
         } else {
-            this.inventoryScene = this.scene.add(handle, demo, true);
+            this.inventoryScene = this.scene.add(handle, demo, true, {userInventory: this.userInventory});
         }
     }
     
     update() 
     {
-
+        
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)
@@ -259,7 +273,7 @@ export class Game extends Scene
         this.coinsText.setText(`Coins: ${this.coins}`)
 
         if(this.shopScene) this.cardShopIcon.setVisible(true);
-        if(this.cardShopScene) this.inventory.setVisible(true);
+        if(this.cardShopScene) this.inventoryIcon.setVisible(true);
         
     }
     startWatering()
