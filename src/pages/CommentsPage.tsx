@@ -61,7 +61,7 @@ const CommentsPage = () => {
               <span>{t("ContactUs.SubmitFeedback")}</span>
             </button>
             </form>
-            <p> {t("contactus.inquiries")}</p>
+            <p> {t("ContactUs.inquiries")}</p>
         </div>
     )
 
