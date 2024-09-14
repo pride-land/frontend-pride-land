@@ -211,6 +211,12 @@ export class Game extends Scene
             this.mushroomCurrency = newMushroomCount; 
             this.coins = newCoinCount;
         });
+
+        //update when selling acrd
+        EventBus.on('card sold', (newInventory: string [], newCoinCount: number) => {
+            this.userInventory = newInventory;
+            this.coins = newCoinCount;
+        })
     }
     
     createShopScene(func: any)
@@ -227,7 +233,7 @@ export class Game extends Scene
         else if(!this.cardShopScene){
             this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
         } else {
-            this.inventoryScene = this.scene.add(handle, demo, true, {userInventory: this.userInventory});
+            this.inventoryScene = this.scene.add(handle, demo, true, {userInventory: this.userInventory, coins: this.coins});
         }
     }
     
