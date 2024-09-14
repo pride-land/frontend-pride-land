@@ -133,7 +133,7 @@ export class Game extends Scene
             return sortOrder.indexOf(a.slice(0,3)) - sortOrder.indexOf(b.slice(0,3))
         })
 
-        this.coins = 200;
+        this.coins = 0;
         this.mushroomCurrency = 0;
         this.isTextDone = false;
 
@@ -219,8 +219,9 @@ export class Game extends Scene
         })
 
         //update when card pack bought
-        EventBus.on('card pack bought', (newCoinCount: number) => {
-            this.coins = newCoinCount
+        EventBus.on('card pack bought', (newCoinCount: number, newCard: string) => {
+            this.coins = newCoinCount;
+            this.userInventory.push(newCard);
         })
     }
     
@@ -244,7 +245,6 @@ export class Game extends Scene
     
     update() 
     {
-        
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)

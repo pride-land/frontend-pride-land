@@ -1,6 +1,6 @@
 import { EventBus } from '../EventBus';
-import { Scene } from 'phaser';
-
+import { Math, Scene } from 'phaser';
+import pick from 'pick-random-weighted'
 
 export class CardShop extends Scene 
 {
@@ -49,8 +49,11 @@ export class CardShop extends Scene
         this.purchaseButton = this.add.image(530, 620 ,'star' ).setInteractive();
         this.purchaseButton.on('pointerdown', () => {
             if(this.currentCoins >= 100){
+                this.input.disable(this.purchaseButton)
+                let chosenCard = this.randomCardChooser();
                 this.currentCoins -= 100;
-                this.dummyCard = this.add.sprite(520, 400, 'redcard01').setScale(0, 0.25).setDepth(301).setInteractive();
+                //dummy card is the chosen card sprite
+                this.dummyCard = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
                 this.tweens.add({
                     targets: this.cardBack,
                     x: {
@@ -85,11 +88,15 @@ export class CardShop extends Scene
                         y: {
                             value: 1000,
                             duration: 300,
+                        },
+                        onComplete: () => {
+                            this.input.enable(this.purchaseButton)
+                            this.dummyCard.destroy(true);
                         }
                     })
                 })
 
-                EventBus.emit('card pack bought', this.currentCoins)
+                EventBus.emit('card pack bought', this.currentCoins, chosenCard);
             };
         });
 
@@ -116,5 +123,21 @@ export class CardShop extends Scene
         if (this.currentCoins < 100) this.errorText.setText('not enough coins!');
         else this.errorText.setText('');
     }
-  
+    randomCardChooser()
+    {
+        const rarities = [
+            ['greencard', 70],
+            ['bluecard', 20],
+            ['yellowcard', 9.5],
+            ['redcard', 0.5]
+        ];
+        let rarity = pick(rarities);
+        let randomIndex = Math.Between(1, 20);
+        if (randomIndex < 10) {
+            return rarity + '0' + randomIndex;
+        } else {
+            return rarity + randomIndex;
+        }
+        
+    }
 }
