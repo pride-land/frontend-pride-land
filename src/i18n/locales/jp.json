@@ -34,12 +34,13 @@
          "follow": "SNS",
          "facebook": "フェイスブック",
          "github": "開発チーム",
-         "Youtube": "ユーチューブ"
-
+         "Youtube": "ユーチューブ",
+         "pridelandInfo": "連絡情報•アクセス",
+         "emailContact": "ぷらいどふぁーむ(株) 川崎市麻生区早野393-3 電話&FAX 044-281-0305 / メール info@pridefarm.org"
       },
       "AboutUs": {
          "ImageText": "私たちのプライドランド"
-         
+
       },
       "ContactUs": {
          "ImageText": "コンタクト",
