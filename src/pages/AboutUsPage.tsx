@@ -1,12 +1,13 @@
 const AboutUsPage = () => {
     return (
-        <div className="w-screen flex flex-col">
-            <div className="(Image) relative w-full h-[20rem]  md:h-[40rem] lg:h-[40rem]  bg-cover bg-center bg-gray-200">
-                <div className="absolute inset-0 flex items-center justify-center text-center text-[40px] md:text-[60px] lg:text-[80px] font-serif bg-white">
-                    About Us
-                </div>
+        <div className="w-screen">
+        <div className="(Image) grid w-full h-[40rem] bg-aboutus-background bg-cover bg-top rounded-sm opacity-80">
+
+            <div className="ml-[40%] w-96 h-auto text-left text-7xl text-black font-serif">
+                About Us
             </div>
 
+        </div>
             <div className="(Body) p-6 md:p-12 lg:p-20 pb-24 bg-gradient-to-br from-green-300 to-white font-sans">
                 <div className="(Body Content)max-w-screen-lg mx-auto">
                     <h1 className="text-4xl md:text-5xl lg:text-[80px] my-8">Our Mission</h1>

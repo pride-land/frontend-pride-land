@@ -39,7 +39,7 @@ const BlogPage = () => {
     
     return (
         <div className="w-screen">
-            <div className="(Image) grid w-full h-[45rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
+            <div className="(Image) grid w-full h-[40rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
 
                 <div className="mt-auto mb-auto ml-24 w-60 h-40 text-left text-[100px] text-white font-serif">
                     Blogs...
