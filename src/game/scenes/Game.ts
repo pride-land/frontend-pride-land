@@ -131,11 +131,11 @@ export class Game extends Scene
         this.camera = this.cameras.main;
         
         this.mushroomCurrencyText = this.add.text(10, 70, "", {
-            color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+            color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
         }).setDepth(200)
 
         this.coinsText = this.add.text(10, 100, "", {
-            color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+            color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
         }).setDepth(200)
 
         if(data.fadeIn){
@@ -285,7 +285,7 @@ export class Game extends Scene
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
                 if(!this.tutorialTimerText) this.tutorialTimerText = this.add.text(10, 40, '', {
-                    color: '#FFFFFF', fontSize: 20, fontFamily: 'Arial Black',
+                    color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
                 }).setDepth(200);
                 this.tutorialTimerHarvest = this.time.delayedCall(1000, () => {
                     this.isMushroomDone = true;

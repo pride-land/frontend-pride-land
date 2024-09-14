@@ -81,7 +81,7 @@ export class Exchange extends Scene
             if (this.currentMushrooms > 0 && this.currentMushrooms >= this.numberInputValue){
                 this.errorText.setVisible(false);
                 this.currentMushrooms -= this.numberInputValue;
-                this.currentCoins += this.todayRate;
+                this.currentCoins += this.todayRate * this.numberInputValue;
                 this.purchaseSound.play();
                 //send this signal to main scene followed by these 2 variables (which are 2 numbers)
                 EventBus.emit('currency updated', this.currentMushrooms, this.currentCoins);
@@ -99,7 +99,7 @@ export class Exchange extends Scene
     update()
     {   
         if(this.scene) this.todayRateText.setText(`Todays exchange rate is: ${this.todayRate} per mushroom`);
-        this.shopText.setText(`x 1     =             x ${this.todayRate}`);
+        this.shopText.setText(`x ${this.numberInputValue}     =             x ${this.todayRate * this.numberInputValue}`);
         this.youHaveText.setText(`you have        x ${this.currentMushrooms}`);
         this.userMushroomOffer.setText(`you are giving         x${this.numberInputValue}`);
 
