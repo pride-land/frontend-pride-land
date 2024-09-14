@@ -18,7 +18,10 @@ export default{
     },
     extend: {
       backgroundImage: {
-        'pudding-background': "url('/prideland.png')"
+        'pudding-background': "url('/prideland.png')",
+        'volunteer-background': "url('/volunteer.jpg')",
+        'aboutus-background': "url('/aboutus.jpg')",
+        'contact-background': "url('/contact.jpg')",
       }
     },
     fontFamily: {

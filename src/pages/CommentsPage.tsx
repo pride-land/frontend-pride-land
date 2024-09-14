@@ -72,8 +72,8 @@ const CommentsPage = () => {
                     {commentsPageView}
                 </div>
             </div>
-            <div className="(Image) bg-white flex-1 grid place-items-center p-4 md:p-8">
-                <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+            <div className="(Image) flex-1 grid place-items-center p-4 md:p-8 bg-contact-background grid w-full bg-cover bg-top rounded-sm opacity-80">
+                <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-[100%]">
                     {t("ContactUs.ImageText")}
                 </div>
             </div>
