@@ -408,7 +408,7 @@ export class Game extends Scene
         const harvestText = this.createTextBox();
         
         this.time.delayedCall(2000, () => {
-            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。タイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
+            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
             // English:
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
