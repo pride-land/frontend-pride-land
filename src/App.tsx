@@ -52,9 +52,7 @@ const App = () => {
                             <Route path="aboutus" element={<AboutUsPage/>}/>
                             <Route path="volunteers" element={<VolunteerPage />} />
                             <Route path="pridefarmgame" element={<MushroomGame />} />  
-                        </Route>
-                        <Route path="/login" element={<AdminLogin/>}/>
-                        <Route path="/register" element={<AdminRegistration/>} />
+                            </Route>
                         <Route element={<AdminLayout/>}>
                               <Route path="admin-layout" element={<AdminDashboard/>} />
                               <Route path="admin-blogs" element={<AdminBlogs/>} />
@@ -63,6 +61,8 @@ const App = () => {
                               <Route path="admin-comments" element={<AdminComments/>} />
                               <Route path="admin-controls" element={<AdminControlDashboard/>} />
                         </Route>
+                        <Route path="/login" element={<AdminLogin/>}/>
+                        <Route path="/register" element={<AdminRegistration/>} />
                     </Routes>
 }
                 </AuthProvider>
