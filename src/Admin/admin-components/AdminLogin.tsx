@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import AuthContext from "../admin-authContext/AuthContext"
 import { useNavigate } from "react-router-dom";
-import logo from '../../../public/assets/logo.png'
+import logo from '/logo.png'
 
 const AdminLogin: React.FC = () => {
   let navigate = useNavigate();

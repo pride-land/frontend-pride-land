@@ -7,13 +7,20 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 function MushroomGame() {
     const [user, setUser] = useState<string | any>(null);
-
+    const [userCoins, setUserCoins] = useState<number | 0>(0);
+    const [userMushrooms, setUserMushrooms] = useState<number | 0>(0);
+    const [userCards, setUserCards] = useState<string []>([]);
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         setUser(user)});
     return () => unsubscribe();
     }, []);
   
+    useEffect(() => {
+        console.log(userCoins);
+        console.log(userMushrooms);
+        console.log(userCards);
+    },)
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
 
@@ -102,7 +109,11 @@ function MushroomGame() {
         </div>
         
         <div id="game-container" className='w-full flex align-center m-12 mx-auto'>
-            <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
+            <PhaserGame ref={phaserRef} currentActiveScene={currentScene} 
+                setUserCoins={setUserCoins}
+                setUserMushrooms={setUserMushrooms}
+                setUserCards={setUserCards}
+            />
             <div>
                 <div>
                     <button className="button" onClick={changeScene}>Change Scene</button>

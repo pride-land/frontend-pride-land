@@ -166,7 +166,7 @@ export class Game extends Scene
         this.cardShopIcon.on('pointerup', () => {
             if (!this.cardShopScene) this.createShopScene(CardShop);
             else {
-                this.cardShopScene.scene.setVisible(true);
+                this.cardShopScene.scene.restart({coins:this.coins});
             }
             this.scene.pause();
         })
@@ -217,6 +217,14 @@ export class Game extends Scene
             this.userInventory = newInventory;
             this.coins = newCoinCount;
         })
+
+        //update when card pack bought
+        EventBus.on('card pack bought', (newCoinCount: number, newCard: string) => {
+            this.coins = newCoinCount;
+            this.userInventory.push(newCard);
+
+            EventBus.emit('inventory updated', this.userInventory);
+        })
     }
     
     createShopScene(func: any)
@@ -231,7 +239,7 @@ export class Game extends Scene
             this.shopScene = this.scene.add(handle, demo, true, {mushroomCurrency: this.mushroomCurrency, coins: this.coins});
         } 
         else if(!this.cardShopScene){
-            this.cardShopScene = this.scene.add(handle, demo, true, {coinCurrency: this.coins});
+            this.cardShopScene = this.scene.add(handle, demo, true, {coins: this.coins});
         } else {
             this.inventoryScene = this.scene.add(handle, demo, true, {userInventory: this.userInventory, coins: this.coins});
         }
@@ -239,7 +247,6 @@ export class Game extends Scene
     
     update() 
     {
-        
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
         // console.log(this.numberOfMushrooms)

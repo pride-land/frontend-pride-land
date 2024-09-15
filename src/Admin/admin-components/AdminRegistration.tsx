@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
-import logo from '../../../public/assets/logo.png'
+import logo from '/logo.png'
 import Axios from 'axios';
 import AdminRegistrationType from "../admin-interface/AdminRegistrationType";
 
