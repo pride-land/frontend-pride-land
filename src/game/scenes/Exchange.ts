@@ -95,6 +95,9 @@ export class Exchange extends Scene
         EventBus.on('mushroom added', () => {
             this.currentMushrooms ++;
         });
+        EventBus.on('card pack bought', () => {
+            this.currentCoins -= 100;
+        })
     }
     update()
     {   
