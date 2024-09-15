@@ -141,7 +141,7 @@ export class Exchange extends Scene
             this.numberInputDiv!.style.visibility = 'visible';
             this.scene.bringToTop();
             this.errorText.setVisible(true);
-            this.owlhoot.play();
+            
             
         } else {
             this.input.disable(this.exchangeButton);
