@@ -62,6 +62,7 @@ export class Preloader extends Scene
         this.load.audio('commoncard', 'sounds/commoncardboom.mp3');
         this.load.audio('error', 'sounds/error.mp3');
         this.load.audio('shopbell', 'sounds/shopbell.mp3');
+        this.load.audio('mushroomsong', 'sounds/mushroomsong.mp3');
     }
 
     create ()

@@ -97,6 +97,7 @@ export class CardShop extends Scene
                         }
                     })
                     if(chosenCard.slice(0,3) === 'red' || chosenCard.slice(0,3) === 'yel'){
+                        this.sound.pauseAll();
                         this.tweens.add({
                             targets: chosenCardSprite,
                             scale: {
@@ -142,6 +143,7 @@ export class CardShop extends Scene
                         },
                         onComplete: () => {
                             this.input.enable(this.purchaseButton)
+                            this.sound.resumeAll();
                             chosenCardSprite.destroy(true);
                         }
                     })

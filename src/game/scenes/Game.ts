@@ -51,6 +51,7 @@ export class Game extends Scene
     inventoryIcon: Phaser.GameObjects.Image;
     inventoryScene: Phaser.Scene | null;
     userInventory: string [];
+    themeSong: Phaser.Sound.BaseSound;
     constructor ()
     {
         super('Game');
@@ -120,6 +121,8 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        this.themeSong = this.sound.add('mushroomsong').setVolume(0.2).setLoop(true);
+        this.themeSong.play();
         this.userInventory = [];
         // this.userInventory.push('redcard01');
         // for(let i = 0; i<23; i++) {
@@ -130,7 +133,7 @@ export class Game extends Scene
         //orders user inventory by rarity
         let sortOrder = ['gre', 'blu', 'yel', 'red'];
         this.userInventory.sort((a,b) => {
-            return sortOrder.indexOf(a.slice(0,3)) - sortOrder.indexOf(b.slice(0,3))
+            return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
         })
 
         this.coins = 0;
