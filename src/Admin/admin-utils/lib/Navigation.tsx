@@ -18,25 +18,25 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'blogsadmin',
 		label: 'ブログ',
-		path: 'blogs-admin',
+		path: 'admin-blogs',
 		icon: <HiOutlineBookOpen />
 	},
 	{
 		key: 'volunteer',
 		label: 'ボランティア',
-		path: 'volunteer',
+		path: 'admin-volunteer',
 		icon: <HiOutlineDocumentText />
 	},
 	{
 		key: 'gallery',
 		label: 'ギャラリー',
-		path: 'gallery',
+		path: 'admin-gallery',
 		icon: <HiOutlineCollection />
 	},
 	{
 		key: 'comments',
 		label: 'コメント',
-		path: 'comments',
+		path: 'admin-comments',
 		icon: <HiOutlineAnnotation />
 	},
 	{

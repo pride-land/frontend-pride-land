@@ -51,18 +51,18 @@ const App = () => {
                             <Route path="contactus" element={<CommentsPage/>}/>
                             <Route path="aboutus" element={<AboutUsPage/>}/>
                             <Route path="volunteers" element={<VolunteerPage />} />
-                            <Route path="pridefarmgame" element={<MushroomGame />} />
-                        </Route>    
-                        <Route path="/login" element={<AdminLogin/>}/>
-                        <Route path="/register" element={<AdminRegistration/>} />
-                        <Route path="/admin-layout/" element={<AdminLayout/>}>
-                              <Route index element={<AdminDashboard/>} />
-                              <Route path="blogs-admin" element={<AdminBlogs/>} />
-                              <Route path="volunteer" element={<AdminVolunteer/>} />
-                              <Route path="gallery" element={<AdminGallery/>} />
-                              <Route path="comments" element={<AdminComments/>} />
+                            <Route path="pridefarmgame" element={<MushroomGame />} />  
+                            </Route>
+                        <Route element={<AdminLayout/>}>
+                              <Route path="admin-layout" element={<AdminDashboard/>} />
+                              <Route path="admin-blogs" element={<AdminBlogs/>} />
+                              <Route path="admin-volunteer" element={<AdminVolunteer/>} />
+                              <Route path="admin-gallery" element={<AdminGallery/>} />
+                              <Route path="admin-comments" element={<AdminComments/>} />
                               <Route path="admin-controls" element={<AdminControlDashboard/>} />
                         </Route>
+                        <Route path="/login" element={<AdminLogin/>}/>
+                        <Route path="/register" element={<AdminRegistration/>} />
                     </Routes>
 }
                 </AuthProvider>
