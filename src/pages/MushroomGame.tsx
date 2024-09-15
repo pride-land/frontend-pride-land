@@ -113,7 +113,6 @@ function MushroomGame() {
                 setUserCoins={setUserCoins}
                 setUserMushrooms={setUserMushrooms}
                 setUserCards={setUserCards}
-                userCards={userCards}
             />
             <div>
                 <div>

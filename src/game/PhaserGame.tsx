@@ -14,10 +14,9 @@ interface IProps
     setUserCoins: Dispatch<SetStateAction<number | 0>>;
     setUserMushrooms: Dispatch<SetStateAction<number | 0>>;
     setUserCards: Dispatch<SetStateAction<string []>>;
-    userCards: string [];
 }
 
-export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame({ currentActiveScene, setUserCoins, setUserMushrooms, setUserCards, userCards}, ref)
+export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame({ currentActiveScene, setUserCoins, setUserMushrooms, setUserCards}, ref)
 {
     const game = useRef<Phaser.Game | null>(null!);
 
@@ -79,12 +78,26 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
 
     //update coins when card back bought
     useEffect(() => {
-        EventBus.on('card pack bought', (coins: number, card: string) => {
+        EventBus.on('card pack bought', (coins: number) => {
             setUserCoins(coins);
-            userCards.push(card);
-            setUserCards(userCards);
         })
     }, [currentActiveScene, ref]);
+
+    //update user inventory after card pack bought
+    useEffect(() => {
+        EventBus.on('inventory updated', (userInventory: string[]) => {
+            setUserCards(userInventory);
+        })
+    }, [currentActiveScene, ref]);
+
+    //update user inventory and coins after card sold
+    useEffect(() => {
+        EventBus.on('card sold',(userInventory: string[], coins: number) => {
+            setUserCards(userInventory);
+            setUserCoins(coins);
+        })
+    }, [currentActiveScene, ref])
+
     //update when mushroom exchanged
     useEffect(() => {
         EventBus.on('currency updated', (newMushroomCount: number, newCoinCount: number) => {
@@ -92,6 +105,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
             setUserMushrooms(newMushroomCount);
         })
     }, [currentActiveScene, ref]);
+
     //update when user picks mushrooms
     useEffect(() => {
         EventBus.on('mushroom added', (currentMushrooms: number) => {
@@ -99,6 +113,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
             setUserMushrooms(currentMushrooms);
         })
     }, [currentActiveScene, ref]);
+
     return (
         <div id="game-container"></div>
     );
