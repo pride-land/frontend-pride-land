@@ -69,6 +69,7 @@ export class CardShop extends Scene
 
                 let chosenCardSprite = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
                 chosenCardSprite.preFX?.addShadow(0, 0, 0.05, 0.5);
+                this.cardBack.off('pointerdown');
                 this.tweens.add({
                     targets: this.cardBack,
                     x: {
