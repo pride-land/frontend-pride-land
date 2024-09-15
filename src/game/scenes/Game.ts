@@ -175,7 +175,13 @@ export class Game extends Scene
         this.background = this.add.image(512, 300, 'shed');
 
         this.cardShopIcon = this.add.image(950, 70, 'cardshopicon').setVisible(false);
-        this.cardShopIcon.setScale(0.15).setInteractive().setDepth(701);
+        this.cardShopIcon.setScale(0.15).setInteractive().setDepth(701)
+        .on('pointerover', () => {
+            this.cardShopIcon.setScale(0.2);
+        })
+        .on('pointerout', () => {
+            this.cardShopIcon.setScale(0.15);
+        })
         this.cardShopIcon.on('pointerup', () => {
             if (!this.cardShopScene) this.createShopScene(CardShop);
             else {
@@ -185,7 +191,13 @@ export class Game extends Scene
         })
 
         this.exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
-        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(702);
+        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(702)
+        .on('pointerover', () => {
+            this.exchangeShopIcon.setScale(0.2);
+        })
+        .on('pointerout', () => {
+            this.exchangeShopIcon.setScale(0.16);
+        })
         this.exchangeShopIcon.on('pointerup', () => {
             if (!this.shopScene) this.createShopScene(Exchange);
             else {
@@ -194,7 +206,13 @@ export class Game extends Scene
             this.scene.pause();
         })
 
-        this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false);
+        this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false)
+        .on('pointerover', () => {
+            this.inventoryIcon.setScale(0.4);
+        })
+        .on('pointerout', () => {
+            this.inventoryIcon.setScale(0.3);
+        })
         this.inventoryIcon.setInteractive()
         .on('pointerup', () => {
             if (!this.inventoryScene) this.createShopScene(Inventory);

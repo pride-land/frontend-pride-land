@@ -37,6 +37,12 @@ export class CardShop extends Scene
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
         let xButton = this.add.text(270, 160, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        xButton.on('pointerover', () => {
+            xButton.setStyle({color: '#FFFFFF'} );
+        })
+        .on('pointerout', () => {
+            xButton.setStyle({color: "000000" });
+        });
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
             this.scene.stop('CardShop');

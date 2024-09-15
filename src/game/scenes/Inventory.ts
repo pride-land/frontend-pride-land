@@ -25,6 +25,12 @@ export class Inventory extends Scene
         this.userInventory = data.userInventory;
         this.background = this.add.image(512, 400, 'inventoryBackground').setScale(1.8).setAlpha(1)
         let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        xButton.on('pointerover', () => {
+            xButton.setStyle({color: '#FFFFFF'} );
+        })
+        .on('pointerout', () => {
+            xButton.setStyle({color: "000000" });
+        });
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
             this.scene.stop('Inventory');
