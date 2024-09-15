@@ -26,6 +26,7 @@ export class Exchange extends Scene
     secondsLeft: string;
     numberInput: Phaser.GameObjects.DOMElement;
     purchaseSound: Phaser.Sound.BaseSound;
+    owlhoot: Phaser.Sound.BaseSound;
     constructor(handle: string)
     {
         super(handle + 'Exchange')
@@ -33,14 +34,15 @@ export class Exchange extends Scene
 
     create(data: {mushroomCurrency: number, coins: number})
     {
-        
+
         this.numberInputValue = 1;
         this.todayRate = Math.Between(10, 50);
         this.currentMushrooms = data.mushroomCurrency;
         this.currentCoins = data.coins;
         this.purchaseSound = this.sound.add('exchange').setVolume(0.2).setRate(1.9);
         this.errorSound = this.sound.add('error').setVolume(0.5);
-
+        this.owlhoot = this.sound.add('owlhoot').setVolume(0.8);
+        this.owlhoot.play();
         //set-up exchange rate background
         this.shopBackground = this.add.image(512, 400, 'exchangebg').setScale(1, 0.8).setAlpha(1).setTint();
         let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
@@ -139,6 +141,8 @@ export class Exchange extends Scene
             this.numberInputDiv!.style.visibility = 'visible';
             this.scene.bringToTop();
             this.errorText.setVisible(true);
+            this.owlhoot.play();
+            
         } else {
             this.input.disable(this.exchangeButton);
             this.numberInputDiv!.style.visibility = 'collapse';

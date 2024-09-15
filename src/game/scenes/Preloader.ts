@@ -72,6 +72,8 @@ export class Preloader extends Scene
         this.load.audio('pop4', 'sounds/pop4.mp3');
         this.load.audio('waterdrop', 'sounds/waterdrop.mp3');
         this.load.audio('mushroomgrow', 'sounds/mushroomgrow.mp3');
+        this.load.audio('pageflip', 'sounds/pageflip.mp3');
+        this.load.audio('owlhoot', 'sounds/owlhoot.mp3');
 
     }
 

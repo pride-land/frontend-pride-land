@@ -13,6 +13,7 @@ export class Inventory extends Scene
     userCoins: number;
     selectedCardToSell: number | null = null;
     sellSound: Phaser.Sound.BaseSound;
+    pageflipSound: Phaser.Sound.BaseSound;
     constructor(handle: string)
     {
         super(handle + 'Inventory')
@@ -20,6 +21,8 @@ export class Inventory extends Scene
 
     create(data: {userInventory: string[], coins: number})
     {
+        this.pageflipSound = this.sound.add('pageflip').setVolume(0.5);
+        this.pageflipSound.play();
         this.sellSound = this.sound.add('cardPurchase').setVolume(0.3);
         this.currentPage = 1;
         this.userCoins = data.coins;
