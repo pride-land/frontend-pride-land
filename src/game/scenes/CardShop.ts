@@ -13,18 +13,27 @@ export class CardShop extends Scene
     purchaseButton: Phaser.GameObjects.Image;
     mysteryCardIcon: Phaser.GameObjects.Image;
     cardBack: Phaser.GameObjects.Sprite;
-    dummyCard: Phaser.GameObjects.Sprite;
+    purchaseSound: Phaser.Sound.BaseSound;
+    rarecardBoom: Phaser.Sound.BaseSound;
+    commoncardBoom: Phaser.Sound.BaseSound;
+    errorSound: Phaser.Sound.BaseSound;
+    shopBell: Phaser.Sound.BaseSound;
     constructor(handle: string) {
         super(handle + 'CardShop');
     }
 
     create(data: {coins: number}) {
-
+        
         this.currentCoins = data.coins;
         this.cardPrice = 100;
-        this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive()
-        
-        
+        this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive();
+        this.cardBack.preFX?.addShadow(0, 0, 0.05, 0.5);
+        this.purchaseSound = this.sound.add('cardPurchase').setVolume(0.3);
+        this.rarecardBoom = this.sound.add('rarecard').setVolume(0.4).setRate(1.2);
+        this.commoncardBoom = this.sound.add('commoncard').setVolume(0.3);
+        this.errorSound = this.sound.add('error').setVolume(0.5);
+        this.shopBell = this.sound.add('shopbell').setVolume(0.3);
+        this.shopBell.play();
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
         let xButton = this.add.text(270, 160, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
@@ -46,14 +55,20 @@ export class CardShop extends Scene
         this.cardText = this.add.text(380, 400, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
         this.errorText = this.add.text(430, 550, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'})
         //exhange coins for cards
-        this.purchaseButton = this.add.image(530, 620 ,'star' ).setInteractive();
+        this.purchaseButton = this.add.image(530, 620 ,'buyicon' ).setInteractive().setScale(0.1);
+        this.purchaseButton
+        .on('pointerover', () => this.hoverPurchase())
+        .on('pointerout', () => this.restPurchase())
+
         this.purchaseButton.on('pointerdown', () => {
             if(this.currentCoins >= 100){
+                this.purchaseSound.play();
                 this.input.disable(this.purchaseButton)
                 let chosenCard = this.randomCardChooser();
                 this.currentCoins -= 100;
-                //dummy card is the chosen card sprite
-                this.dummyCard = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
+
+                let chosenCardSprite = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
+                chosenCardSprite.preFX?.addShadow(0, 0, 0.05, 0.5);
                 this.tweens.add({
                     targets: this.cardBack,
                     x: {
@@ -74,30 +89,68 @@ export class CardShop extends Scene
                         }
                     });
                     this.tweens.add({
-                        targets: this.dummyCard,
+                        targets: chosenCardSprite,
                         scaleX: {
                             value: 0.3,
                             duration: 200,
                             delay: 200
                         }
                     })
+                    if(chosenCard.slice(0,3) === 'red' || chosenCard.slice(0,3) === 'yel'){
+                        this.tweens.add({
+                            targets: chosenCardSprite,
+                            scale: {
+                                value: 0.5,
+                                duration: 100,
+                                delay: 400
+                            },
+                            yoyo: true,
+                            onComplete: () => {
+                                if(chosenCardSprite.postFX){
+                                    chosenCardSprite.postFX.addShine(0.5, 0.5, 2);
+                                    this.rarecardBoom.play();
+                                }
+                            }
+                        });
+                        this.tweens.add({
+                            targets: chosenCardSprite,
+                            angle: {
+                                value: 40,
+                                duration: 50,
+                                delay: 300,
+                            },
+                            yoyo: true,
+                            onComplete: () => {
+                                this.tweens.add({
+                                    targets: chosenCardSprite,
+                                    angle: {
+                                        value: -40,
+                                        duration: 50,
+                                    },
+                                    yoyo: true,
+                                })
+                            }
+                        })
+                    } else this.commoncardBoom.play();
                 });
-                this.dummyCard.on('pointerdown', () => {
+                chosenCardSprite.on('pointerdown', () => {
                     this.tweens.add({
-                        targets: this.dummyCard,
+                        targets: chosenCardSprite,
                         y: {
                             value: 1000,
                             duration: 300,
                         },
                         onComplete: () => {
                             this.input.enable(this.purchaseButton)
-                            this.dummyCard.destroy(true);
+                            chosenCardSprite.destroy(true);
                         }
                     })
                 })
 
                 EventBus.emit('card pack bought', this.currentCoins, chosenCard);
-            };
+            } else {
+                this.errorSound.play();
+            }
         });
 
 
@@ -139,5 +192,13 @@ export class CardShop extends Scene
             return rarity + randomIndex;
         }
         
+    }
+    hoverPurchase()
+    {
+        this.purchaseButton.setScale(0.15);
+    }
+    restPurchase()
+    {
+        this.purchaseButton.setScale(0.1);
     }
 }
