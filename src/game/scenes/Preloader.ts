@@ -51,6 +51,7 @@ export class Preloader extends Scene
         this.load.image('cardshopbackground', 'cardshopbackground.png');
         this.load.image('mysterycard', 'mysterycard.png');
         this.load.image('cardback', 'cardback.png');
+        this.load.image('buyicon', 'buyicon.png');
         //cards
         this.load.image('redcard01', 'cardAssets/redCards/galaxyChicken.png');
         this.load.image('greencard01', 'cardAssets/greenCards/eggsGreen.png');
@@ -59,6 +60,8 @@ export class Preloader extends Scene
         this.load.audio('cardPurchase', 'sounds/cardPurchase.mp3');
         this.load.audio('rarecard', 'sounds/rarecardboom.mp3');
         this.load.audio('commoncard', 'sounds/commoncardboom.mp3');
+        this.load.audio('error', 'sounds/error.mp3');
+        this.load.audio('shopbell', 'sounds/shopbell.mp3');
     }
 
     create ()

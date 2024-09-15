@@ -16,12 +16,14 @@ export class CardShop extends Scene
     purchaseSound: Phaser.Sound.BaseSound;
     rarecardBoom: Phaser.Sound.BaseSound;
     commoncardBoom: Phaser.Sound.BaseSound;
+    errorSound: Phaser.Sound.BaseSound;
+    shopBell: Phaser.Sound.BaseSound;
     constructor(handle: string) {
         super(handle + 'CardShop');
     }
 
     create(data: {coins: number}) {
-
+        
         this.currentCoins = data.coins;
         this.cardPrice = 100;
         this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive();
@@ -29,6 +31,9 @@ export class CardShop extends Scene
         this.purchaseSound = this.sound.add('cardPurchase').setVolume(0.3);
         this.rarecardBoom = this.sound.add('rarecard').setVolume(0.4).setRate(1.2);
         this.commoncardBoom = this.sound.add('commoncard').setVolume(0.3);
+        this.errorSound = this.sound.add('error').setVolume(0.5);
+        this.shopBell = this.sound.add('shopbell').setVolume(0.3);
+        this.shopBell.play();
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
         let xButton = this.add.text(270, 160, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
@@ -50,7 +55,11 @@ export class CardShop extends Scene
         this.cardText = this.add.text(380, 400, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
         this.errorText = this.add.text(430, 550, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'})
         //exhange coins for cards
-        this.purchaseButton = this.add.image(530, 620 ,'star' ).setInteractive();
+        this.purchaseButton = this.add.image(530, 620 ,'buyicon' ).setInteractive().setScale(0.1);
+        this.purchaseButton
+        .on('pointerover', () => this.hoverPurchase())
+        .on('pointerout', () => this.restPurchase())
+
         this.purchaseButton.on('pointerdown', () => {
             if(this.currentCoins >= 100){
                 this.purchaseSound.play();
@@ -139,7 +148,9 @@ export class CardShop extends Scene
                 })
 
                 EventBus.emit('card pack bought', this.currentCoins, chosenCard);
-            };
+            } else {
+                this.errorSound.play();
+            }
         });
 
 
@@ -181,5 +192,13 @@ export class CardShop extends Scene
             return rarity + randomIndex;
         }
         
+    }
+    hoverPurchase()
+    {
+        this.purchaseButton.setScale(0.15);
+    }
+    restPurchase()
+    {
+        this.purchaseButton.setScale(0.1);
     }
 }
