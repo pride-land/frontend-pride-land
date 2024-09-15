@@ -25,7 +25,7 @@ export class CardShop extends Scene
     create(data: {coins: number}) {
         
         this.currentCoins = data.coins;
-        this.cardPrice = 100;
+        this.cardPrice = 200;
         this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive();
         this.cardBack.preFX?.addShadow(0, 0, 0.05, 0.5);
         this.purchaseSound = this.sound.add('cardPurchase').setVolume(0.3);
@@ -67,11 +67,11 @@ export class CardShop extends Scene
         .on('pointerout', () => this.restPurchase())
 
         this.purchaseButton.on('pointerdown', () => {
-            if(this.currentCoins >= 100){
+            if(this.currentCoins >= 200){
                 this.purchaseSound.play();
                 this.input.disable(this.purchaseButton)
                 let chosenCard = this.randomCardChooser();
-                this.currentCoins -= 100;
+                this.currentCoins -= 200;
 
                 let chosenCardSprite = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
                 chosenCardSprite.preFX?.addShadow(0, 0, 0.05, 0.5);
@@ -182,7 +182,7 @@ export class CardShop extends Scene
             this.scene.sendToBack();
         };
 
-        if (this.currentCoins < 100) this.errorText.setText('not enough coins!');
+        if (this.currentCoins < 200) this.errorText.setText('not enough coins!');
         else this.errorText.setText('');
     }
     randomCardChooser()

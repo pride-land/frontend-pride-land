@@ -57,6 +57,9 @@ export class Game extends Scene
     pop2: Phaser.Sound.BaseSound;
     pop3: Phaser.Sound.BaseSound;
     pop4: Phaser.Sound.BaseSound;
+    waterdropSound: Phaser.Sound.BaseSound;
+    muteButton: Phaser.GameObjects.Image;
+    mushroomGrowSound: Phaser.Sound.BaseSound;
     constructor ()
     {
         super('Game');
@@ -126,11 +129,31 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
-        this.pop1 = this.sound.add('pop1').setVolume(0.05);
-        this.pop2 = this.sound.add('pop2').setVolume(0.05);
-        this.pop3 = this.sound.add('pop3').setVolume(0.05);
-        this.pop4 = this.sound.add('pop4').setVolume(0.05);
+        //mute song button
+        this.muteButton = this.add.image(950,700,'mute').setScale(0.05).setInteractive().setDepth(200).setTintFill();
+        this.muteButton.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.muteButton,
+                scale: {
+                    value: 0.07,
+                    duration: 100
+                }
+            });
+        })
+        .on('pointerout', () => {
+            this.muteButton.setScale(0.05);
+        });
+        this.muteButton.on('pointerdown', () => {
+            this.sound.isPlaying('mushroomsong') ? this.sound.pauseAll() : this.sound.resumeAll();  
+        })
 
+        this.pop1 = this.sound.add('pop1').setVolume(0.06);
+        this.pop2 = this.sound.add('pop2').setVolume(0.06);
+        this.pop3 = this.sound.add('pop3').setVolume(0.06);
+        this.pop4 = this.sound.add('pop4').setVolume(0.06);
+        this.mushroomGrowSound = this.sound.add('mushroomgrow').setVolume(0.3).setRate(1.6);
+
+        this.waterdropSound = this.sound.add('waterdrop').setVolume(0.5);
         this.themeSong = this.sound.add('mushroomsong').setVolume(0.2).setLoop(true);
         this.themeSong.play();
         this.userInventory = [];
@@ -359,7 +382,19 @@ export class Game extends Scene
             .setCollideWorldBounds(false)
         
             this.physics.add.collider(waterdrop, this.realLog);
-            this.physics.add.overlap(waterdrop, this.realLog, () => addProgress(waterdrop), undefined, this)
+            this.physics.add.overlap(waterdrop, this.realLog, () => {
+                this.tweens.add({
+                    targets: waterdrop,
+                    scale: {
+                        value: 0,
+                        duration: 50
+                    },
+                    onComplete: () => {
+                        addProgress(waterdrop);
+                    }
+                });
+                this.waterdropSound.play();
+            }, undefined, this)
             
         }, this);
 
@@ -380,9 +415,10 @@ export class Game extends Scene
                 if(!this.tutorialTimerText) this.tutorialTimerText = this.add.text(10, 40, '', {
                     color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
                 }).setDepth(200);
-                this.tutorialTimerHarvest = this.time.delayedCall(1000, () => {
+                this.tutorialTimerHarvest = this.time.delayedCall(7000, () => {
+                    this.mushroomGrowSound.play();
                     this.isMushroomDone = true;
-                    this.mushroomGrowth();
+                    this.mushroomGrowth();                    
                 })
             };
             
