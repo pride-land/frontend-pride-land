@@ -12,6 +12,7 @@ export class Inventory extends Scene
     sellText: Phaser.GameObjects.Text;
     userCoins: number;
     selectedCardToSell: number | null = null;
+    sellSound: Phaser.Sound.BaseSound;
     constructor(handle: string)
     {
         super(handle + 'Inventory')
@@ -19,7 +20,7 @@ export class Inventory extends Scene
 
     create(data: {userInventory: string[], coins: number})
     {
-        
+        this.sellSound = this.sound.add('cardPurchase').setVolume(0.3);
         this.currentPage = 1;
         this.userCoins = data.coins;
         this.userInventory = data.userInventory;
@@ -39,6 +40,7 @@ export class Inventory extends Scene
 
         this.sellText = this.add.text(100, 680, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'}).setVisible(false)
         .setInteractive().on('pointerdown', () => {
+            this.sellSound.play();
             let cardRarity = this.userInventory[this.selectedCardToSell!].slice(0,3);
             this.userInventory.splice(this.selectedCardToSell!, 1);
             if(cardRarity === 'gre') this.userCoins += 10;
@@ -109,9 +111,51 @@ export class Inventory extends Scene
             if(currentCard.texture.key.slice(0,3) === 'red' || currentCard.texture.key.slice(0,3) === 'yel') {
                 currentCard.preFX?.addShine(0.5, 0.5, 2);
             }
+            currentCard.on('pointerover', () => {
+                if(currentCard.scale < 0.12){
+                    this.tweens.add({
+                        targets: currentCard,
+                            scale:{
+                                value: 0.12,
+                                duration: 50
+                            },
+                    })
+                }
+            });
+            currentCard.on('pointerout', () => {
+                if(currentCard.scale <= 0.12){
+                    this.tweens.add({
+                        targets: currentCard,
+                            scale:{
+                                value: 0.1,
+                                duration: 50
+                            },
+                    })
+                }
+            });
             currentCard.on('pointerdown', () => {
-                if(currentCard.scale === 0.1) {
-                    currentCard.setScale(0.5).setPosition(512, 384).setDepth(700);
+                if(currentCard.scale <= 0.12) {
+                    currentCard.disableInteractive()
+                    // currentCard.setScale(0.5).setPosition(512, 384).setDepth(700);
+                    currentCard.setDepth(700);
+                    this.tweens.add({
+                        targets: currentCard,
+                        scale:{
+                            value: 0.5,
+                            duration: 100
+                        },
+                        x:{
+                            value: 512,
+                            duration: 100
+                        },
+                        y:{
+                            value:384,
+                            duration:100,
+                        },
+                        onComplete: () => {
+                            currentCard.setInteractive();
+                        }
+                    })
                     this.sellText.setVisible(true);
                     this.selectedCardToSell = this.userInventory.indexOf(card);
                     if(currentCard.texture.key.slice(0,3) === 'gre') {
@@ -124,8 +168,29 @@ export class Inventory extends Scene
                         this.sellText.setText('Sell for 50 Coin')
                     }
                 } else {
-                    currentCard.setScale(0.1).setPosition(ownX, ownY).setDepth(0);
+                    // currentCard.setScale(0.1).setPosition(ownX, ownY).setDepth(0);
+                    currentCard.setDepth(0);
+                    currentCard.disableInteractive();
+                    this.tweens.add({
+                        targets: currentCard,
+                        scale:{
+                            value: 0.1,
+                            duration: 100
+                        },
+                        x:{
+                            value: ownX,
+                            duration: 100
+                        },
+                        y:{
+                            value:ownY,
+                            duration:100,
+                        },
+                        onComplete: () => {
+                            currentCard.setInteractive();
+                        }
+                    })
                     this.sellText.setVisible(false);
+                    
                 }
                 
             })

@@ -177,7 +177,13 @@ export class Game extends Scene
         this.cardShopIcon = this.add.image(950, 70, 'cardshopicon').setVisible(false);
         this.cardShopIcon.setScale(0.15).setInteractive().setDepth(701)
         .on('pointerover', () => {
-            this.cardShopIcon.setScale(0.2);
+            this.tweens.add({
+                targets: this.cardShopIcon,
+                scale: {
+                    value: 0.2,
+                    duration: 100
+                }
+            });
         })
         .on('pointerout', () => {
             this.cardShopIcon.setScale(0.15);
@@ -190,10 +196,16 @@ export class Game extends Scene
             this.scene.pause();
         })
 
-        this.exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
+        this.exchangeShopIcon = this.add.image(955, 190, 'exchangeshopicon');
         this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(702)
         .on('pointerover', () => {
-            this.exchangeShopIcon.setScale(0.2);
+            this.tweens.add({
+                targets: this.exchangeShopIcon,
+                scale: {
+                    value: 0.2,
+                    duration: 100
+                }
+            });
         })
         .on('pointerout', () => {
             this.exchangeShopIcon.setScale(0.16);
@@ -208,7 +220,13 @@ export class Game extends Scene
 
         this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false)
         .on('pointerover', () => {
-            this.inventoryIcon.setScale(0.4);
+            this.tweens.add({
+                targets: this.inventoryIcon,
+                scale: {
+                    value: 0.4,
+                    duration: 100
+                }
+            });
         })
         .on('pointerout', () => {
             this.inventoryIcon.setScale(0.3);
