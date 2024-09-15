@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { IRefPhaserGame, PhaserGame } from '../game/PhaserGame';
 import { MainMenu } from '../game/scenes/MainMenu';
-import { auth } from "../firebase.ts";
+import { auth , db} from "../firebase.ts";
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import Auth from '../game/Authentication.tsx';
 import { onAuthStateChanged } from 'firebase/auth';
 
@@ -10,11 +11,45 @@ function MushroomGame() {
     const [userCoins, setUserCoins] = useState<number | 0>(0);
     const [userMushrooms, setUserMushrooms] = useState<number | 0>(0);
     const [userCards, setUserCards] = useState<string []>([]);
+    const [gameData, setGameData] = useState();
+
     useEffect(() => {
+        inventory();
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         setUser(user)});
     return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+        // Auto-save game progress every 30 seconds
+        const autoSaveInterval = 5000;
+        const intervalId = setInterval(() => {
+          saveGameProgress(user.uid, gameData);
+    }, autoSaveInterval);
+        return () => clearInterval(intervalId); // Cleanup on component unmount
+      }, [gameData]);
+
+      async function saveGameProgress(user: string, gameData: any) {
+        try {
+          await setDoc(doc(db,'game-data', user), gameData);
+          console.log('Game progress saved successfully.');
+        } catch (error) {
+          console.error('Error saving game progress:', error);
+        }
+      }
+
+    
+    const inventory = async () => {
+        let userInventory = {
+            coins: userCoins,
+            mushrooms: userMushrooms,
+            cards: userCards
+        }
+        setGameData(userInventory);
+    } 
+    
+    console.log(gameData)
+  
   
     useEffect(() => {
         console.log(userCoins);
