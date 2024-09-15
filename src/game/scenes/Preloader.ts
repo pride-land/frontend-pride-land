@@ -52,6 +52,8 @@ export class Preloader extends Scene
         this.load.image('mysterycard', 'mysterycard.png');
         this.load.image('cardback', 'cardback.png');
         this.load.image('buyicon', 'buyicon.png');
+        this.load.image('max', 'max.png');
+        this.load.image('exchangebg', 'exchangebg.png');
         //cards
         this.load.image('redcard01', 'cardAssets/redCards/galaxyChicken.png');
         this.load.image('greencard01', 'cardAssets/greenCards/eggsGreen.png');
