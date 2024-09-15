@@ -13,7 +13,7 @@ export class CardShop extends Scene
     purchaseButton: Phaser.GameObjects.Image;
     mysteryCardIcon: Phaser.GameObjects.Image;
     cardBack: Phaser.GameObjects.Sprite;
-    dummyCard: Phaser.GameObjects.Sprite;
+   
     constructor(handle: string) {
         super(handle + 'CardShop');
     }
@@ -22,8 +22,8 @@ export class CardShop extends Scene
 
         this.currentCoins = data.coins;
         this.cardPrice = 100;
-        this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive()
-        
+        this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive();
+        this.cardBack.preFX?.addShadow(0, 0, 0.05, 0.5);
         
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
@@ -52,8 +52,9 @@ export class CardShop extends Scene
                 this.input.disable(this.purchaseButton)
                 let chosenCard = this.randomCardChooser();
                 this.currentCoins -= 100;
-                //dummy card is the chosen card sprite
-                this.dummyCard = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
+
+                let chosenCardSprite = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
+                chosenCardSprite.preFX?.addShadow(0, 0, 0.05, 0.5);
                 this.tweens.add({
                     targets: this.cardBack,
                     x: {
@@ -74,24 +75,59 @@ export class CardShop extends Scene
                         }
                     });
                     this.tweens.add({
-                        targets: this.dummyCard,
+                        targets: chosenCardSprite,
                         scaleX: {
                             value: 0.3,
                             duration: 200,
                             delay: 200
                         }
                     })
+                    if(chosenCard.slice(0,3) === 'red' || chosenCard.slice(0,3) === 'yel'){
+                        this.tweens.add({
+                            targets: chosenCardSprite,
+                            scale: {
+                                value: 0.5,
+                                duration: 100,
+                                delay: 400
+                            },
+                            yoyo: true,
+                            onComplete: () => {
+                                if(chosenCardSprite.postFX){
+                                    chosenCardSprite.postFX.addShine(0.5, 0.5, 2);
+                                }
+                            }
+                        });
+                        this.tweens.add({
+                            targets: chosenCardSprite,
+                            angle: {
+                                value: 40,
+                                duration: 50,
+                                delay: 300,
+                            },
+                            yoyo: true,
+                            onComplete: () => {
+                                this.tweens.add({
+                                    targets: chosenCardSprite,
+                                    angle: {
+                                        value: -40,
+                                        duration: 50,
+                                    },
+                                    yoyo: true,
+                                })
+                            }
+                        })
+                    }
                 });
-                this.dummyCard.on('pointerdown', () => {
+                chosenCardSprite.on('pointerdown', () => {
                     this.tweens.add({
-                        targets: this.dummyCard,
+                        targets: chosenCardSprite,
                         y: {
                             value: 1000,
                             duration: 300,
                         },
                         onComplete: () => {
                             this.input.enable(this.purchaseButton)
-                            this.dummyCard.destroy(true);
+                            chosenCardSprite.destroy(true);
                         }
                     })
                 })
