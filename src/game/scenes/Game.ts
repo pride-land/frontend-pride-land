@@ -6,6 +6,7 @@ import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
 import { CardShop } from './CardShop';
 import { Inventory } from './Inventory';
+import pick from 'pick-random-weighted';
 
 //to appease custom property on the mushroom counter error;
 interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
@@ -52,6 +53,10 @@ export class Game extends Scene
     inventoryScene: Phaser.Scene | null;
     userInventory: string [];
     themeSong: Phaser.Sound.BaseSound;
+    pop1: Phaser.Sound.BaseSound;
+    pop2: Phaser.Sound.BaseSound;
+    pop3: Phaser.Sound.BaseSound;
+    pop4: Phaser.Sound.BaseSound;
     constructor ()
     {
         super('Game');
@@ -121,6 +126,11 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        this.pop1 = this.sound.add('pop1').setVolume(0.05);
+        this.pop2 = this.sound.add('pop2').setVolume(0.05);
+        this.pop3 = this.sound.add('pop3').setVolume(0.05);
+        this.pop4 = this.sound.add('pop4').setVolume(0.05);
+
         this.themeSong = this.sound.add('mushroomsong').setVolume(0.2).setLoop(true);
         this.themeSong.play();
         this.userInventory = [];
@@ -361,7 +371,7 @@ export class Game extends Scene
             }
         });
 
-        mushroom.setImmovable(false).setInteractive({draggable: true}).refreshBody();
+        mushroom.setImmovable(false).setInteractive({draggable: true}).refreshBody().on('pointerdown', () => this.playRandom());
 
         //make mushrooms draggable
         this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
@@ -383,6 +393,10 @@ export class Game extends Scene
                     y: {
                         value: 800,
                         duration: 1000,
+                    },
+                    angle: {
+                        value: 360,
+                        duration: 1000
                     }
                 }).on('complete', () => {
                     this.mushroomCurrency++;
@@ -412,5 +426,16 @@ export class Game extends Scene
     changeScene ()
     {
         this.scene.start('GameOver');
+    }
+    playRandom()
+    {
+        const sounds = [
+            [this.pop1, 1],
+            [this.pop2, 1],
+            [this.pop3, 1],
+            [this.pop4, 1]
+        ];
+        let chosenSound = pick(sounds);
+        chosenSound.play();
     }
 }
