@@ -51,17 +51,17 @@ const App = () => {
                             <Route path="contactus" element={<CommentsPage/>}/>
                             <Route path="aboutus" element={<AboutUsPage/>}/>
                             <Route path="volunteers" element={<VolunteerPage />} />
-                            <Route path="pridefarmgame" element={<MushroomGame />} />
-                        </Route>    
+                            <Route path="pridefarmgame" element={<MushroomGame />} />  
                         <Route path="/login" element={<AdminLogin/>}/>
                         <Route path="/register" element={<AdminRegistration/>} />
-                        <Route path="/admin-layout/" element={<AdminLayout/>}>
+                        <Route path="/admin-layout" element={<AdminLayout/>}>
                               <Route index element={<AdminDashboard/>} />
                               <Route path="blogs-admin" element={<AdminBlogs/>} />
                               <Route path="volunteer" element={<AdminVolunteer/>} />
                               <Route path="gallery" element={<AdminGallery/>} />
                               <Route path="comments" element={<AdminComments/>} />
                               <Route path="admin-controls" element={<AdminControlDashboard/>} />
+                        </Route>
                         </Route>
                     </Routes>
 }
