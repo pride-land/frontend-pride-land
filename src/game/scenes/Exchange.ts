@@ -35,7 +35,7 @@ export class Exchange extends Scene
         this.todayRate = Math.Between(10, 50);
         this.currentMushrooms = data.mushroomCurrency;
         this.currentCoins = data.coins;
-        this.purchaseSound = this.sound.add('purchase').setVolume(0.2);
+        this.purchaseSound = this.sound.add('exchange').setVolume(0.2).setRate(1.9);
 
         //set-up exchange rate background
         this.shopBackground = this.add.image(512, 400, 'background').setScale(0.8).setAlpha(0.7);

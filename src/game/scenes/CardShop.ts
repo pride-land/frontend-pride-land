@@ -13,7 +13,9 @@ export class CardShop extends Scene
     purchaseButton: Phaser.GameObjects.Image;
     mysteryCardIcon: Phaser.GameObjects.Image;
     cardBack: Phaser.GameObjects.Sprite;
-   
+    purchaseSound: Phaser.Sound.BaseSound;
+    rarecardBoom: Phaser.Sound.BaseSound;
+    commoncardBoom: Phaser.Sound.BaseSound;
     constructor(handle: string) {
         super(handle + 'CardShop');
     }
@@ -24,7 +26,9 @@ export class CardShop extends Scene
         this.cardPrice = 100;
         this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive();
         this.cardBack.preFX?.addShadow(0, 0, 0.05, 0.5);
-        
+        this.purchaseSound = this.sound.add('cardPurchase').setVolume(0.3);
+        this.rarecardBoom = this.sound.add('rarecard').setVolume(0.4).setRate(1.2);
+        this.commoncardBoom = this.sound.add('commoncard').setVolume(0.3);
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
         let xButton = this.add.text(270, 160, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
@@ -49,6 +53,7 @@ export class CardShop extends Scene
         this.purchaseButton = this.add.image(530, 620 ,'star' ).setInteractive();
         this.purchaseButton.on('pointerdown', () => {
             if(this.currentCoins >= 100){
+                this.purchaseSound.play();
                 this.input.disable(this.purchaseButton)
                 let chosenCard = this.randomCardChooser();
                 this.currentCoins -= 100;
@@ -94,6 +99,7 @@ export class CardShop extends Scene
                             onComplete: () => {
                                 if(chosenCardSprite.postFX){
                                     chosenCardSprite.postFX.addShine(0.5, 0.5, 2);
+                                    this.rarecardBoom.play();
                                 }
                             }
                         });
@@ -116,7 +122,7 @@ export class CardShop extends Scene
                                 })
                             }
                         })
-                    }
+                    } else this.commoncardBoom.play();
                 });
                 chosenCardSprite.on('pointerdown', () => {
                     this.tweens.add({
