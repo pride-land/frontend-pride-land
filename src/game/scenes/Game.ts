@@ -222,6 +222,8 @@ export class Game extends Scene
         EventBus.on('card pack bought', (newCoinCount: number, newCard: string) => {
             this.coins = newCoinCount;
             this.userInventory.push(newCard);
+
+            EventBus.emit('inventory updated', this.userInventory);
         })
     }
     
