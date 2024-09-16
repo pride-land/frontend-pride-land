@@ -52,7 +52,7 @@ export class Game extends Scene
     inventoryIcon: Phaser.GameObjects.Image;
     inventoryScene: Phaser.Scene | null;
     userInventory: string [];
-    themeSong: Phaser.Sound.BaseSound;
+    themeSong: Phaser.Sound.WebAudioSound;
     pop1: Phaser.Sound.BaseSound;
     pop2: Phaser.Sound.BaseSound;
     pop3: Phaser.Sound.BaseSound;
@@ -145,20 +145,25 @@ export class Game extends Scene
         .on('pointerout', () => {
             this.muteButton.setScale(0.05);
         });
-        this.muteButton.on('pointerdown', () => {
-            this.sound.isPlaying('mushroomsong') ? this.sound.pauseAll() : this.sound.resumeAll();  
-        })
-
+        
         this.pop1 = this.sound.add('pop1').setVolume(0.06);
         this.pop2 = this.sound.add('pop2').setVolume(0.06);
         this.pop3 = this.sound.add('pop3').setVolume(0.06);
         this.pop4 = this.sound.add('pop4').setVolume(0.06);
         this.mushroomGrowSound = this.sound.add('mushroomgrow').setVolume(0.3).setRate(1.6);
-
+        
         this.waterdropSound = this.sound.add('waterdrop').setVolume(0.5);
-        this.themeSong = this.sound.add('mushroomsong').setVolume(0.2).setLoop(true);
+
+        const themeSong = this.sound.add('mushroomsong').setLoop(true).setVolume(0.2);
+        if(themeSong instanceof Phaser.Sound.WebAudioSound) this.themeSong = themeSong;
         this.themeSong.play();
+        this.muteButton.on('pointerdown', () => {
+            this.themeSong.volume !== 0 ? this.themeSong.setVolume(0) : this.themeSong.setVolume(0.2);
+        })
+
         this.userInventory = [];
+
+
         // this.userInventory.push('redcard01');
         // for(let i = 0; i<23; i++) {
         //     this.userInventory.push('greencard01');
