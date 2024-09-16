@@ -49,36 +49,36 @@
          "FieldInput": "Eingabe",
          "SubmitFeedback": "Feedback abgeben",
          "completedForm": "Vielen Dank, dass Sie uns Ihr Feedback geschickt haben!",
-         "inquiries": "For all other inquiries please contact us at: info@pridefarm.org"
+         "inquiries": "Für alle anderen Anfragen kontaktieren Sie uns bitte unter: info@pridefarm.org"
 
 
    },
 
    "volunteer": {
-      "slug": "Join the Pride Farm Community!",
-      "applicationHeader": "Apply to be a Pride Farm Volunteer!",
-      "volunteerStatus": "Choose your desired role as a volunteer:",
-      "once": "One-Time Volunteer",
-      "regular": "Regular Volunteer",
+      "slug": "Werden Sie Mitglied der Pride Farm Gemeinschaft!",
+      "applicationHeader": "Bewerben Sie sich als freiwilliger Helfer auf der Pride Farm!",
+      "volunteerStatus": "Wählen Sie Ihre gewünschte Rolle als Freiwilliger:",
+      "once": "Einmaliger Freiwilliger",
+      "regular": "Regelmäßiger Freiwilliger",
       "name": "Name:",
       "email": "Email:",
-      "start": "When would you like to start?",
-      "category": "What are you interested in?",
-      "subcategory": " (Check all that apply)",
-      "bamboo": "bamboo",
-      "vegetables": "field work",
-      "eggs": "gathering eggs",
-      "goats": "working with animals",
-      "shiitake": "growing shiitake",
-      "bees": "beekeeping",
-      "construction": "wood shop",
-      "shop": "shop work",
-      "restrictions": "Do you have any restrictions we should know about?",
-      "askRestrictions": "If so, please give a little detail.",
-      "submit": "submit",
-      "afterSubmit": "Thank you for your interest,",
-      "notify": "You will recieve an email at:",
-      "startDate": "Make sure you remember the date:"
+      "start": "Wann möchten Sie anfangen?",
+      "category": "Woran sind Sie interessiert?",
+      "subcategory": " (Alle zutreffenden Angaben ankreuzen)",
+      "bamboo": "Bambus",
+      "vegetables": "Feldarbeit",
+      "eggs": "Eiersammeln",
+      "goats": "Arbeit mit Tieren",
+      "shiitake": "Anbau von Shiitake",
+      "bees": "Imkerei",
+      "construction": "Holzwerkstatt",
+      "shop": "Werkstattarbeit",
+      "restrictions": "Haben Sie irgendwelche Einschränkungen, die wir kennen sollten?",
+      "askRestrictions": "Wenn ja, geben Sie bitte ein paar Details an.",
+      "submit": "abgeben",
+      "afterSubmit": "Vielen Dank für Ihr Interesse,",
+      "notify": "Sie erhalten eine E-Mail an:",
+      "startDate": "Vergessen Sie das Datum nicht:"
 
    }
 }
