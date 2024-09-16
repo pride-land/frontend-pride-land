@@ -41,7 +41,6 @@ const Auth: React.FC = () => {
       throw error;
     }
   };
-  console.log(user)
 return (
    <>
   <FireBaseDialog open={open} onClose={() => setOpen(false)} className="relative z-10">

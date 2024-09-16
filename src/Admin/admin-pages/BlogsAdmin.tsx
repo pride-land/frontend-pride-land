@@ -22,9 +22,8 @@ const BlogsAdmin = () => {
   const handleDelete = (id: number) => {
     try{
       Axios.delete(process.env.backend_url  + `blogs/${id}/`)
-        console.log("succesfully deleted!")
     }catch (error){
-        console.log('error/:', error)
+      console.error('error', error);
       }
   }
 

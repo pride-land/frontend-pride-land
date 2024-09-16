@@ -194,8 +194,17 @@ export class CardShop extends Scene
             ['redcard', 0.5]
         ];
         let rarity = pick(rarities);
-        let randomIndex = Math.Between(1, 20);
-        if (randomIndex < 10) {
+        let randomIndex;
+
+        if(rarity === 'greencard' || rarity === 'bluecard') {
+            randomIndex = Math.Between(1, 8);
+        } else if (rarity === 'yellowcard') {
+            randomIndex = Math.Between(1, 16);
+        } else if (rarity === 'redcard') {
+            randomIndex = Math.Between(1, 11);
+        }
+
+        if (randomIndex! < 10) {
             return rarity + '0' + randomIndex;
         } else {
             return rarity + randomIndex;

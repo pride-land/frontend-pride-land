@@ -48,17 +48,15 @@ export default function Home() {
         description,
         content,
       };
-    console.log(formData);
 
     if (!formData.title || !formData.description || !formData.description) {
       alert('Please fill out all required fields');
   }
 
     try{
-        const response = await axios.post( endpoint + 'blogs/' , formData);
-        console.log("Form submitted!", response);
+        await axios.post( endpoint + 'blogs/' , formData);
       } catch (error){
-        console.log("error:" , error)
+        console.error('error', error)
       }
   }
 

@@ -37,13 +37,12 @@ const AdminRegistration: React.FC = () => {
        }
        setIsLoading(true);
        try{
-        const response = await Axios.post( AUTH_REGISTER_URL + "register/", formData)
-        console.log("Registration Success!", response.data)
+        await Axios.post( AUTH_REGISTER_URL + "register/", formData)
         setSuccess("登録完了しました!");
         navigate('/login');
        }
        catch (error){
-        console.log('Error:', error)
+        console.error('error', error);
         setError("エラー");
        }
        finally{

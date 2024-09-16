@@ -37,7 +37,7 @@ const config: Phaser.Types.Core.GameConfig = {
         default: 'arcade',
         arcade: {
             gravity: { x: 0, y: 300 },
-            debug: true
+            debug: false
         }
     },
     dom: {
@@ -50,5 +50,9 @@ const StartGame = (parent: string) => {
     return new Game({ ...config, parent });
 
 }
-
+// function calculateScreenSize () {
+//     const xSize = window.innerWidth - 30;
+//     const ySize = window.innerHeight - 30;
+//     return {xSize, ySize}
+// }
 export default StartGame;
