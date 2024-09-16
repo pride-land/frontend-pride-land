@@ -22,8 +22,8 @@ const BlogHistoryList: React.FC<Props> = (props) => {
 
     const createBlogNameList = currentBlogs.map((blog, index) => {
         return (
-            <div className="transition ease-in-out cursor-pointer max-w-72 hover:scale-105 duration-300 mt-3" id={'blogs-' + String(index + 1)} key={index} onClick={() => props.setChosenBlog(blog)}>
-                <div className="bg-white my-2 shadow-md p-2 rounded-lg h-32" >
+            <div className="invisible lg:visible xl:visible ml-2 transition ease-in-out cursor-pointer max-w-72 hover:scale-105 duration-300" id={'blogs-' + String(index + 1)} key={index} onClick={() => props.setChosenBlog(blog)}>
+                <div className="bg-white my-1 shadow-md p-4 rounded-md h-32" >
                     <div className="my-2 text-center">{blog.title}</div>
                     
                     <div className="text-end font-thin mt-10">{formatDistanceToNow(blog.date_created)}</div>
