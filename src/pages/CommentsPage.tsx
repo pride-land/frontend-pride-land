@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { postFeedback } from "../api/feedbacks"
-import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const CommentsPage = () => {
