@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import SideBar from '../admin-pages/SideBar'
-import Header from '../admin-pages/Header'
+// import Header from '../admin-pages/Header'
 
 const AdminLayout = () => {
   return (
@@ -9,7 +9,7 @@ const AdminLayout = () => {
               <SideBar />
       </div>
           <div className='flex-1'>
-          <div><Header /></div>
+          {/* <div><Header /></div> */}
           <div className='p-4 w-full'>
             {<Outlet/>}
           </div>
