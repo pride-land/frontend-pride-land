@@ -52,13 +52,14 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
               <XMarkIcon aria-hidden="true"className="h-8 w-8 hidden" />
             </DisclosureButton>
           </div>
+              <a href="./">
               <img
                 alt="プライドランドロゴ"
                 src='/logo.png'
-                className="h-40 p-0 m-0"
+                className="h-24 p-2 m-0"
               />
+              </a>
               <div className='hidden md:flex md:items-center md:space-x-4'>
-              <a key="home" href="./" className='px-4 py-6 text-lg font-medium rounded-lg transition-colors duration-300 hover:bg-green-800 hover:text-yellow-200 text-white text-md'>{t("navbar.home")}</a>
               </div>
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-end">
             <div className="hidden md:ml-6 md:block">
