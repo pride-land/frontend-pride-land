@@ -49,7 +49,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true"className="h-8 w-8" />
-              <XMarkIcon aria-hidden="true"className="h-8 w-8 hidden" />
+              <XMarkIcon aria-hidden="true"className="h-8 w-8" />
             </DisclosureButton>
           </div>
               <a href="./">
