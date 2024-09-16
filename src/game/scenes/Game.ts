@@ -338,7 +338,6 @@ export class Game extends Scene
     {
         //number of mushrooms on the log
         // this.numberOfMushrooms = this.children.list.filter(child => child instanceof Phaser.Physics.Arcade.Sprite).length - 1;
-        // console.log(this.numberOfMushrooms)
         
         if(this.mushroomGroup?.getChildren().length === 0 && !this.isCurrentBatchHarvested) {
 
@@ -353,7 +352,6 @@ export class Game extends Scene
         if(this.isTextDone && !this.hasRun) {
             this.hasRun = true;
             this.startWatering();
-            console.log('waterupdate')
         };
         
 
@@ -364,7 +362,6 @@ export class Game extends Scene
                 this.waterFillProgressBar.destroy();
             });
             this.startHarvesting();
-            console.log('logfull update')
         };
 
         if(this.tutorialTimerText && !this.isMushroomDone){

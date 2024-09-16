@@ -76,13 +76,13 @@ export class Exchange extends Scene
         this.youHaveText = this.add.text(450, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
         this.add.image(575, 250, 'mushroom4').setScale(0.1);
         this.userMushroomOffer = this.add.text(420, 450, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
-        this.add.image(610, 460, 'mushroom4').setScale(0.1);
-
+        this.add.image(460, 460, 'mushroom4').setScale(0.1);
+        this.add.image(537, 462, 'coin').setScale(0.02)
         //error message if they do more than they can
         this.errorText = this.add.text(400, 500, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
 
         //input for how many mushroom you want to offer
-        this.numberInput = this.add.dom(650, 400).createFromCache('mushroomForm');
+        this.numberInput = this.add.dom(512, 400).createFromCache('mushroomForm');
         this.numberInputDiv = this.numberInput.node.querySelector('input');
         this.numberInputDiv!.addEventListener('input', () => {
             this.numberInputValue = Number(this.numberInputDiv!.value);
@@ -134,7 +134,7 @@ export class Exchange extends Scene
         this.todayRateText.setText(`Price time left: ${this.secondsLeft}`);
         this.shopText.setText(`x ${this.numberInputValue}     =             x ${this.todayRate * this.numberInputValue}`);
         this.youHaveText.setText(`you have        x ${this.currentMushrooms}`);
-        this.userMushroomOffer.setText(`you are giving         x${this.numberInputValue}`);
+        this.userMushroomOffer.setText(`        x1 =     x${this.todayRate}`);
 
         if(this.scene.isVisible()) {
             this.input.enable(this.exchangeButton);

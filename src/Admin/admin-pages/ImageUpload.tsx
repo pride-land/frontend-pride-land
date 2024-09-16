@@ -39,8 +39,7 @@ const ImageUpload: React.FC = () => {
       const formData = new FormData();
       formData.append('blob_img', base64string);
       try {
-        const response = await axios.post(UPLOAD_URL, formData);
-        console.log('Server Response:', response.data);
+        await axios.post(UPLOAD_URL, formData);
       } catch (error) {
         console.error('Error uploading image:', error);
       }

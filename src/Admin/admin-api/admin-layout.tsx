@@ -11,21 +11,18 @@ export const deleteImage = async(image: Image) => {
         },
         });
     const result = await request.json();
-    console.log(result);
     return result;
     }
 
 export const getAllImages = async() => {
     const request = await fetch(endpoint + "medias/");
     const result = await request.json();
-    console.log(result);
     return result;
 }
 
 export const getCardRefs = async() => {
     const request = await fetch(endpoint + "cardrefs/");
     const result = await request.json();
-    console.log(result);
     return result;
 }
 
@@ -39,7 +36,6 @@ export const addHeroTagToImg = async(image: Image) => {
 
         });
     const result = await request.json();
-    console.log(result);
     return result;
     }
 
@@ -53,13 +49,11 @@ export const removeHeroTagFromImg = async(image: Image) => {
 
         });
     const result = await request.json();
-    console.log(result);
     return result;
     }
 
     export const getHeroImages = async() => {
         const request = await fetch(media_url + "heroes/");
         const result = await request.json();
-        console.log(result);
         return result;
     }

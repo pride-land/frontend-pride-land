@@ -7,7 +7,7 @@ export const fetchAllFeedbacks = async() => {
         const result: FeedbackType[] = await request.json();
         return result;
     } catch(error) {
-        console.log("error", error)
+        console.error('error', error)
     }
 }
 
@@ -18,9 +18,8 @@ export const postFeedback = async (formData: FormData) => {
             body: formData
         });
         const result = await request.json();
-        console.log(result)
         return result
     } catch(error){
-        console.log("error", error)
+        console.error('error', error);
     }
 }
