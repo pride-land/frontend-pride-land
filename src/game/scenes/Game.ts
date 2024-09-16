@@ -130,7 +130,7 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
-        this.userFinishTutorial = true;
+
         //mute song button
         this.muteButton = this.add.image(950,700,'mute').setScale(0.05).setInteractive().setDepth(200).setTintFill();
         this.muteButton.on('pointerover', () => {
@@ -179,7 +179,7 @@ export class Game extends Scene
         this.coins = 0;
         this.mushroomCurrency = 0;
         this.isTextDone = false;
-
+        this.userFinishTutorial = false;
         //intro textbox text check
         this.hasRun = false;
 
@@ -309,6 +309,11 @@ export class Game extends Scene
 
             EventBus.emit('inventory updated', this.userInventory);
         })
+
+        //update when userfinishes tutorial
+        EventBus.on('tutorial finished', () => {
+            this.userFinishTutorial = true;
+        })
     }
     
     createShopScene(func: any)
@@ -420,7 +425,7 @@ export class Game extends Scene
         const harvestText = this.createTextBox();
         
         this.time.delayedCall(2000, () => {
-            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
+            if(!this.mushroomGroup && !this.userFinishTutorial) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
             // English:
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
@@ -433,6 +438,7 @@ export class Game extends Scene
                     this.mushroomGrowth();                    
                 })
             };
+            if(!this.userFinishTutorial) EventBus.emit('tutorial finished');
             
         })
         
