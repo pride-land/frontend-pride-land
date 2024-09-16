@@ -69,13 +69,13 @@ const CommentsPage = () => {
        <>
         <div className="flex flex-col md:flex-row h-screen w-screen">
             <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans flex-1 grid place-items-center p-4 md:p-8">
-                <div className="w-full md:w-10/12 lg:w-10/12 xl:w-8/12 h-full flex items-center justify-center">
+            <p className="mb-3 text-4xl">{t("ContactUs.ImageText")}</p>
+                <div className="w-full mt-0 xl:mb-[12rem]  md:w-8/12 lg:w-10/12 xl:w-8/12 h-auto flex items-center justify-center">
                     {commentsPageView}
                 </div>
             </div>
-            <div className="(Image) flex-1 grid place-items-center p-4 md:p-8 bg-contact-background grid w-full bg-cover bg-top rounded-sm opacity-80">
-                <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-[100%]">
-                    {t("ContactUs.ImageText")}
+            <div className="(Image) flex-1  place-items-center p-4 md:p-8 font bg-contact-background grid w-full bg-cover bg-top rounded-sm opacity-80">
+                <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                 </div>
             </div>
         </div>
