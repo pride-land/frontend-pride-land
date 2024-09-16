@@ -9,7 +9,7 @@ interface Props {
 const BlogFocus: React.FC<Props> = (props) => {
 
     return (
-        <div className="bg-white my-4 shadow-md p-8 rounded-lg max-w-2/3">
+        <div className="bg-white  shadow-md p-8 rounded-md max-w-2/3">
             <div className="my-2 text-center text-5xl font-semibold">
                 {props.chosenBlog.title}
             </div>
