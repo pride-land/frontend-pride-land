@@ -38,7 +38,7 @@ const CommentsPage = () => {
             setSubmitted(true);
             return request;
         } catch(error) {
-            console.log("Error submitting form", error)
+            console.error('error', error);
         }
     }
 

@@ -16,7 +16,7 @@ const volunteerForm = () => {
             setVolunteer(request);
             setSubmitted(true);
         } catch(error) {
-            console.log("error submitting form", error)
+            console.error('error', error);
         }
     }
 

@@ -50,5 +50,9 @@ const StartGame = (parent: string) => {
     return new Game({ ...config, parent });
 
 }
-
+// function calculateScreenSize () {
+//     const xSize = window.innerWidth - 30;
+//     const ySize = window.innerHeight - 30;
+//     return {xSize, ySize}
+// }
 export default StartGame;

@@ -6,6 +6,6 @@ export const fetchAllBinaryImage = async() => {
         const result = await request.json();
         return result;
     } catch(error) {
-        console.log("error", error)
+        console.error('error', error);
     }
 }

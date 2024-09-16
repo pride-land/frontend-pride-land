@@ -27,7 +27,6 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
     i18n.changeLanguage(lang);
     setCurrentLang(lang);
     sessionStorage.setItem("lang", lang);
-    console.log(sessionStorage.getItem("lang"));
   }
   
   const navigation: Navigation[] = [
