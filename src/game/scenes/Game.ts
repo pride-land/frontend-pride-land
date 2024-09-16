@@ -60,6 +60,7 @@ export class Game extends Scene
     waterdropSound: Phaser.Sound.BaseSound;
     muteButton: Phaser.GameObjects.Image;
     mushroomGrowSound: Phaser.Sound.BaseSound;
+    userFinishTutorial: boolean;
     constructor ()
     {
         super('Game');
@@ -129,6 +130,7 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        this.userFinishTutorial = true;
         //mute song button
         this.muteButton = this.add.image(950,700,'mute').setScale(0.05).setInteractive().setDepth(200).setTintFill();
         this.muteButton.on('pointerover', () => {
@@ -270,9 +272,14 @@ export class Game extends Scene
 
         this.tutorialTextBox = this.createTextBox();
         
-        // this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE, () => {
-        // });
-        this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE, () => {
+            if(!this.userFinishTutorial)this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
+            else {
+                this.isTextDone = true;
+                this.hasRun = true;
+                this.startWatering();
+            }
+        });
         // English Text: 
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
         
