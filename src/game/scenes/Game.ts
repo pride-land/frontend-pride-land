@@ -6,6 +6,7 @@ import AIO from 'phaser3-rex-plugins/templates/spinner/aio/AIO';
 import { Exchange } from './Exchange';
 import { CardShop } from './CardShop';
 import { Inventory } from './Inventory';
+import pick from 'pick-random-weighted';
 
 //to appease custom property on the mushroom counter error;
 interface ExtendedSprite extends Phaser.Physics.Arcade.Sprite {
@@ -51,6 +52,14 @@ export class Game extends Scene
     inventoryIcon: Phaser.GameObjects.Image;
     inventoryScene: Phaser.Scene | null;
     userInventory: string [];
+    themeSong: Phaser.Sound.BaseSound;
+    pop1: Phaser.Sound.BaseSound;
+    pop2: Phaser.Sound.BaseSound;
+    pop3: Phaser.Sound.BaseSound;
+    pop4: Phaser.Sound.BaseSound;
+    waterdropSound: Phaser.Sound.BaseSound;
+    muteButton: Phaser.GameObjects.Image;
+    mushroomGrowSound: Phaser.Sound.BaseSound;
     constructor ()
     {
         super('Game');
@@ -120,6 +129,33 @@ export class Game extends Scene
 
     create (data: { fadeIn: boolean })
     {
+        //mute song button
+        this.muteButton = this.add.image(950,700,'mute').setScale(0.05).setInteractive().setDepth(200).setTintFill();
+        this.muteButton.on('pointerover', () => {
+            this.tweens.add({
+                targets: this.muteButton,
+                scale: {
+                    value: 0.07,
+                    duration: 100
+                }
+            });
+        })
+        .on('pointerout', () => {
+            this.muteButton.setScale(0.05);
+        });
+        this.muteButton.on('pointerdown', () => {
+            this.sound.isPlaying('mushroomsong') ? this.sound.pauseAll() : this.sound.resumeAll();  
+        })
+
+        this.pop1 = this.sound.add('pop1').setVolume(0.06);
+        this.pop2 = this.sound.add('pop2').setVolume(0.06);
+        this.pop3 = this.sound.add('pop3').setVolume(0.06);
+        this.pop4 = this.sound.add('pop4').setVolume(0.06);
+        this.mushroomGrowSound = this.sound.add('mushroomgrow').setVolume(0.3).setRate(1.6);
+
+        this.waterdropSound = this.sound.add('waterdrop').setVolume(0.5);
+        this.themeSong = this.sound.add('mushroomsong').setVolume(0.2).setLoop(true);
+        this.themeSong.play();
         this.userInventory = [];
         // this.userInventory.push('redcard01');
         // for(let i = 0; i<23; i++) {
@@ -130,7 +166,7 @@ export class Game extends Scene
         //orders user inventory by rarity
         let sortOrder = ['gre', 'blu', 'yel', 'red'];
         this.userInventory.sort((a,b) => {
-            return sortOrder.indexOf(a.slice(0,3)) - sortOrder.indexOf(b.slice(0,3))
+            return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
         })
 
         this.coins = 0;
@@ -162,7 +198,19 @@ export class Game extends Scene
         this.background = this.add.image(512, 300, 'shed');
 
         this.cardShopIcon = this.add.image(950, 70, 'cardshopicon').setVisible(false);
-        this.cardShopIcon.setScale(0.15).setInteractive().setDepth(701);
+        this.cardShopIcon.setScale(0.15).setInteractive().setDepth(701)
+        .on('pointerover', () => {
+            this.tweens.add({
+                targets: this.cardShopIcon,
+                scale: {
+                    value: 0.2,
+                    duration: 100
+                }
+            });
+        })
+        .on('pointerout', () => {
+            this.cardShopIcon.setScale(0.15);
+        })
         this.cardShopIcon.on('pointerup', () => {
             if (!this.cardShopScene) this.createShopScene(CardShop);
             else {
@@ -171,8 +219,20 @@ export class Game extends Scene
             this.scene.pause();
         })
 
-        this.exchangeShopIcon = this.add.image(955, 150, 'exchangeshopicon');
-        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(702);
+        this.exchangeShopIcon = this.add.image(955, 190, 'exchangeshopicon');
+        this.exchangeShopIcon.setScale(0.16).setInteractive().setDepth(702)
+        .on('pointerover', () => {
+            this.tweens.add({
+                targets: this.exchangeShopIcon,
+                scale: {
+                    value: 0.2,
+                    duration: 100
+                }
+            });
+        })
+        .on('pointerout', () => {
+            this.exchangeShopIcon.setScale(0.16);
+        })
         this.exchangeShopIcon.on('pointerup', () => {
             if (!this.shopScene) this.createShopScene(Exchange);
             else {
@@ -181,7 +241,19 @@ export class Game extends Scene
             this.scene.pause();
         })
 
-        this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false);
+        this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false)
+        .on('pointerover', () => {
+            this.tweens.add({
+                targets: this.inventoryIcon,
+                scale: {
+                    value: 0.4,
+                    duration: 100
+                }
+            });
+        })
+        .on('pointerout', () => {
+            this.inventoryIcon.setScale(0.3);
+        })
         this.inventoryIcon.setInteractive()
         .on('pointerup', () => {
             if (!this.inventoryScene) this.createShopScene(Inventory);
@@ -310,7 +382,19 @@ export class Game extends Scene
             .setCollideWorldBounds(false)
         
             this.physics.add.collider(waterdrop, this.realLog);
-            this.physics.add.overlap(waterdrop, this.realLog, () => addProgress(waterdrop), undefined, this)
+            this.physics.add.overlap(waterdrop, this.realLog, () => {
+                this.tweens.add({
+                    targets: waterdrop,
+                    scale: {
+                        value: 0,
+                        duration: 50
+                    },
+                    onComplete: () => {
+                        addProgress(waterdrop);
+                    }
+                });
+                this.waterdropSound.play();
+            }, undefined, this)
             
         }, this);
 
@@ -324,16 +408,17 @@ export class Game extends Scene
         const harvestText = this.createTextBox();
         
         this.time.delayedCall(2000, () => {
-            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。タイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
+            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
             // English:
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
                 if(!this.tutorialTimerText) this.tutorialTimerText = this.add.text(10, 40, '', {
                     color: '#9fd412', fontSize: 20, fontFamily: 'Arial Black',
                 }).setDepth(200);
-                this.tutorialTimerHarvest = this.time.delayedCall(1000, () => {
+                this.tutorialTimerHarvest = this.time.delayedCall(7000, () => {
+                    this.mushroomGrowSound.play();
                     this.isMushroomDone = true;
-                    this.mushroomGrowth();
+                    this.mushroomGrowth();                    
                 })
             };
             
@@ -358,7 +443,7 @@ export class Game extends Scene
             }
         });
 
-        mushroom.setImmovable(false).setInteractive({draggable: true}).refreshBody();
+        mushroom.setImmovable(false).setInteractive({draggable: true}).refreshBody().on('pointerdown', () => this.playRandom());
 
         //make mushrooms draggable
         this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
@@ -380,6 +465,10 @@ export class Game extends Scene
                     y: {
                         value: 800,
                         duration: 1000,
+                    },
+                    angle: {
+                        value: 360,
+                        duration: 1000
                     }
                 }).on('complete', () => {
                     this.mushroomCurrency++;
@@ -409,5 +498,16 @@ export class Game extends Scene
     changeScene ()
     {
         this.scene.start('GameOver');
+    }
+    playRandom()
+    {
+        const sounds = [
+            [this.pop1, 1],
+            [this.pop2, 1],
+            [this.pop3, 1],
+            [this.pop4, 1]
+        ];
+        let chosenSound = pick(sounds);
+        chosenSound.play();
     }
 }

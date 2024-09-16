@@ -25,7 +25,7 @@ export class CardShop extends Scene
     create(data: {coins: number}) {
         
         this.currentCoins = data.coins;
-        this.cardPrice = 100;
+        this.cardPrice = 200;
         this.cardBack = this.add.sprite(-200, 400, 'cardback').setVisible(true).setDepth(300).setScale(0.8).setInteractive();
         this.cardBack.preFX?.addShadow(0, 0, 0.05, 0.5);
         this.purchaseSound = this.sound.add('cardPurchase').setVolume(0.3);
@@ -37,6 +37,12 @@ export class CardShop extends Scene
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
         let xButton = this.add.text(270, 160, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        xButton.on('pointerover', () => {
+            xButton.setStyle({color: '#FFFFFF'} );
+        })
+        .on('pointerout', () => {
+            xButton.setStyle({color: "000000" });
+        });
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
             this.scene.stop('CardShop');
@@ -61,14 +67,15 @@ export class CardShop extends Scene
         .on('pointerout', () => this.restPurchase())
 
         this.purchaseButton.on('pointerdown', () => {
-            if(this.currentCoins >= 100){
+            if(this.currentCoins >= 200){
                 this.purchaseSound.play();
                 this.input.disable(this.purchaseButton)
                 let chosenCard = this.randomCardChooser();
-                this.currentCoins -= 100;
+                this.currentCoins -= 200;
 
                 let chosenCardSprite = this.add.sprite(520, 400, chosenCard).setScale(0, 0.25).setDepth(301).setInteractive();
                 chosenCardSprite.preFX?.addShadow(0, 0, 0.05, 0.5);
+                this.cardBack.off('pointerdown');
                 this.tweens.add({
                     targets: this.cardBack,
                     x: {
@@ -97,6 +104,7 @@ export class CardShop extends Scene
                         }
                     })
                     if(chosenCard.slice(0,3) === 'red' || chosenCard.slice(0,3) === 'yel'){
+                        this.sound.pauseAll();
                         this.tweens.add({
                             targets: chosenCardSprite,
                             scale: {
@@ -142,6 +150,7 @@ export class CardShop extends Scene
                         },
                         onComplete: () => {
                             this.input.enable(this.purchaseButton)
+                            this.sound.resumeAll();
                             chosenCardSprite.destroy(true);
                         }
                     })
@@ -173,7 +182,7 @@ export class CardShop extends Scene
             this.scene.sendToBack();
         };
 
-        if (this.currentCoins < 100) this.errorText.setText('not enough coins!');
+        if (this.currentCoins < 200) this.errorText.setText('not enough coins!');
         else this.errorText.setText('');
     }
     randomCardChooser()

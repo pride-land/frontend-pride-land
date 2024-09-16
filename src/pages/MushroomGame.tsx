@@ -117,7 +117,6 @@ function MushroomGame() {
     console.log('current',documentData)
     console.log('fetched',previousData)
 
-
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
 
