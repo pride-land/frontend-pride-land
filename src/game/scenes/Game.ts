@@ -128,7 +128,7 @@ export class Game extends Scene
         return textbox;
     }
 
-    create (data: { fadeIn: boolean })
+    create (data: { fadeIn: boolean, coins: number, mushrooms: number, cards: string[], tutorialFinished: boolean})
     {
 
         //mute song button
@@ -161,7 +161,7 @@ export class Game extends Scene
             this.themeSong.volume !== 0 ? this.themeSong.setVolume(0) : this.themeSong.setVolume(0.2);
         })
 
-        this.userInventory = [];
+        this.userInventory = data.cards;
 
 
         // this.userInventory.push('redcard01');
@@ -172,14 +172,22 @@ export class Game extends Scene
 
         //orders user inventory by rarity
         let sortOrder = ['gre', 'blu', 'yel', 'red'];
-        this.userInventory.sort((a,b) => {
-            return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
-        })
+        if(this.userInventory) {
+            this.userInventory.sort((a,b) => {
+                return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
+            })
+        }
 
-        this.coins = 0;
-        this.mushroomCurrency = 0;
+        this.coins = data.coins;
+        this.mushroomCurrency = data.mushrooms;
         this.isTextDone = false;
-        this.userFinishTutorial = false;
+        this.userFinishTutorial = data.tutorialFinished;
+
+        if(data.mushrooms && data.coins && data.tutorialFinished) {
+            EventBus.emit('currency updated', data.mushrooms, data.coins);
+            EventBus.emit('tutorial finished');
+        }
+   
         //intro textbox text check
         this.hasRun = false;
 
@@ -287,7 +295,7 @@ export class Game extends Scene
         });
         // English Text: 
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
-        
+
         EventBus.emit('current-scene-ready', this);
 
         //IMPORANT when main game receives this exact signal; increase/decrease user currencies
@@ -438,7 +446,10 @@ export class Game extends Scene
                     this.mushroomGrowth();                    
                 })
             };
-            if(!this.userFinishTutorial) EventBus.emit('tutorial finished');
+            if(!this.userFinishTutorial) {
+                this.userFinishTutorial = true;
+                EventBus.emit('tutorial finished');
+            };
             
         })
         
