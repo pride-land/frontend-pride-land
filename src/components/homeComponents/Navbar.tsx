@@ -51,7 +51,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
             <a
               key={nav.key}
               href={nav.href}
-              className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-yellow-200"
+              className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary"
             >
               {nav.name}
             </a>
@@ -61,7 +61,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
         <Menu as="div" className="relative ml-3">
           <MenuButton className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary focus:outline-none focus:ring-inset">
           <img src={langs[currentLang].flag} alt={`${currentLang} flag`} className="h-12 w-12 mx-4" />          </MenuButton>
-          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 mt-2 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl">
+          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl z-40">
             {Object.keys(langs).map((lang) => (
               <MenuItem key={lang}>
                 {({ active }) => (
@@ -78,10 +78,10 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
         </Menu>
         {/* hamburger menu for mobile view */}
         <Menu as="div" className="relative md:hidden">
-          <MenuButton className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-yellow-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <MenuButton className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <Bars3Icon className="h-8 w-8" />
           </MenuButton>
-          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 mt-2 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl">
+          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 mt-2 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl z-40">
             {navigation.map((nav) => (
               <MenuItem key={nav.key}>
                 {({ active }) => (
