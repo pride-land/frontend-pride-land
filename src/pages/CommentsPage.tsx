@@ -46,7 +46,7 @@ const CommentsPage = () => {
 
     const initialPageView = (
         <div className="h-full w-full shadow-2xl rounded-md p-6 lg:p-16 bg-white">
-            <h1 className="mb-20 font-semibold text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
+            <h1 className="mb-20 font-semibold lg:text-2xl text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
             <form name="CommentsForm" onSubmit={handleIsSubmitted}>
                 <label htmlFor='name'>{t("ContactUs.Name")}</label>
                     <input type='text' id='name' placeholder={t("ContactUs.FieldInput")} name='name' className=" border-solid border-black block w-full rounded-md border-0 py-2 px-4 text-gray-900 
@@ -67,7 +67,7 @@ const CommentsPage = () => {
 
     return (
        <>
-        <div className="flex flex-col md:flex-row h-screen w-screen">
+        <div className="flex flex-col md:flex-row h-screen w-screen overflow-hidden ">
             <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans flex-1 grid place-items-center p-4 md:p-8">
             <p className="mb-3 text-4xl">{t("ContactUs.ImageText")}</p>
                 <div className="w-full mt-0 xl:mb-[12rem] md:w-8/12 lg:w-10/12 xl:w-8/12 h-auto flex items-center justify-center">

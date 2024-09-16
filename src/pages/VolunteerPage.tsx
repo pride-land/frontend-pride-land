@@ -13,9 +13,9 @@ const VolunteerPage = () => {
         <div className=" md:w-1/2 py-6 px-4 md:px-16 bg-gradient-to-br from-green-300
          to-white font-sans flex items-center justify-center">
             <div className="w-full">
-         <div className="mb-20 text-center text-black text-2xl md:text-4xl lg:text-2xl lg:mt-10 p-4 md:p-0">
+         <div className="xl:mb-20 text-center text-black text-2xl md:mt-10 xl:mt-10 md:text-2xl lg:text-4xl xl:text-4xl lg:mt-10 p-4 md:p-0">
              {t("volunteer.slug")}
-                <div className='xl:mt-5 mt-2 lg:h-1/2'><VolunteerForm /></div>
+                <div className=' xl:mt-10 mt-2 lg:h-1/2'><VolunteerForm /></div>
          </div>
             </div>
         </div>
