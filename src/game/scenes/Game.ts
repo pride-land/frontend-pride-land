@@ -395,7 +395,7 @@ export class Game extends Scene
 
         const addProgress = (waterdrop: Phaser.Physics.Arcade.Sprite ) => {
             waterdrop.destroy();
-            if(this.waterFillProgressBar.width < 468) this.waterFillProgressBar.width += 232;
+            if(this.waterFillProgressBar.width < 468) this.waterFillProgressBar.width += 16;
             else this.isLogFull = true;
         }
         this.waterDropListener = this.input.on('pointerdown',  (pointer: MouseEvent) => {
