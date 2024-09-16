@@ -170,14 +170,6 @@ export class Game extends Scene
 
         // }
 
-        //orders user inventory by rarity
-        let sortOrder = ['gre', 'blu', 'yel', 'red'];
-        if(this.userInventory) {
-            this.userInventory.sort((a,b) => {
-                return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
-            })
-        }
-
         this.coins = data.coins || 0;
         this.mushroomCurrency = data.mushrooms || 0;
         this.isTextDone = false;

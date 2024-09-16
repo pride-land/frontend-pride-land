@@ -26,7 +26,16 @@ export class Inventory extends Scene
         this.sellSound = this.sound.add('cardPurchase').setVolume(0.3);
         this.currentPage = 1;
         this.userCoins = data.coins;
+
+        //sort inventory by rarity
+        let sortOrder = ['gre', 'blu', 'yel', 'red'];
+        if(data.userInventory) {
+            data.userInventory.sort((a,b) => {
+                return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
+            })
+        }
         this.userInventory = data.userInventory;
+
         this.background = this.add.image(512, 400, 'inventoryBackground').setScale(1.8).setAlpha(1)
         let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
