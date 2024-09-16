@@ -5,15 +5,14 @@ import { auth , db} from "../firebase.ts";
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import Auth from '../game/Authentication.tsx';
 import { onAuthStateChanged } from 'firebase/auth';
+import { EventBus } from '../game/EventBus.ts';
 
 function MushroomGame() {
     const [user, setUser] = useState<string | any>(null);
     const [userCoins, setUserCoins] = useState<number | 0>(0);
     const [userMushrooms, setUserMushrooms] = useState<number | 0>(0);
     const [userCards, setUserCards] = useState<string []>([]);
-    // const [gameData, setGameData] = useState();
-    // const [fetchedData, setFetchedData] = useState();
-    // const [data, setData] = useState();
+    const [userTutorial, setUserTutorial] = useState<boolean>(false);
     const [previousData, setPreviousData] = useState<any>(null); // Store previous game data
     const [documentData, setDocumentData] = useState<any>({});
 
@@ -24,7 +23,7 @@ function MushroomGame() {
             setUser(user);
         });
         return () => unsubscribe();
-    }, [ userCoins,userCards,userMushrooms]);
+    }, [ userCoins,userCards,userMushrooms, userTutorial]);
 
     // fetch and update game data on login
     useEffect(() => {
@@ -43,11 +42,13 @@ function MushroomGame() {
                 const data = docSnap.data();
                 setDocumentData(data);
                 setPreviousData(data); // Initialize previousData with fetched data
+                EventBus.emit('logged in', data.coins, data.mushrooms, data.cards, data.tutorialFinished)
             } else {
                 const defaultData = {
                     coins: 0,
                     mushroom: 0,
                     cards: [],
+                    tutorialFinished: false
                 };
                 // default state if guest
                 setDocumentData(defaultData);
@@ -104,18 +105,19 @@ function MushroomGame() {
     }
     
     const inventory = () => {
-        let userInventory: any = {
+        let userInventory = {
             coins: userCoins,
             mushrooms: userMushrooms,
-            cards: userCards
+            cards: userCards,
+            tutorialFinished: userTutorial
         }
     //     console.log(userInventory)
     //    let data =  Object.assign({}, userInventory, previousData);
        setDocumentData(userInventory);
     } 
     
-    console.log('current',documentData)
-    console.log('fetched',previousData)
+    // console.log('current',documentData)
+    // console.log('fetched',previousData)
 
     // The sprite can only be moved in the MainMenu Scene
     const [canMoveSprite, setCanMoveSprite] = useState(true);
@@ -209,6 +211,7 @@ function MushroomGame() {
                 setUserCoins={setUserCoins}
                 setUserMushrooms={setUserMushrooms}
                 setUserCards={setUserCards}
+                setUserTutorial={setUserTutorial}
             />
 
             <div>

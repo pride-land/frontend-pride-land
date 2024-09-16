@@ -14,9 +14,10 @@ interface IProps
     setUserCoins: Dispatch<SetStateAction<number | 0>>;
     setUserMushrooms: Dispatch<SetStateAction<number | 0>>;
     setUserCards: Dispatch<SetStateAction<string []>>;
+    setUserTutorial: Dispatch<SetStateAction<boolean>>;
 }
 
-export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame({ currentActiveScene, setUserCoins, setUserMushrooms, setUserCards}, ref)
+export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame({ currentActiveScene, setUserCoins, setUserMushrooms, setUserCards, setUserTutorial}, ref)
 {
     const game = useRef<Phaser.Game | null>(null!);
 
@@ -76,6 +77,16 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
         }
     }, [currentActiveScene, ref]);
 
+    //onuserlogin
+    useEffect(() => {
+        EventBus.on('logged in', (coins: number, mushrooms: number, cards: string[], tutorialStatus: boolean) => {
+            setUserCoins(coins);
+            setUserMushrooms(mushrooms);
+            setUserCards(cards);
+            setUserTutorial(tutorialStatus);
+        })
+    }, [currentActiveScene, ref]);
+
     //update coins when card back bought
     useEffect(() => {
         EventBus.on('card pack bought', (coins: number) => {
@@ -111,6 +122,13 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
         EventBus.on('mushroom added', (currentMushrooms: number) => {
             
             setUserMushrooms(currentMushrooms);
+        })
+    }, [currentActiveScene, ref]);
+
+    //update when user finishes tutorial
+    useEffect(() => {
+        EventBus.on('tutorial finished', () => {
+            setUserTutorial(true);
         })
     }, [currentActiveScene, ref]);
 

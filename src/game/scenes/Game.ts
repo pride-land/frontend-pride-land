@@ -52,7 +52,7 @@ export class Game extends Scene
     inventoryIcon: Phaser.GameObjects.Image;
     inventoryScene: Phaser.Scene | null;
     userInventory: string [];
-    themeSong: Phaser.Sound.BaseSound;
+    themeSong: Phaser.Sound.WebAudioSound;
     pop1: Phaser.Sound.BaseSound;
     pop2: Phaser.Sound.BaseSound;
     pop3: Phaser.Sound.BaseSound;
@@ -60,6 +60,7 @@ export class Game extends Scene
     waterdropSound: Phaser.Sound.BaseSound;
     muteButton: Phaser.GameObjects.Image;
     mushroomGrowSound: Phaser.Sound.BaseSound;
+    userFinishTutorial: boolean;
     constructor ()
     {
         super('Game');
@@ -127,8 +128,9 @@ export class Game extends Scene
         return textbox;
     }
 
-    create (data: { fadeIn: boolean })
+    create (data: { fadeIn: boolean, coins: number, mushrooms: number, cards: string[], tutorialFinished: boolean})
     {
+
         //mute song button
         this.muteButton = this.add.image(950,700,'mute').setScale(0.05).setInteractive().setDepth(200).setTintFill();
         this.muteButton.on('pointerover', () => {
@@ -143,20 +145,25 @@ export class Game extends Scene
         .on('pointerout', () => {
             this.muteButton.setScale(0.05);
         });
-        this.muteButton.on('pointerdown', () => {
-            this.sound.isPlaying('mushroomsong') ? this.sound.pauseAll() : this.sound.resumeAll();  
-        })
-
+        
         this.pop1 = this.sound.add('pop1').setVolume(0.06);
         this.pop2 = this.sound.add('pop2').setVolume(0.06);
         this.pop3 = this.sound.add('pop3').setVolume(0.06);
         this.pop4 = this.sound.add('pop4').setVolume(0.06);
         this.mushroomGrowSound = this.sound.add('mushroomgrow').setVolume(0.3).setRate(1.6);
-
+        
         this.waterdropSound = this.sound.add('waterdrop').setVolume(0.5);
-        this.themeSong = this.sound.add('mushroomsong').setVolume(0.2).setLoop(true);
+
+        const themeSong = this.sound.add('mushroomsong').setLoop(true).setVolume(0.2);
+        if(themeSong instanceof Phaser.Sound.WebAudioSound) this.themeSong = themeSong;
         this.themeSong.play();
-        this.userInventory = [];
+        this.muteButton.on('pointerdown', () => {
+            this.themeSong.volume !== 0 ? this.themeSong.setVolume(0) : this.themeSong.setVolume(0.2);
+        })
+
+        this.userInventory = data.cards || [];
+
+
         // this.userInventory.push('redcard01');
         // for(let i = 0; i<23; i++) {
         //     this.userInventory.push('greencard01');
@@ -165,14 +172,22 @@ export class Game extends Scene
 
         //orders user inventory by rarity
         let sortOrder = ['gre', 'blu', 'yel', 'red'];
-        this.userInventory.sort((a,b) => {
-            return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
-        })
+        if(this.userInventory) {
+            this.userInventory.sort((a,b) => {
+                return sortOrder.indexOf(b.slice(0,3)) - sortOrder.indexOf(a.slice(0,3))
+            })
+        }
 
-        this.coins = 0;
-        this.mushroomCurrency = 0;
+        this.coins = data.coins || 0;
+        this.mushroomCurrency = data.mushrooms || 0;
         this.isTextDone = false;
+        this.userFinishTutorial = data.tutorialFinished || false;
 
+        if(data.mushrooms && data.coins && data.tutorialFinished) {
+            EventBus.emit('currency updated', data.mushrooms, data.coins);
+            EventBus.emit('tutorial finished');
+        }
+   
         //intro textbox text check
         this.hasRun = false;
 
@@ -270,12 +285,17 @@ export class Game extends Scene
 
         this.tutorialTextBox = this.createTextBox();
         
-        // this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE, () => {
-        // });
-        this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE, () => {
+            if(!this.userFinishTutorial)this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
+            else {
+                this.isTextDone = true;
+                this.hasRun = true;
+                this.startWatering();
+            }
+        });
         // English Text: 
         // 'Welcome to the PrideFarm mushroom shed!\f\nHere you will be responsible to water, take care, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20
-        
+
         EventBus.emit('current-scene-ready', this);
 
         //IMPORANT when main game receives this exact signal; increase/decrease user currencies
@@ -296,6 +316,11 @@ export class Game extends Scene
             this.userInventory.push(newCard);
 
             EventBus.emit('inventory updated', this.userInventory);
+        })
+
+        //update when userfinishes tutorial
+        EventBus.on('tutorial finished', () => {
+            this.userFinishTutorial = true;
         })
     }
     
@@ -408,7 +433,7 @@ export class Game extends Scene
         const harvestText = this.createTextBox();
         
         this.time.delayedCall(2000, () => {
-            if(!this.mushroomGroup) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
+            if(!this.mushroomGroup && !this.userFinishTutorial) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
             // English:
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
@@ -420,6 +445,10 @@ export class Game extends Scene
                     this.isMushroomDone = true;
                     this.mushroomGrowth();                    
                 })
+            };
+            if(!this.userFinishTutorial) {
+                this.userFinishTutorial = true;
+                EventBus.emit('tutorial finished');
             };
             
         })
