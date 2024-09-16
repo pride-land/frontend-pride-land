@@ -161,7 +161,7 @@ export class Game extends Scene
             this.themeSong.volume !== 0 ? this.themeSong.setVolume(0) : this.themeSong.setVolume(0.2);
         })
 
-        this.userInventory = data.cards;
+        this.userInventory = data.cards || [];
 
 
         // this.userInventory.push('redcard01');
@@ -178,10 +178,10 @@ export class Game extends Scene
             })
         }
 
-        this.coins = data.coins;
-        this.mushroomCurrency = data.mushrooms;
+        this.coins = data.coins || 0;
+        this.mushroomCurrency = data.mushrooms || 0;
         this.isTextDone = false;
-        this.userFinishTutorial = data.tutorialFinished;
+        this.userFinishTutorial = data.tutorialFinished || false;
 
         if(data.mushrooms && data.coins && data.tutorialFinished) {
             EventBus.emit('currency updated', data.mushrooms, data.coins);
