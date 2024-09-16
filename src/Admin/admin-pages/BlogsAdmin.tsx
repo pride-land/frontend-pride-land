@@ -34,7 +34,7 @@ const BlogsAdmin = () => {
   <hr className="my-3"/>
    <div>
     <div>
-      <h2 className="font-bold text-center">Blog List</h2>
+      <h2 className="font-bold text-center">ブログリスト</h2>
 
 
    <div>
@@ -42,11 +42,11 @@ const BlogsAdmin = () => {
         <table className="hover:table-fixed">
           <thead>
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Id</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium w-[10rem] text-gray-500 uppercase">Title</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">日付</th>
+              <th className="px-6 py-3 text-left text-xs font-medium w-[10rem] text-gray-500 uppercase">タイトル</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">説明</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">アクション</th>
             </tr>
           </thead>
             <tbody>
@@ -57,7 +57,7 @@ const BlogsAdmin = () => {
                 <td className="px-6 py-4  text-sm  text-gray-500">{blog.title}</td>
                 <td className="px-6 py-4  text-sm line-clamp-1 text-gray-500">{blog.description}</td>
                 <td className="px-6 py-4  text-sm text-gray-500"><button onClick={() => handleDelete(blog.id)}
-                    className="bg-red-400 hover:bg-red-500 p-1 rounded-md text-white text-xs">Delete</button> </td>
+                    className="bg-red-400 hover:bg-red-500 p-1 rounded-md text-white text-xs">削除</button> </td>
               </tr> 
               ))}
             </tbody>
