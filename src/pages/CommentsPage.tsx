@@ -46,8 +46,8 @@ const CommentsPage = () => {
     const { t } = useTranslation();
 
     const initialPageView = (
-        <div className="h-full w-full shadow-2xl rounded-md p-16 bg-white">
-            <h1 className="mb-20 text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
+        <div className="h-full w-full shadow-2xl rounded-md p-6 lg:p-16 bg-white">
+            <h1 className="mb-20 font-semibold text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
             <form name="CommentsForm" onSubmit={handleIsSubmitted}>
                 <label htmlFor='name'>{t("ContactUs.Name")}</label>
                     <input type='text' id='name' placeholder={t("ContactUs.FieldInput")} name='name' className=" border-solid border-black block w-full rounded-md border-0 py-2 px-4 text-gray-900 
@@ -56,8 +56,9 @@ const CommentsPage = () => {
                     <textarea  id='comment'  placeholder={t("ContactUs.FieldInput")} name='comment' required className="border-solid h-[15rem] border-black block w-full rounded-md border-0 py-2 px-4 text-gray-900 
                     shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm sm:leading-6 "></textarea> <br/>
              <button type="submit"
-              className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-500 rounded-lg focus:ring-4 focus:ring-purple-200  hover:bg-green-400">
-              <Plus className="w-5 h-5 mr-2" />
+              className="px-4 py-2 bg-gradient-to-r from-green-300 via-green-400 
+                     to-green-500 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105 
+                     hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
               <span>{t("ContactUs.SubmitFeedback")}</span>
             </button>
             </form>
@@ -69,13 +70,13 @@ const CommentsPage = () => {
        <>
         <div className="flex flex-col md:flex-row h-screen w-screen">
             <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans flex-1 grid place-items-center p-4 md:p-8">
-                <div className="w-full md:w-10/12 lg:w-10/12 xl:w-8/12 h-full flex items-center justify-center">
+            <p className="mb-3 text-4xl">{t("ContactUs.ImageText")}</p>
+                <div className="w-full mt-0 xl:mb-[12rem] md:w-8/12 lg:w-10/12 xl:w-8/12 h-auto flex items-center justify-center">
                     {commentsPageView}
                 </div>
             </div>
-            <div className="(Image) flex-1 grid place-items-center p-4 md:p-8 bg-contact-background grid w-full bg-cover bg-top rounded-sm opacity-80">
-                <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-[100%]">
-                    {t("ContactUs.ImageText")}
+            <div className="(Image) flex-1  place-items-center p-4 md:p-8 font bg-contact-background grid w-full bg-cover bg-top rounded-sm opacity-80">
+                <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                 </div>
             </div>
         </div>
