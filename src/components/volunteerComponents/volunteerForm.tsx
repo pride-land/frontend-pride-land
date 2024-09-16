@@ -76,7 +76,7 @@ const volunteerForm = () => {
                     </div>
                     <input name='is_accepted' defaultValue="false" hidden />
                     <div className="flex justify-center">
-                    <button type='submit' className="w-1/2 px-4 py-2 bg-gradient-to-r from-green-300 via-green-400
+                    <button type='submit' className="w-1/2 text-sm xl:text-lg px-4 py-2 bg-gradient-to-r from-green-300 via-green-400
                      to-green-500 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105 
                      hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
                         {t("volunteer.submit")}
