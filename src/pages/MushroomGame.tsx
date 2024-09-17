@@ -134,7 +134,7 @@ function MushroomGame() {
             ) : (<Auth />)}
         </div>
         
-        <div id="game-container" className='w-full flex align-center m-12 mx-auto justify-center'>
+        <div id="game-container">
 
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} 
                 setUserCoins={setUserCoins}
