@@ -146,6 +146,7 @@ export class Game extends Scene
             this.muteButton.setScale(0.05);
         });
         
+        this.add.rectangle(0,50,450,200,0x000000).setDepth(200).setAlpha(0.5)
         this.pop1 = this.sound.add('pop1').setVolume(0.06);
         this.pop2 = this.sound.add('pop2').setVolume(0.06);
         this.pop3 = this.sound.add('pop3').setVolume(0.06);

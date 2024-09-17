@@ -45,9 +45,10 @@ export class Exchange extends Scene
         this.owlhoot.play();
         //set-up exchange rate background
         this.shopBackground = this.add.image(512, 400, 'exchangebg').setScale(1, 0.8).setAlpha(1).setTint();
+        this.add.rectangle(120,110,30,30,0xFFFFFF).setAlpha(0.7)
         let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
-            xButton.setStyle({color: '#FFFFFF'} );
+            xButton.setStyle({color: '#CC0000'} );
         })
         .on('pointerout', () => {
             xButton.setStyle({color: "000000" });
