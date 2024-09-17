@@ -67,8 +67,8 @@ const CommentsPage = () => {
 
     return (
        <>
-        <div className="flex flex-col md:flex-row h-screen w-screen overflow-hidden ">
-            <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans flex-1 grid place-items-center p-4 md:p-8">
+        <div className="flex flex-col md:flex-row h-screen w-screen overflow-hidden">
+            <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans flex-1 grid place-items-center p-4 md:p-8 pb-24">
             <p className="mb-3 xl:mt-10 text-2xl md:text-4xl xl:mb-14 xl:text-6xl">{t("ContactUs.ImageText")}</p>
                 <div className="w-full mt-0 xl:mb-[12rem] md:w-8/12 lg:w-10/12 xl:w-8/12 h-auto flex items-center justify-center">
                     {commentsPageView}

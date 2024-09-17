@@ -39,10 +39,10 @@ const BlogPage = () => {
     
     return (
         <>
-        <div className="w-screen">
+        <div className="w-screen pb-24 bg-gradient-to-br from-green-300 to-white">
             <div className="grid w-full h-[40rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
             </div>
-            <div className="bg-gradient-to-br from-green-300 to-white font-sans h-full flex flex-col md:flex-row">
+            <div className=" font-sans h-full flex flex-col md:flex-row">
                 <div className="hidden md:flex md:flex-col m-10 md:w-3/12 h-[60rem]">
                     <BlogHistoryList
                         blogsProp={blogs} 

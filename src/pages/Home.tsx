@@ -23,7 +23,7 @@ function Home() {
 };
 
   return (
-    <div className="bg-gradient-to-br from-green-300 to-white font-sans">
+    <div className="bg-gradient-to-br from-green-300 to-white font-sans pb-24">
       <div className="w-full m-auto"></div>
       {images &&
       <HeroCarousel images={images}/>
