@@ -143,9 +143,13 @@ function MushroomGame() {
                 setUserTutorial={setUserTutorial}
             />
 
-            <div>
-               
-            </div>
+            <a href='./' className='lg:hidden'>
+                <img
+                alt="プライドランドロゴ"
+                src='/logo.png'
+                className="h-24 w-24"
+                />
+            </a>
         </div>
         </>
     )

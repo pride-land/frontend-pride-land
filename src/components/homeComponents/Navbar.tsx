@@ -2,6 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next';
 import Langs from '../../interfaces/LayoutType';
+import { useLocation } from 'react-router-dom';
 
 const langs: any = {
   en: { nativeName: 'English', flag: "/flagassets/us.svg" },
@@ -33,6 +34,10 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
     { name: t("navbar.about"), href: '/aboutus', key: "about" },
     { name: t("navbar.game"), href: "/pridefarmgame", key: "game" },
   ];
+
+  const withouNavBarRoutes = ["/pridefarmgame"];
+  const {pathname} = useLocation();
+  if (withouNavBarRoutes.some((item) => pathname.includes(item)) && window.innerWidth < 1024 ) return null;
 
   return (
     <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl md:sticky top-0 z-50">
