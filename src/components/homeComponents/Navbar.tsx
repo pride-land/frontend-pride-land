@@ -31,8 +31,10 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
     { name: t("navbar.join"), href: "/volunteers", key: "join" },
     { name: t("navbar.contact"), href: '/contactus', key: "contact" },
     { name: t("navbar.about"), href: '/aboutus', key: "about" },
-    { name: t("navbar.game"), href: "/pridefarmgame", key: "game" },
   ];
+
+  const gameNav: Navigation = 
+  { name: t("navbar.game"), href: "/pridefarmgame", key: "game" }
 
   return (
     <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl md:sticky top-0 z-50">
@@ -56,6 +58,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
               {nav.name}
             </a>
           ))}
+          <a key={gameNav.key} href={gameNav.href} className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary">{gameNav.name}</a>
         </div>
         {/* language menu */}
         <Menu as="div" className="relative ml-3">
