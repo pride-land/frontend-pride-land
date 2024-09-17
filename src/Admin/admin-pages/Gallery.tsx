@@ -46,7 +46,6 @@ const Layout = () => {
   }
 
 const handleRemoveImage = (image: Image) => {
-  console.log('selectedImage: ', selectedImage);
 if (heroImages !== null) {
   if (window.confirm("削除します")) {
     deleteImage(selectedImage as Image);
@@ -86,7 +85,7 @@ if (selectedImage !== null  && selectedImages !== null) {
         </div>
       <div className="(images container) w-5/6">
         <h2>画像を５枚選択して下さい</h2>
-        <div className="snap-x snap-mandatory align-middle bg-gray-200 p-10 overflow-scroll rounded-md grid grid-rows-1 grid-flow-col gap-6 overflow-scroll">
+        <div className="snap-x snap-mandatory align-middle bg-gray-200 p-10 rounded-md grid grid-rows-1 grid-flow-col gap-6 overflow-scroll">
           {/* made a container that holds all of the images in the db */}
           {/* created a method to click 5 of those images and set them as selected for the front page. */}
           {/* need to add a button to add images to the db */}
@@ -97,13 +96,13 @@ if (selectedImage !== null  && selectedImages !== null) {
           <img src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className="rounded-md w-full"/>
             <p>{image.alt_text}</p>
         </button>
-        <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute top-2 -right-10 cursor-pointer" onClick={() => {console.log(image); handleRemoveImage(image)}}/>
+        <FaCircleXmark className="w-10 h-10 text-red-600 bg-black rounded-full absolute top-2 -right-10 cursor-pointer" onClick={() => {handleRemoveImage(image)}}/>
                   </div>
         )}
         </div>
         <div className="(hero container) w-full">
         <h2>選択した画像</h2>
-        <div className="flex grid grid-rows-a grid-flow-col bg-gray-200 overflow-scroll w-full">
+        <div className="grid grid-rows-a grid-flow-col bg-gray-200 overflow-scroll w-full">
           {selectedImages && selectedImages?.map((image) => 
           <div className="m-6 w-[400px] relative text-center">
             <img src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className="rounded-md w-full"/>

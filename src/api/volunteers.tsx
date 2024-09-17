@@ -9,6 +9,6 @@ export const postVolunteer = async (formData: FormData) => {
         const result = await request.json();
         return result
     } catch(error) {
-        console.log("error", error);
+        console.error('error', error);
     }
 }

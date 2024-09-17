@@ -26,7 +26,7 @@ function Home() {
     <div className="bg-gradient-to-br from-green-300 to-white font-sans">
       <div className="w-full m-auto"></div>
       {images &&
-      <HeroCarousel images={images}></HeroCarousel>
+      <HeroCarousel images={images}/>
 }
       <Slogan></Slogan>
       <MissionStatement/>
@@ -40,7 +40,7 @@ function Home() {
       </section>
       <section id="kuchikomi" className={"min-h-80 flex px-4"}>
         <div className="flex max-w-[1400] mx-auto w-full ">
-          <FeedbackComments/>
+       <FeedbackComments/>
         </div>
       </section>
     </div>

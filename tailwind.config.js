@@ -22,7 +22,16 @@ export default{
         'volunteer-background': "url('/volunteer.jpg')",
         'aboutus-background': "url('/aboutus.jpg')",
         'contact-background': "url('/contact.jpg')",
+      },
+      animation: {
+        "infinite-scroll": 'infinite-scroll 45s linear infinite',
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
       }
+    }
     },
     fontFamily: {
       'roboto' : ['Roboto', 'sans-serif']

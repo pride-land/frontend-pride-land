@@ -39,17 +39,17 @@ const Volunteer = () => {
 
   return (
     <div>
-    <h1 className='text-3xl m-5 mt-0'>Volunteer List</h1>
+    <h1 className='text-3xl m-5 mt-0'>ボランティアリスト</h1>
     <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
       <thead className="bg-gray-300 border-b border-gray-200">
         <tr>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Name</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Email</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Date Submitted</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Volunteer Date</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Restrictions</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Status</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">Action</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">名前</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">メールアドレス</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">提出日</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">ボランティア参加日</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">制約</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">ステータス</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase ">アクション</th>
         </tr>
       </thead>
       <tbody>
@@ -60,13 +60,13 @@ const Volunteer = () => {
             <td className="px-6 py-4  text-sm text-gray-500">{format(volunteer.signup_date, "MM/dd/yy")}</td>
             <td className="px-6 py-4  text-sm text-gray-500">{format(volunteer.start_date, "MM/dd/yy @ H:mm")}</td>
             <td className="px-6 py-4   text-sm text-gray-500">{volunteer.restrictions}</td>
-            <td className="px-6 py-4   text-sm text-gray-500">{volunteer.is_accepted ? "Accepted" : "Not Accepted"}</td>
+            <td className="px-6 py-4   text-sm text-gray-500">{volunteer.is_accepted ? "了承済み" : "未了承"}</td>
             <td className="px-6 py-4  text-sm text-gray-500">
               <button
                 className={`px-4 py-2 font-semibold text-white rounded-md ${volunteer.is_accepted ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`}
                 onClick={() => changeVolunteerStatus(volunteer)}
               >
-                {volunteer.is_accepted ? "Reject" : "Accept"}
+                {volunteer.is_accepted ? "断る" : "了承する"}
               </button>
             </td>
           </tr>

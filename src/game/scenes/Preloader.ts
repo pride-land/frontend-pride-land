@@ -56,8 +56,53 @@ export class Preloader extends Scene
         this.load.image('exchangebg', 'exchangebg.png');
         this.load.image('mute', 'mute.png');
         //cards
-        this.load.image('redcard01', 'cardAssets/redCards/galaxyChicken.png');
-        this.load.image('greencard01', 'cardAssets/greenCards/eggsGreen.png');
+        this.load.image('greencard01', 'cardAssets/greenCards/green01.png');
+        this.load.image('greencard02', 'cardAssets/greenCards/green02.png');
+        this.load.image('greencard03', 'cardAssets/greenCards/green03.png');
+        this.load.image('greencard04', 'cardAssets/greenCards/green04.png');
+        this.load.image('greencard05', 'cardAssets/greenCards/green05.png');
+        this.load.image('greencard06', 'cardAssets/greenCards/green06.png');
+        this.load.image('greencard07', 'cardAssets/greenCards/green07.png');
+        this.load.image('greencard08', 'cardAssets/greenCards/green08.png');
+
+        this.load.image('bluecard01', 'cardAssets/blueCards/blue01.png');
+        this.load.image('bluecard02', 'cardAssets/blueCards/blue02.png');
+        this.load.image('bluecard03', 'cardAssets/blueCards/blue03.png');
+        this.load.image('bluecard04', 'cardAssets/blueCards/blue04.png');
+        this.load.image('bluecard05', 'cardAssets/blueCards/blue05.png');
+        this.load.image('bluecard06', 'cardAssets/blueCards/blue06.png');
+        this.load.image('bluecard07', 'cardAssets/blueCards/blue07.png');
+        this.load.image('bluecard08', 'cardAssets/blueCards/blue08.png');
+
+        this.load.image('yellowcard01', 'cardAssets/yellowCards/yellow01.png');
+        this.load.image('yellowcard02', 'cardAssets/yellowCards/yellow02.png');
+        this.load.image('yellowcard03', 'cardAssets/yellowCards/yellow03.png');
+        this.load.image('yellowcard04', 'cardAssets/yellowCards/yellow04.png');
+        this.load.image('yellowcard05', 'cardAssets/yellowCards/yellow05.png');
+        this.load.image('yellowcard06', 'cardAssets/yellowCards/yellow06.png');
+        this.load.image('yellowcard07', 'cardAssets/yellowCards/yellow07.png');
+        this.load.image('yellowcard08', 'cardAssets/yellowCards/yellow08.png');
+        this.load.image('yellowcard09', 'cardAssets/yellowCards/yellow09.png');
+        this.load.image('yellowcard10', 'cardAssets/yellowCards/yellow10.png');
+        this.load.image('yellowcard11', 'cardAssets/yellowCards/yellow11.png');
+        this.load.image('yellowcard12', 'cardAssets/yellowCards/yellow12.png');
+        this.load.image('yellowcard13', 'cardAssets/yellowCards/yellow13.png');
+        this.load.image('yellowcard14', 'cardAssets/yellowCards/yellow14.png');
+        this.load.image('yellowcard15', 'cardAssets/yellowCards/yellow15.png');
+        this.load.image('yellowcard16', 'cardAssets/yellowCards/yellow16.png');
+
+        this.load.image('redcard01', 'cardAssets/redCards/red01.png');
+        this.load.image('redcard02', 'cardAssets/redCards/red02.png');
+        this.load.image('redcard03', 'cardAssets/redCards/red03.png');
+        this.load.image('redcard04', 'cardAssets/redCards/red04.png');
+        this.load.image('redcard05', 'cardAssets/redCards/red05.png');
+        this.load.image('redcard06', 'cardAssets/redCards/red06.png');
+        this.load.image('redcard07', 'cardAssets/redCards/red07.png');
+        this.load.image('redcard08', 'cardAssets/redCards/red08.png');
+        this.load.image('redcard09', 'cardAssets/redCards/red09.png');
+        this.load.image('redcard10', 'cardAssets/redCards/red10.png');
+        this.load.image('redcard11', 'cardAssets/redCards/red11.png');
+
         //audio
         this.load.audio('exchange', 'sounds/exchange.mp3');
         this.load.audio('cardPurchase', 'sounds/cardPurchase.mp3');
@@ -83,6 +128,6 @@ export class Preloader extends Scene
         //  For example, you can define global animations here, so we can use them in other scenes.
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start('Game');
+        this.scene.start('MainMenu');
     }
 }

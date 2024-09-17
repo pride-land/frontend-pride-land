@@ -7,7 +7,7 @@ export function signUp(email: string, password: string): Promise<void> {
         console.log('User signed up:', userCredential.user)
     })
     .catch((error) => {
-        console.log('Error:', error)
+        console.error('Error:', error)
     });
 }
 
@@ -17,7 +17,7 @@ export function logIn(email: string, password: string): Promise<void> {
         console.log('User logged in:', userCredential.user )
     })
     .catch((error) => {
-        console.log('Error:', error)
+        console.error('Error:', error)
     });
 }
 
@@ -27,6 +27,6 @@ export function signOut(): Promise<void> {
         console.log('User signed out');
     })
     .catch((error) => {
-        console.log('Error:', error)
+        console.error('Error:', error)
     })
 };

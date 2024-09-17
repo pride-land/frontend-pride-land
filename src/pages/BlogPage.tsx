@@ -38,31 +38,33 @@ const BlogPage = () => {
     };
     
     return (
+        <>
         <div className="w-screen">
-            <div className="(Image) grid w-full h-[40rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
-
-                <div className="mt-auto mb-auto ml-24 w-60 h-40 text-left text-[100px] text-white font-serif">
-                    Blogs...
-                </div>
-
+            <div className="grid w-full h-[40rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
             </div>
-            <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans h-full flex">
-                <div className="(Blog History) flex flex-col m-10 w-3/12 h-[60rem]">
+            <div className="bg-gradient-to-br from-green-300 to-white font-sans h-full flex flex-col md:flex-row">
+                <div className="hidden md:flex md:flex-col m-10 md:w-3/12 h-[60rem]">
                     <BlogHistoryList
                         blogsProp={blogs} 
                         setChosenBlog={setChosenBlog}
-                    />
+                        />
                 </div>
-                {chosenBlog && (
-                <div className="(Selected Month's Blog Posts) m-10 w-full">  
+                <div className="xl:mt-10 xl:mr-10 m-4 w-11/12 md:w-9/12">  
+                {chosenBlog ? (
                     <BlogFocus chosenBlog={chosenBlog} />
-                </div>
+                ) : (
+                    <p>Please select a blog.</p>
                 )}
+                </div>
             </div>
-          
-
-            
         </div>
+
+        {/* <Pagination
+                blogsPerPage = {blogsPerPage}
+                length = {props.blogsProp.length}
+                handlePagination = {handlePagination}
+            /> */}
+        </>
     )
 }
 

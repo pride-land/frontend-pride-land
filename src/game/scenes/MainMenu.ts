@@ -10,7 +10,10 @@ export class MainMenu extends Scene
     logo: GameObjects.Image;
     startButton: GameObjects.Text;
     logoTween: Phaser.Tweens.Tween | null;
-
+    coins: number;
+    mushrooms: number;
+    cards: string[];
+    tutorialFinished: boolean;
     constructor ()
     {
         super('MainMenu');
@@ -47,10 +50,18 @@ export class MainMenu extends Scene
         // }).setOrigin(0.5).setDepth(100);
 
         EventBus.emit('current-scene-ready', this);
+
+        EventBus.on('logged in', (coins: number, mushrooms: number, cards: string[], tutorialStatus: boolean) => {
+            this.coins = coins;
+            this.mushrooms = mushrooms;
+            this.cards = cards;
+            this.tutorialFinished = tutorialStatus;
+        })
     }
-    
+
     changeScene ()
     {
+        this.input.disable(this.startButton);
         if (this.logoTween)
         {
             this.logoTween.stop();
@@ -60,7 +71,7 @@ export class MainMenu extends Scene
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
             //stay in black for 1 second
             this.time.delayedCall(1000, () => {
-                this.scene.start('Game', { fadeIn: true });  //just passing in data to see how passing data works between scenes
+                this.scene.start('Game', { fadeIn: true, coins: this.coins, mushrooms: this.mushrooms, cards: this.cards, tutorialFinished: this.tutorialFinished });  //just passing in data to see how passing data works between scenes
             });
         });
     }

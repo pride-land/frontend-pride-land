@@ -7,9 +7,8 @@ export const postBlogs = async (formData: FormData) => {
             body: formData
         });
         const result = await request.json();
-        console.log(result)
-        return result
+        return result;
     } catch(error){
-        console.log("error", error)
+        console.error("error", error);
     }
 }

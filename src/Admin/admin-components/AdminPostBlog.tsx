@@ -48,17 +48,15 @@ export default function Home() {
         description,
         content,
       };
-    console.log(formData);
 
     if (!formData.title || !formData.description || !formData.description) {
       alert('Please fill out all required fields');
   }
 
     try{
-        const response = await axios.post( endpoint + 'blogs/' , formData);
-        console.log("Form submitted!", response);
+        await axios.post( endpoint + 'blogs/' , formData);
       } catch (error){
-        console.log("error:" , error)
+        console.error('error', error)
       }
   }
 
@@ -68,7 +66,7 @@ export default function Home() {
         {/* Blog Editor */}
         <div className="w-full max-w-3xl p-5 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
           <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5 ">
-            Blog Post
+            ブログ投稿
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -78,7 +76,7 @@ export default function Home() {
                   htmlFor="title"
                   className="block text-sm font-medium leading-6 text-gray-900 mb-2 "
                 >
-                  Title
+                  タイトル
                 </label>
                 <div className="mt-2">
                   <input
@@ -90,7 +88,7 @@ export default function Home() {
                     id="title"
                     autoComplete="given-name"
                     className="block w-full rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm sm:leading-6"
-                    placeholder="Type the Course title"
+                    placeholder="ブログタイトルを入力してください"
                   />
                 </div>
       
@@ -101,7 +99,7 @@ export default function Home() {
                   htmlFor="description"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Description
+                  説明
                 </label>
                 <textarea
                   id="description"
@@ -110,7 +108,7 @@ export default function Home() {
                   onChange={(e) => setDescription(e.target.value)}
                   value={description}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-green-300 focus:border-green-300 "
-                  placeholder="Write your thoughts here..."
+                  placeholder="説明を入力してください"
                 ></textarea>
               </div>
               {/* Content */}
@@ -119,7 +117,7 @@ export default function Home() {
                   htmlFor="content"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Body
+                  内容
                 </label>
                 <ReactQuill
                   theme="snow"
@@ -135,7 +133,7 @@ export default function Home() {
               className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-500 rounded-lg focus:ring-4 focus:ring-purple-200 hover:bg-green-500"
             >
               <Plus className="w-5 h-5 mr-2" />
-              <span>Create Blog Post</span>
+              <span>投稿</span>
             </button>
           </form>
         </div>
@@ -143,7 +141,7 @@ export default function Home() {
 
         <div className=" blog-view w-full max-w-3xl text-ellipsis p-8 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
           <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5 ">
-           Preview
+           プレビュー
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             {/* Title */}
