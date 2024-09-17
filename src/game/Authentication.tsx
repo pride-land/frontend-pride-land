@@ -12,7 +12,7 @@ const Auth: React.FC = () => {
   const [password, setPassword] = useState('');
   const [signUpUser, setSignUpUser] = useState(true);
   const [open, setOpen] = useState(true)
-  const [user, setUser] = useState<any>(null);
+  const [_user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
