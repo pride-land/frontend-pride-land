@@ -134,7 +134,7 @@ function MushroomGame() {
             ) : (<Auth />)}
         </div>
         
-        <div id="game-container">
+        <div id="game-container" className='mt-9'>
 
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} 
                 setUserCoins={setUserCoins}
@@ -143,13 +143,6 @@ function MushroomGame() {
                 setUserTutorial={setUserTutorial}
             />
 
-            <a href='./' className='lg:hidden'>
-                <img
-                alt="プライドランドロゴ"
-                src='/logo.png'
-                className="h-24 w-24"
-                />
-            </a>
         </div>
         </>
     )
