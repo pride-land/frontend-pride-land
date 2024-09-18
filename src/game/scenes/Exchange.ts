@@ -70,7 +70,7 @@ export class Exchange extends Scene
         //conversion text
         this.mushroomIcon = this.add.image(330, 300, 'mushroom4').setScale(0.4);
         this.shopText = this.add.text(380, 290, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
-        this.add.image(570, 310, 'coin').setScale(0.05);
+        this.add.image(530, 310, 'coin').setScale(0.05);
 
         //display how many mushrooms user has and their offer
         this.youHaveText = this.add.text(450, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
@@ -132,7 +132,7 @@ export class Exchange extends Scene
     {   
         this.secondsLeft = this.mushroomExchangeRateTimer.getRemainingSeconds().toString().substring(0, 3);
         this.todayRateText.setText(`Price time left: ${this.secondsLeft}`);
-        this.shopText.setText(`x ${this.numberInputValue}     =             x ${this.todayRate * this.numberInputValue}`);
+        this.shopText.setText(`x ${this.numberInputValue} =          x ${this.todayRate * this.numberInputValue}`);
         this.youHaveText.setText(`you have        x ${this.currentMushrooms}`);
         this.userMushroomOffer.setText(`        x1 =     x${this.todayRate}`);
 
