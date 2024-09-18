@@ -71,7 +71,7 @@ export class Exchange extends Scene
         //conversion text
         this.mushroomIcon = this.add.image(330, 300, 'mushroom4').setScale(0.4);
         this.shopText = this.add.text(380, 290, '', {color: "000000", fontSize: 30, fontFamily: 'Helvetica-Bold'});
-        this.add.image(490, 310, 'coin').setScale(0.05);
+        this.add.image(500, 310, 'coin').setScale(0.05);
 
         //display how many mushrooms user has and their offer
         this.youHaveText = this.add.text(450, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold'});
