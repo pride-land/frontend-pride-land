@@ -36,7 +36,7 @@ export class CardShop extends Scene
         this.shopBell.play();
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
-        let xButton = this.add.text(282, 180, 'X', {color: "#000000", fontSize: 55, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        let xButton = this.add.text(282, 180, 'X', {color: "#000000", fontSize: 55, fontFamily: 'Helvetica-Bold' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
             xButton.setStyle({color: '#FFFFFF'} );
         })
@@ -49,19 +49,19 @@ export class CardShop extends Scene
             this.scene.resume('Game');
         });
 
-        this.currentCoinsText = this.add.text(380, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black' }); //you have __ coins available!
+        this.currentCoinsText = this.add.text(400, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold' }); //you have __ coins available!
      
 
         //display how many coins user has and their offer
-        this.add.image(360, 250, 'coin').setScale(0.02);
+        this.add.image(380, 250, 'coin').setScale(0.02);
         this.add.image(670, 416, 'coin').setScale(0.05);
-        this.mysteryCardIcon = this.add.image(480, 410, 'mysterycard').setScale(0.3)
+        this.mysteryCardIcon = this.add.image(460, 410, 'mysterycard').setScale(0.3)
    
 
-        this.cardText = this.add.text(380, 400, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
-        this.errorText = this.add.text(370, 550, '', {color: "#00ff26", fontSize: 20, fontFamily: 'Arial Black'});
-        this.add.text(450, 670, 'CARD DROP RATES:', {color: "#000", fontSize: 15, fontFamily: 'Arial Black'});
-        this.add.text(350, 710, '70% Green, 20% Blue, 9.5% Yellow, 0.5% Red', {color: "#aa38fc", fontSize: 15, fontFamily: 'Arial Black'}).setColor("blue");
+        this.cardText = this.add.text(380, 400, '', {color: "000000", fontSize: 30, fontFamily: 'Helvetica-Bold'});
+        this.errorText = this.add.text(370, 550, '', {color: "#00ff26", fontSize: 20, fontFamily: 'Helvetica-Bold'});
+        this.add.text(450, 670, 'CARD DROP RATES:', {color: "#000", fontSize: 15, fontFamily: 'Helvetica-Bold'});
+        this.add.text(350, 710, '70% Green, 20% Blue, 9.5% Yellow, 0.5% Red', {color: "#aa38fc", fontSize: 15, fontFamily: 'Helvetica-Bold'}).setColor("blue");
         //exhange coins for cards
         this.purchaseButton = this.add.image(530, 620 ,'buyicon' ).setInteractive().setScale(0.1);
         this.purchaseButton
@@ -176,7 +176,7 @@ export class CardShop extends Scene
     update()
     {   
         this.currentCoinsText.setText(`You have ${this.currentCoins} coins available!`);
-        this.cardText.setText(`x1            = ${this.cardPrice}`)
+        this.cardText.setText(`x1            =   x ${this.cardPrice}`)
 
         if(this.scene.isVisible()) {
             this.scene.bringToTop();

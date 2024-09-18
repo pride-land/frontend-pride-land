@@ -37,7 +37,7 @@ export class Inventory extends Scene
         this.userInventory = data.userInventory;
 
         this.background = this.add.image(512, 400, 'inventoryBackground').setScale(1.8).setAlpha(1)
-        let xButton = this.add.text(110, 90, 'X', {color: "#ff0000", fontSize: 45, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        let xButton = this.add.text(110, 90, 'X', {color: "#ff0000", fontSize: 45, fontFamily: 'Helvetica-Bold' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
             xButton.setStyle({color: '#FFFFFF'} );
         })
@@ -50,7 +50,7 @@ export class Inventory extends Scene
             this.scene.resume('Game');
         });
 
-        this.sellText = this.add.text(85, 600, '', {color: "#1900ff", fontSize: 20, fontFamily: 'Arial Black'}).setVisible(false)
+        this.sellText = this.add.text(85, 600, '', {color: "#1900ff", fontSize: 20, fontFamily: 'Helvetica-Bold'}).setVisible(false)
         .setInteractive().on('pointerdown', () => {
             this.sellSound.play();
             let cardRarity = this.userInventory[this.selectedCardToSell!].slice(0,3);
