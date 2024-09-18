@@ -279,7 +279,7 @@ export class Game extends Scene
         this.tutorialTextBox = this.createTextBox();
         
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE, () => {
-            if(!this.userFinishTutorial)this.tutorialTextBox.start('プライドファームのきのこ小屋へようこそ！\f\nここでは、水やり、手入れ、収穫など、自分だけのシイタケを作ることができます！\f\nまずは丸太に水をやりましょう！\f\n画面をクリックすると、水やりが開始されます。', 20);
+            if(!this.userFinishTutorial)this.tutorialTextBox.start('Welcome to the Pride Farm mushroom shed!\f\nHere you will be responsible to water, take care of, and harvest your very own Shiitake mushrooms!\f\nLets first water the log!\f\nClick anywhere on the screen to start watering the log.', 20);
             else {
                 this.isTextDone = true;
                 this.hasRun = true;
@@ -423,7 +423,7 @@ export class Game extends Scene
         const harvestText = this.createTextBox();
         
         this.time.delayedCall(2000, () => {
-            if(!this.mushroomGroup && !this.userFinishTutorial) harvestText.start('よくやったわ！\f\nキノコを収穫するためには、キノコが成長するのを待たなければなりません。\f\nタイマーが切れるのを待ちましょう。\f\nタイマーが終わったら、クリックしてキノコを収穫しましょう。', 20);
+            if(!this.mushroomGroup && !this.userFinishTutorial) harvestText.start('Nice work!\f\nNow we must wait for our mushrooms to grow in order to harvest them.\f\nIn the top left corner, there is a timer that will tell you when the mushrooms are finished growing.\f\nOnce that is over, click on the mushrooms to harvest them!\f\nAfterwards, you may water the log again and harvest as many mushrooms as you would like!\f\nThen, using the two shop icons in the top right, you can purchase coins and cool collectors cards!\f\nHappy harvesting!', 20);
             // English:
             // Nice work! Now we must wait for our mushrooms to grow in order to harvest them. Lets wait for the timer to go down. And once that is over, click to harvest the mushrooms
             if(this.isTextDone === true || this.mushroomGroup){
@@ -466,7 +466,7 @@ export class Game extends Scene
 
         //make mushrooms draggable
         this.input.on('dragstart', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite) => {
-            gameObject.setTint(0xff0000)
+            gameObject.setTint(0x00ffa6)
         });
 
         this.input.on('drag', (_pointer: PointerEvent, gameObject: Phaser.Physics.Arcade.Sprite , dragX: number, dragY: number) => {
