@@ -26,9 +26,9 @@ const Blogs = () => {
         </div>
   
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6  sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {blogs.map((blog, index) => (
-              <div key={index} className="hover:xl:bg-white rounded-lg shadow-md hover:shadow-lg 
+              <div key={index} className="portrait:bg-white hover:xl:bg-white hover:lg:bg-white hover:sm:bg-white  hover:md:bg-white rounded-lg shadow-md hover:shadow-lg 
                 transition ease-in-out cursor-pointer  hover:scale-105 duration-300
                  overflow-hidden" >
                 <div className="p-4 sm:p-6">
