@@ -28,7 +28,7 @@ const volunteerForm = () => {
                 <form name="myForm" method='POST' onSubmit={handleIsSubmitted} 
                 className="space-y-4 sm:space-y-6"><div>
                         <label htmlFor='volunteer-status' className="block text-left text-sm font-medium text-gray-700">{t("volunteer.volunteerStatus")}</label>
-                        <select id='is_regular_volunteer' name='is_regular_volunteer' className="mt-1 block w-full
+                        <select id='is_regular_volunteer' name='is_regular_volunteer' className="block w-full
                          border-gray-300 rounded-md shadow-sm focus:ring-green-300 focus:border-green-300 sm:text-sm">
                             <option value='false'>{t("volunteer.once")}</option>
                             <option value='true'>{t("volunteer.regular")}</option>
@@ -36,12 +36,12 @@ const volunteerForm = () => {
                     </div>
                     <div>
                         <label htmlFor='name' className="block text-sm text-left font-medium text-gray-700">{t("volunteer.name")} </label>
-                        <input type='text' id='name' name='name' required className="mt-1 block w-full border-gray-300 rounded-md shadow-sm
+                        <input type='text' id='name' name='name' required className="block w-full border-gray-300 rounded-md shadow-sm
                          focus:ring-green-300 focus:border-green-300 sm:text-sm" />
                     </div>
                     <div>
                         <label htmlFor='email' className="block text-sm text-left font-medium text-gray-700">{t("volunteer.email")} </label>
-                        <input type='email' id='email' name='email' required className="mt-1 block w-full border-gray-300 rounded-md shadow-sm
+                        <input type='email' id='email' name='email' required className="block w-full border-gray-300 rounded-md shadow-sm
                          focus:ring-green-300 focus:border-green-300 sm:text-sm" />
                     </div>
                     <div>
@@ -49,7 +49,7 @@ const volunteerForm = () => {
                         <input type='datetime-local' id='start_date' name='start_date' required className="mt-1 block w-full
                          border-gray-300 rounded-md shadow-sm focus:ring-green-300 focus:border-green-300 sm:text-sm" />
                     </div>
-                    <div className="space-y-2">
+                    <div>
                         <legend className="block text-sm mb-1 font-medium text-gray-700">{t("volunteer.category")} 
                             <span className="text-gray-400">{t("volunteer.subcategory")}</span></legend>
                         <div className="flex flex-wrap gap-4">
