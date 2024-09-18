@@ -42,7 +42,17 @@ const config: Phaser.Types.Core.GameConfig = {
     },
     dom: {
         createContainer: true,
-    }
+    },
+    max: {
+        width: 1024,
+        height: 768
+    },
+    scale:{
+        parent: "game-container",
+        mode: Phaser.Scale.FIT,
+        autoRound: true,
+        autoCenter: 2,
+    },
 };
 
 const StartGame = (parent: string) => {

@@ -2,7 +2,6 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'react-i18next';
 import Langs from '../../interfaces/LayoutType';
-import { useLocation } from 'react-router-dom';
 
 const langs: any = {
   en: { nativeName: 'English', flag: "/flagassets/us.svg" },
@@ -35,79 +34,8 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
     { name: t("navbar.game"), href: "/pridefarmgame", key: "game" },
   ];
 
-  const withouNavBarRoutes = ["/pridefarmgame"];
-  const {pathname} = useLocation();
-  if (withouNavBarRoutes.some((item) => pathname.includes(item)) && window.innerWidth < 1024 ) {
-    return (
-      <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl top-0 z-50">
-      <div className="flex h-24 items-center justify-between px-4">
-        {/* Logo */}
-        <a href="./">
-          <img
-            alt="プライドランドロゴ"
-            src='/logo.png'
-            className="h-24 p-2 m-0"
-          />
-        </a>
-        {/* desktop view links */}
-        <div className="hidden md:flex space-x-4">
-          {navigation.map((nav) => (
-            <a
-              key={nav.key}
-              href={nav.href}
-              className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary"
-            >
-              {nav.name}
-            </a>
-          ))}
-        </div>
-        {/* language menu */}
-        <Menu as="div" className="relative ml-3">
-          <MenuButton className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary focus:outline-none focus:ring-inset">
-          <img src={langs[currentLang].flag} alt={`${currentLang} flag`} className="h-12 w-12 mx-4" />          </MenuButton>
-          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl z-40">
-            {Object.keys(langs).map((lang) => (
-              <MenuItem key={lang}>
-                {({ active }) => (
-                  <button
-                    onClick={() => handleLangChange(lang)}
-                    className={`w-full flex px-4 py-2 text-sm text-white ${active ? 'text-secondary bg-green-300' : ''}`}                  >
-                      <img src={langs[lang].flag} alt={`${lang} flag`} className="h-8 w-8 mx-4" />
-                    {langs[lang].nativeName}
-                  </button>
-                )}
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Menu>
-        {/* hamburger menu for mobile view */}
-        <Menu as="div" className="relative md:hidden">
-          <MenuButton className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-            <Bars3Icon className="h-8 w-8" />
-          </MenuButton>
-          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 mt-2 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl z-40">
-            {navigation.map((nav) => (
-              <MenuItem key={nav.key}>
-                {({ active }) => (
-                  <a
-                    href={nav.href}
-                    className={`block px-4 py-2 text-sm text-white ${active ? 'text-secondary' : ''}`}
-                  >
-                    {nav.name}
-                  </a>
-                )}
-              </MenuItem>
-            ))}
-          </MenuItems>
-        </Menu>
-
-      </div>
-    </nav>
-    )
-  }
-
   return (
-    <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl md:sticky top-0 z-50">
+    <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl lg:sticky top-0 z-50">
       <div className="flex h-24 items-center justify-between px-4">
         {/* Logo */}
         <a href="./">

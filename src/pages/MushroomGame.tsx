@@ -134,7 +134,7 @@ function MushroomGame() {
             ) : (<Auth />)}
         </div>
         
-        <div id="game-container" className='mt-9'>
+        <div id="game-container" className='mt-10 w-fit mb-14'>
 
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} 
                 setUserCoins={setUserCoins}
