@@ -30,12 +30,12 @@ const BlogFocus: React.FC<Props> = (props) => {
     console.log(props.blogsProp)
     const createBlogList  = currentBlogs.map((blog, index) => {
         return (
+        <div>
             <div  className="visible lg:invisible" id={'blogs-' + String(index + 1)} key={index} onClick={() => props.setChosenBlog(blog)}>
-                <div>
 
                 <div className="bg-white my-1 shadow-md p-4 rounded-md " >
-                    <div className="my-2 text-center">{blog.title}</div>
-                    <div>{format(props.chosenBlog.date_created, 'dd/MM/yyyy')}</div>
+                    <div className="my-2 text-center text-xl">{blog.title}</div>
+                    <div className='text-right text-xss text-gray-400'>{format(props.chosenBlog.date_created, 'dd/MM/yyyy')}</div>
                     <div className=''> {parse(props.chosenBlog.content)}</div>
                 </div>
                 </div>

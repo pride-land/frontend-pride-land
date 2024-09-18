@@ -56,7 +56,7 @@ const BlogPage = () => {
                     setChosenBlog={setChosenBlog}
                     chosenBlog={chosenBlog} />
                 ) : (
-                    <p>Please select a blog.</p>
+                    <p className="hidden">Please select a blog.</p>
                 )}
                 </div>
             </div>
