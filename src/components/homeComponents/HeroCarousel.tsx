@@ -32,8 +32,9 @@ const HeroCarousel = ({images}: HeroCarouselProps) => {
 
     <div className="overflow-hidden relative">
   <div className="flex transition ease-out duration-700 lg:w-1/2"  style={{transform: `translateX(-${(currentSlide * 100)}%)`,}}>
+  {(images.length < 1) ? <div/> :
   <img key={images.length} src={"data:image/jpeg;base64," + images[images.length - 1].blob_img} className={`lg:-translate-x-2/4 ${currentSlide === loopImages.length - 1 ? 'lg:blur-0' : 'lg:blur-md'}`}
-  />
+  />}
     {loopImages.map((image, index) => (
         <img key={index} src={"data:image/jpeg;base64," + image.blob_img} alt={image.alt_text} className={`lg:-translate-x-2/4 ${index === currentSlide ? "lg:blur-0" : "lg:blur-md"}`}
         />
