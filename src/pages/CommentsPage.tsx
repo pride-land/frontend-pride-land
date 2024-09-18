@@ -55,7 +55,7 @@ const CommentsPage = () => {
                     <textarea  id='comment'  placeholder={t("ContactUs.FieldInput")} name='comment' required className=" h-[8rem] border-solid xl:h-[8rem] border-black block w-full rounded-md border-0 py-2 px-4 text-gray-900 
                     shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm sm:leading-6 "></textarea> <br/>
                 <label htmlFor="displayed"></label>
-                    <select id='is_regular_volunteer' name='is_regular_volunteer' className="mt-1 block w-full
+                    <select id='permission_to_display' name='permission_to_display' className="mt-1 block w-full
                          border-gray-300 rounded-md shadow-sm focus:ring-green-300 focus:border-green-300 sm:text-sm">
                             <option value='true'>{t("ContactUs.show")}</option>
                             <option value='false'>{t("ContactUs.dontShow")}</option>

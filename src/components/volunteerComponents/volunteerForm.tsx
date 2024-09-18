@@ -28,7 +28,7 @@ const volunteerForm = () => {
                 <form name="myForm" method='POST' onSubmit={handleIsSubmitted} 
                 className="space-y-4 sm:space-y-6"><div>
                         <label htmlFor='volunteer-status' className="block text-left text-sm font-medium text-gray-700">{t("volunteer.volunteerStatus")}</label>
-                        <select id='permission_to_display' name='permission_to_display' className="mt-1 block w-full
+                        <select id='is_regular_volunteer' name='is_regular_volunteer' className="mt-1 block w-full
                          border-gray-300 rounded-md shadow-sm focus:ring-green-300 focus:border-green-300 sm:text-sm">
                             <option value='false'>{t("volunteer.once")}</option>
                             <option value='true'>{t("volunteer.regular")}</option>
