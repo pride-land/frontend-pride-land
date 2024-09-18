@@ -46,7 +46,7 @@ const CommentsPage = () => {
 
     const initialPageView = (
         <div className="h-full w-full shadow-2xl rounded-md p-6 lg:p-16 bg-white">
-            <h1 className="mb-20 font-semibold lg:text-2xl text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
+            <h1 className="mb-5 font-semibold lg:text-xl text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
             <form name="CommentsForm" onSubmit={handleIsSubmitted}>
                 <label htmlFor='name'>{t("ContactUs.Name")}</label>
                     <input type='text' id='name' placeholder={t("ContactUs.FieldInput")} name='name' className=" border-solid border-black block w-full rounded-md border-0 py-2 px-4 text-gray-900 
