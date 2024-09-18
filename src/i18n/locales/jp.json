@@ -50,9 +50,9 @@
          "FieldInput": "入力してください",
          "SubmitFeedback": "フィードバック送信",
          "completedForm": "ご意見をお寄せいただき、ありがとうございました",
-         "inquiries": "その他の問い合わせ：info@pridefarm.org"
-
-
+         "inquiries": "その他の問い合わせ：info@pridefarm.org",
+         "show": "コメントを公開する",
+         "dontShow": "コメントを公開しない"
       },
 
       "volunteer": {

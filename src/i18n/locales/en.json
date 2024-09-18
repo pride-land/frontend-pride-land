@@ -51,7 +51,9 @@
          "FieldInput": "Input here",
          "SubmitFeedback": "Submit Feedback",
          "completedForm": "Thank you for submitting your feedback!",
-         "inquiries": "For all other inquiries please contact us at: info@pridefarm.org"
+         "inquiries": "For all other inquiries please contact us at: info@pridefarm.org",
+         "show": "display comment",
+         "dontShow": "don't display comment"
       },
 
       "volunteer": {

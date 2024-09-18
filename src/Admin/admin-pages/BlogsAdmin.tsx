@@ -10,7 +10,7 @@ const BlogsAdmin = () => {
   const [blogs, setBlogs] = useState<BlogsTypes[]>([]);
   
   useEffect(()=>{
-    fetchAllBlogs()
+    fetchAllBlogs();
   },[]);
 
 
@@ -20,11 +20,16 @@ const BlogsAdmin = () => {
   }
 
   const handleDelete = (id: number) => {
+  if(window.confirm("削除します")){
     try{
       Axios.delete(process.env.backend_url  + `blogs/${id}/`)
+      .then(() => {
+        window.location.reload()
+      });
     }catch (error){
       console.error('error', error);
       }
+    }
   }
 
   return (
@@ -57,7 +62,7 @@ const BlogsAdmin = () => {
                 <td className="px-6 py-4  text-sm  text-gray-500">{blog.title}</td>
                 <td className="px-6 py-4  text-sm line-clamp-1 text-gray-500">{blog.description}</td>
                 <td className="px-6 py-4  text-sm text-gray-500"><button onClick={() => handleDelete(blog.id)}
-                    className="bg-red-400 hover:bg-red-500 p-1 rounded-md text-white text-xs">削除</button> </td>
+                    className="bg-red-400 hover:bg-red-500 p-1 rounded-md text-white text-xs">削除</button></td>
               </tr> 
               ))}
             </tbody>
@@ -73,3 +78,4 @@ const BlogsAdmin = () => {
 }
 
 export default BlogsAdmin
+
