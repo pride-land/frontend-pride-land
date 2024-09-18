@@ -46,7 +46,7 @@ export class Exchange extends Scene
         //set-up exchange rate background
         this.shopBackground = this.add.image(512, 400, 'exchangebg').setScale(1, 0.8).setAlpha(1).setTint();
         this.add.rectangle(121,107,40,40,0xFFFFFF).setAlpha(0.7)
-        let xButton = this.add.text(110, 90, 'X', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        let xButton = this.add.text(110, 90, 'X', {color: "000000", fontSize: 30, fontFamily: 'Helvetica-Bold' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
             xButton.setStyle({color: '#CC0000'} );
         })
@@ -58,7 +58,7 @@ export class Exchange extends Scene
             this.scene.setVisible(false);
             this.scene.resume('Game');
         })
-        this.todayRateText = this.add.text(450, 350, '', {color: "000000", fontSize: 14, fontFamily: 'Arial Black' });
+        this.todayRateText = this.add.text(450, 350, '', {color: "000000", fontSize: 14, fontFamily: 'Helvetica-Bold' });
 
         //setup timer to change price
         this.mushroomExchangeRateTimer = this.time.addEvent({
@@ -70,17 +70,17 @@ export class Exchange extends Scene
 
         //conversion text
         this.mushroomIcon = this.add.image(330, 300, 'mushroom4').setScale(0.4);
-        this.shopText = this.add.text(380, 290, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
-        this.add.image(530, 310, 'coin').setScale(0.05);
+        this.shopText = this.add.text(380, 290, '', {color: "000000", fontSize: 30, fontFamily: 'Helvetica-Bold'});
+        this.add.image(500, 310, 'coin').setScale(0.05);
 
         //display how many mushrooms user has and their offer
-        this.youHaveText = this.add.text(450, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
-        this.add.image(575, 250, 'mushroom4').setScale(0.1);
-        this.userMushroomOffer = this.add.text(420, 450, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
-        this.add.image(460, 460, 'mushroom4').setScale(0.1);
-        this.add.image(537, 462, 'coin').setScale(0.02)
+        this.youHaveText = this.add.text(450, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold'});
+        this.add.image(555, 250, 'mushroom4').setScale(0.1);
+        this.userMushroomOffer = this.add.text(420, 450, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold'});
+        this.add.image(440, 460, 'mushroom4').setScale(0.1);
+        this.add.image(520, 462, 'coin').setScale(0.018)
         //error message if they do more than they can
-        this.errorText = this.add.text(400, 500, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
+        this.errorText = this.add.text(400, 500, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold'});
 
         //input for how many mushroom you want to offer
         this.numberInput = this.add.dom(512, 400).createFromCache('mushroomForm');
