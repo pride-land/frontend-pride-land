@@ -27,7 +27,7 @@ const BlogFocus: React.FC<Props> = (props) => {
     const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
     const currentBlogs = props.blogsProp.slice(indexOfFirstBlog, indexOfLastBlog);
 
-    const createBlogList  = currentBlogs.map((blog, index) => {
+    const createBlogList  = currentBlogs.map((_blog, index) => {
         return (
         <div>
             <div  className="visible lg:invisible" id={'blogs-' + String(index + 1)} key={index} >
