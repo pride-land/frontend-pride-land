@@ -54,8 +54,14 @@ const CommentsPage = () => {
                 <label htmlFor='comments'>{t("ContactUs.Comments")}</label>
                     <textarea  id='comment'  placeholder={t("ContactUs.FieldInput")} name='comment' required className=" h-[8rem] border-solid xl:h-[8rem] border-black block w-full rounded-md border-0 py-2 px-4 text-gray-900 
                     shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-300 sm:text-sm sm:leading-6 "></textarea> <br/>
+                <label htmlFor="displayed"></label>
+                    <select id='permission_to_display' name='permission_to_display' className="mt-1 block w-full
+                         border-gray-300 rounded-md shadow-sm focus:ring-green-300 focus:border-green-300 sm:text-sm">
+                            <option value='true'>{t("ContactUs.show")}</option>
+                            <option value='false'>{t("ContactUs.dontShow")}</option>
+                    </select>
              <button type="submit"
-              className="px-4 py-2 bg-gradient-to-r from-green-300 via-green-400 
+              className="px-4 py-2 bg-gradient-to-r from-green-300 via-green-400 mt-5
                      to-green-500 text-white font-semibold rounded-md shadow-md transition-transform transform hover:scale-105 
                      hover:shadow-lg focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
               <span>{t("ContactUs.SubmitFeedback")}</span>
