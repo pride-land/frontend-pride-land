@@ -45,7 +45,7 @@ const CommentsPage = () => {
     const { t } = useTranslation();
 
     const initialPageView = (
-        <div className="h-full w-full shadow-2xl rounded-md p-6 lg:p-16 bg-white">
+        <div className="h-full w-full shadow-2xl rounded-md p-6 lg:p-8 lg:w-4/5 xl:w-4/5 bg-white">
             <h1 className="mb-5 font-semibold lg:text-xl text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
             <form name="CommentsForm" onSubmit={handleIsSubmitted}>
                 <label htmlFor='name'>{t("ContactUs.Name")}</label>
