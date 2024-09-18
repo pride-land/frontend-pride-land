@@ -78,7 +78,7 @@ export class Exchange extends Scene
         this.add.image(555, 250, 'mushroom4').setScale(0.1);
         this.userMushroomOffer = this.add.text(420, 450, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold'});
         this.add.image(440, 460, 'mushroom4').setScale(0.1);
-        this.add.image(520, 462, 'coin').setScale(0.018)
+        this.add.image(510, 462, 'coin').setScale(0.018)
         //error message if they do more than they can
         this.errorText = this.add.text(400, 500, '', {color: "000000", fontSize: 20, fontFamily: 'Helvetica-Bold'});
 
