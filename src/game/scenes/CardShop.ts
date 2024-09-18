@@ -59,7 +59,7 @@ export class CardShop extends Scene
    
 
         this.cardText = this.add.text(380, 400, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
-        this.errorText = this.add.text(370, 550, 'Click below to purchase a card!', {color: "#00ff26", fontSize: 20, fontFamily: 'Arial Black'});
+        this.errorText = this.add.text(370, 550, '', {color: "#00ff26", fontSize: 20, fontFamily: 'Arial Black'});
         this.add.text(400, 670, 'CARD DROP RATES:', {color: "#00d0ff", fontSize: 25, fontFamily: 'Arial Black'}).setColor("blue");
         this.add.text(220, 710, '70% Green, 20% Blue, 9.5% Yellow, 0.5% Red', {color: "#aa38fc", fontSize: 25, fontFamily: 'Arial Black'});
         //exhange coins for cards
