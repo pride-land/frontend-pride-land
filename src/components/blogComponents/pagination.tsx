@@ -11,11 +11,13 @@ const Pagination: React.FC<Props> = (props) => {
     }
 
   return (
-    <div id='pagination' className="mt-auto">
+    <div id='pagination' className="mt-auto flex justify-center">
         {paginationNumbers.map((pageNumber) => (
-            <button className='text-xl m-2 w-6 bg-white rounded' key={pageNumber} onClick={() => props.handlePagination(pageNumber)}>
+       
+            <button className='m-[.08rem] text-md w-6 bg-white rounded' key={pageNumber} onClick={() => props.handlePagination(pageNumber)}>
                 {pageNumber}
             </button>
+  
         ))}
     </div>
   )

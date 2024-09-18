@@ -40,7 +40,7 @@ const BlogPage = () => {
     return (
         <>
         <div className="w-screen">
-            <div className="grid w-full h-[40rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
+        <div className="grid w-full h-[19rem] xl:h-[30rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
             </div>
             <div className="bg-gradient-to-br from-green-300 to-white font-sans h-full flex flex-col md:flex-row">
                 <div className="hidden md:flex md:flex-col m-10 md:w-3/12 h-[60rem]">
@@ -51,21 +51,22 @@ const BlogPage = () => {
                 </div>
                 <div className="xl:mt-10 xl:mr-10 m-4 w-11/12 md:w-9/12">  
                 {chosenBlog ? (
-                    <BlogFocus chosenBlog={chosenBlog} />
+                    <BlogFocus
+                    blogsProp={blogs} 
+                    setChosenBlog={setChosenBlog}
+                    chosenBlog={chosenBlog} />
                 ) : (
-                    <p>Please select a blog.</p>
+                    <p className="hidden">Please select a blog.</p>
                 )}
                 </div>
             </div>
         </div>
 
-        {/* <Pagination
-                blogsPerPage = {blogsPerPage}
-                length = {props.blogsProp.length}
-                handlePagination = {handlePagination}
-            /> */}
         </>
     )
 }
 
 export default BlogPage
+
+
+

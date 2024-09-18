@@ -45,9 +45,10 @@ export class Exchange extends Scene
         this.owlhoot.play();
         //set-up exchange rate background
         this.shopBackground = this.add.image(512, 400, 'exchangebg').setScale(1, 0.8).setAlpha(1).setTint();
-        let xButton = this.add.text(110, 90, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        this.add.rectangle(121,107,40,40,0xFFFFFF).setAlpha(0.7)
+        let xButton = this.add.text(110, 90, 'X', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
-            xButton.setStyle({color: '#FFFFFF'} );
+            xButton.setStyle({color: '#CC0000'} );
         })
         .on('pointerout', () => {
             xButton.setStyle({color: "000000" });
@@ -70,7 +71,7 @@ export class Exchange extends Scene
         //conversion text
         this.mushroomIcon = this.add.image(330, 300, 'mushroom4').setScale(0.4);
         this.shopText = this.add.text(380, 290, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
-        this.add.image(570, 310, 'coin').setScale(0.05);
+        this.add.image(530, 310, 'coin').setScale(0.05);
 
         //display how many mushrooms user has and their offer
         this.youHaveText = this.add.text(450, 240, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
@@ -132,7 +133,7 @@ export class Exchange extends Scene
     {   
         this.secondsLeft = this.mushroomExchangeRateTimer.getRemainingSeconds().toString().substring(0, 3);
         this.todayRateText.setText(`Price time left: ${this.secondsLeft}`);
-        this.shopText.setText(`x ${this.numberInputValue}     =             x ${this.todayRate * this.numberInputValue}`);
+        this.shopText.setText(`x ${this.numberInputValue} =          x ${this.todayRate * this.numberInputValue}`);
         this.youHaveText.setText(`you have        x ${this.currentMushrooms}`);
         this.userMushroomOffer.setText(`        x1 =     x${this.todayRate}`);
 

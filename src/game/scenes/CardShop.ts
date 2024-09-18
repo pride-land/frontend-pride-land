@@ -36,12 +36,12 @@ export class CardShop extends Scene
         this.shopBell.play();
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
-        let xButton = this.add.text(270, 160, 'x', {color: "000000", fontSize: 30, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
+        let xButton = this.add.text(282, 180, 'X', {color: "#000000", fontSize: 55, fontFamily: 'Arial Black' }).setInteractive().setOrigin(0);
         xButton.on('pointerover', () => {
             xButton.setStyle({color: '#FFFFFF'} );
         })
         .on('pointerout', () => {
-            xButton.setStyle({color: "000000" });
+            xButton.setStyle({color: "#ff0000" });
         });
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
@@ -59,8 +59,9 @@ export class CardShop extends Scene
    
 
         this.cardText = this.add.text(380, 400, '', {color: "000000", fontSize: 30, fontFamily: 'Arial Black'});
-        this.errorText = this.add.text(430, 550, '', {color: "000000", fontSize: 20, fontFamily: 'Arial Black'});
-        this.add.text(410, 660, '70% green 20% blue 9.5% yellow 0.5% red', {color: "000000", fontSize: 10, fontFamily: 'Arial Black'});
+        this.errorText = this.add.text(370, 550, '', {color: "#00ff26", fontSize: 20, fontFamily: 'Arial Black'});
+        this.add.text(450, 670, 'CARD DROP RATES:', {color: "#000", fontSize: 15, fontFamily: 'Arial Black'});
+        this.add.text(350, 710, '70% Green, 20% Blue, 9.5% Yellow, 0.5% Red', {color: "#aa38fc", fontSize: 15, fontFamily: 'Arial Black'}).setColor("blue");
         //exhange coins for cards
         this.purchaseButton = this.add.image(530, 620 ,'buyicon' ).setInteractive().setScale(0.1);
         this.purchaseButton
@@ -183,8 +184,8 @@ export class CardShop extends Scene
             this.scene.sendToBack();
         };
 
-        if (this.currentCoins < 200) this.errorText.setText('not enough coins!');
-        else this.errorText.setText('');
+        if (this.currentCoins < 200) this.errorText.setText('Not enough coins!').setColor("#c20000").setX(430).setY(550);
+        else this.errorText.setText('Click below to purchase a card!').setX(370).setY(550);
     }
     randomCardChooser()
     {

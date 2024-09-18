@@ -35,7 +35,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
   ];
 
   return (
-    <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl md:sticky top-0 z-50">
+    <nav className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 shadow-2xl lg:sticky top-0 z-50">
       <div className="flex h-24 items-center justify-between px-4">
         {/* Logo */}
         <a href="./">
