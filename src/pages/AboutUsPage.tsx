@@ -1,15 +1,18 @@
 const AboutUsPage = () => {
     return (
         <div className="w-screen">
-        <div className="(Image) grid w-full h-[40rem] bg-aboutus-background bg-cover bg-top rounded-sm opacity-80">
+        <div className="(Image) grid w-full portrait:h-[20rem] h-[40rem] bg-aboutus-background bg-cover bg-top rounded-sm opacity-80">
 
-            <div className="ml-[40%] lg:w-96 h-auto w-auto text-left text-2xl lg:text-7xl text-black font-serif">
+            <div className="portrait:hidden  ml-[40%] lg:w-96 h-auto w-auto text-left text-2xl lg:text-7xl text-black font-serif">
                 About Us
             </div>
 
         </div>
             <div className="(Body) p-6 md:p-12 lg:p-20 pb-24 bg-gradient-to-br from-green-300 to-white font-sans">
                 <div className="(Body Content)max-w-screen-lg mx-auto">
+                <div className="landscape:hidden text-center h-auto w-auto  text-4xl  text-black font-serif">
+                About Us
+            </div>
                     <h1 className="text-4xl md:text-5xl lg:text-[80px] my-8">設立背景</h1>
                     <hr className="h-px my-6 border-black border-2"/>
                     <p className="text-base md:text-lg lg:text-2xl mb-10">

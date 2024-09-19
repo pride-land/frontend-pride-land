@@ -46,6 +46,7 @@ const CommentsPage = () => {
 
     const initialPageView = (
         <div className="h-full w-full shadow-2xl rounded-md p-6 lg:p-8 lg:w-4/5 xl:w-4/5 bg-white">
+        <h1 className="landscape:hidden portrait:visible text-center mb-2 text-2xl">{t("ContactUs.ImageText")}</h1>
             <h1 className="mb-5 font-semibold lg:text-xl text-center">{t("ContactUs.FeedbackFormHeader")}</h1>
             <form name="CommentsForm" onSubmit={handleIsSubmitted}>
                 <label htmlFor='name'>{t("ContactUs.Name")}</label>
@@ -75,12 +76,12 @@ const CommentsPage = () => {
        <>
         <div className="flex flex-col md:flex-row h-screen w-screen overflow-hidden ">
             <div className="(Body) bg-gradient-to-br from-green-300 to-white font-sans flex-1 grid place-items-center p-4 md:p-8">
-            <p className="mb-3 xl:mt-5 text-2xl md:text-4xl xl:mb-14 xl:text-4xl">{t("ContactUs.ImageText")}</p>
-                <div className="w-full mt-0 xl:mb-[12rem] md:w-8/12 lg:w-10/12 xl:w-8/12 h-auto flex items-center justify-center">
+            <p className="portrait:hidden mb-3 xl:mt-5 text-2xl md:text-4xl xl:mb-14 xl:text-4xl">{t("ContactUs.ImageText")}</p>
+                <div className="portrait:w-full portrait:mb-32 mt-0 xl:mb-[12rem] md:w-8/12 lg:w-10/12 xl:w-8/12 h-auto flex items-center justify-center">
                     {commentsPageView}
                 </div>
             </div>
-            <div className="(Image) flex-1  place-items-center p-4 md:p-8 font bg-contact-background grid w-full bg-cover bg-top rounded-sm opacity-80">
+            <div className="hidden flex-1  place-items-center p-4 md:p-8 font bg-contact-background lg:grid xl:grid w-full bg-cover bg-top rounded-sm opacity-80">
                 <div className="w-full md:w-3/4 lg:w-1/2 text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                 </div>
             </div>
