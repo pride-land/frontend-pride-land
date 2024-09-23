@@ -59,9 +59,9 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
         </div>
         {/* language menu */}
         <Menu as="div" className="relative ml-3">
-          <MenuButton className="px-4 py-6 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary focus:outline-none focus:ring-inset">
+          <MenuButton className="p-3 portrait:p-2 text-lg font-medium rounded-lg text-white hover:bg-green-800 hover:text-secondary focus:outline-none focus:ring-inset">
           <img src={langs[currentLang].flag} alt={`${currentLang} flag`} className="h-12 w-12 mx-4" />          </MenuButton>
-          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none shadow-xl z-40">
+          <MenuItems className="bg-gradient-to-br from-green-500 via-green-600 to-green-600 absolute right-0 w-48 origin-top-right divide-y divide-gray-100 shadow-lg focus:outline-none  z-40">
             {Object.keys(langs).map((lang) => (
               <MenuItem key={lang}>
                 {({ active }) => (
