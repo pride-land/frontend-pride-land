@@ -23,7 +23,7 @@ const AdminLogin: React.FC = () => {
             <img
               alt="Pride-Land"
               src={logo}
-              className="mx-auto my-0 h-40 "
+              className="mx-auto my-0 h-32 p-5 mb-4"
             />
             <h2 className=" text-center text-2xl font-bold text-gray-900">
             ログイン
