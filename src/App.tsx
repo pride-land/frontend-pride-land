@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/homeComponents/Layout";
 import Home from "./pages/Home";
 import AdminLogin from "./Admin/admin-components/AdminLogin";
-import { AuthProvider, useAuth } from "./Admin/admin-authContext/AuthContext"; // Updated import for useAuth
+import { AuthProvider, useAuth } from "./Admin/admin-authContext/AuthContext";
 import AdminRegistration from "./Admin/admin-components/AdminRegistration";
 import AdminLayout from "./Admin/admin-components/AdminLayout";
 import VolunteerPage from "./pages/VolunteerPage";
