@@ -53,7 +53,8 @@ const AdminRegistration: React.FC = () => {
     return (
       <>
       {/* Register and Logo */}
-      <div className="flex min-h-full justify-center px-6 py-12 mt-[6rem] lg:px-8">
+      <div className=" h-auto portrait:h-[60rem] sm:h-[60rem] md:h-[60rem] lg:h-[60rem] xl:h-[70rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
+      <div className="flex min-h-full justify-center px-6 py-12 lg:px-8">
           <div className="shadow-2xl mt-0 mb-5 bg-gray-100 w-[22rem] h-[37rem]">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -153,10 +154,10 @@ const AdminRegistration: React.FC = () => {
 								<a href ="#" className="text-center" >ログイン</a>
 							  </p>
               </div>
-          </div>
+              </div>
+            </div>
           </div>
         </div>
-    
       </>
     )
   }
