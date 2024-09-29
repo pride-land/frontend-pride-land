@@ -55,6 +55,8 @@ export class Preloader extends Scene
         this.load.image('max', 'max.png');
         this.load.image('exchangebg', 'exchangebg.png');
         this.load.image('mute', 'mute.png');
+        this.load.image('exitbutton', 'exitbutton.png');
+        this.load.image('exitmushroom', 'exitmushroom.png');
         //cards
         this.load.image('greencard01', 'cardAssets/greenCards/green01.png');
         this.load.image('greencard02', 'cardAssets/greenCards/green02.png');
@@ -102,7 +104,6 @@ export class Preloader extends Scene
         this.load.image('redcard09', 'cardAssets/redCards/red09.png');
         this.load.image('redcard10', 'cardAssets/redCards/red10.png');
         this.load.image('redcard11', 'cardAssets/redCards/red11.png');
-
         //audio
         this.load.audio('exchange', 'sounds/exchange.mp3');
         this.load.audio('cardPurchase', 'sounds/cardPurchase.mp3');
