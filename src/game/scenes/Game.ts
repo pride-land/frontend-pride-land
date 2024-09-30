@@ -32,7 +32,7 @@ export class Game extends Scene
     isMushroomDone: boolean;
     isCurrentBatchHarvested: boolean;
     
-    waterDropListener: Phaser.Input.InputPlugin;
+    waterDropListener: Phaser.Events.EventEmitter;
     tutorialTimerText: Phaser.GameObjects.Text;
     tutorialTimerHarvest: Phaser.Time.TimerEvent;
     mushroomSprite: Phaser.Physics.Arcade.Sprite;
@@ -247,6 +247,7 @@ export class Game extends Scene
                 this.shopScene.scene.setVisible(true);
             }
             this.scene.pause();
+            // this.waterDropListener.once
         })
 
         this.inventoryIcon = this.add.image(70, 690, 'mushroomBook').setScale(0.3).setVisible(false)

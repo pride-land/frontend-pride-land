@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState, useEffect } from 'react'
+import { ReactNode, createContext, useState, useEffect, useContext } from 'react'
 import * as jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined >(undefined);
 const AUTH_TOKEN  = process.env.backend_auth_url;
-
+    
 export const AuthProvider = ({ children } : { children: ReactNode }) => {
 
     let [user, setUser] = useState(() => (sessionStorage.getItem('authTokens') ? jwt.jwtDecode(sessionStorage.getItem('authTokens') ?? '') : null))
@@ -132,5 +132,13 @@ export const AuthProvider = ({ children } : { children: ReactNode }) => {
         </AuthContext.Provider>
     )
 }
-
 export default AuthContext;
+
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

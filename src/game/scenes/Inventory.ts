@@ -37,14 +37,29 @@ export class Inventory extends Scene
         this.userInventory = data.userInventory;
 
         this.background = this.add.image(512, 400, 'inventoryBackground').setScale(1.8).setAlpha(1)
-        let xButton = this.add.text(110, 90, 'X', {color: "#ff0000", fontSize: 45, fontFamily: 'Helvetica-Bold' }).setInteractive().setOrigin(0);
+      
+        let xButton = this.add.image(110, 90, 'exitmushroom').setScale(0.2).setInteractive();
         xButton.on('pointerover', () => {
-            xButton.setStyle({color: '#FFFFFF'} );
-        })
-        .on('pointerout', () => {
-            xButton.setStyle({color: "#ff0000" });
+            this.tweens.add({
+                targets: xButton,
+                scale: {
+                    value: 0.25
+                },
+                duration: 100
+            })
+        }).on('pointerout', () => {
+            this.tweens.add({
+                targets: xButton,
+                scale: {
+                    value: 0.2
+                },
+                duration: 100
+            });
+            xButton.clearTint();
         });
         xButton.on('pointerdown', () => {
+            xButton.setTint(0x9fd412);
+        }).on('pointerup', () => {
             this.scene.setVisible(false);
             this.scene.stop('Inventory');
             this.scene.resume('Game');

@@ -15,7 +15,8 @@ const AdminLogin: React.FC = () => {
  
     return (
       <>
-      <div className="flex min-h-full justify-center px-6 py-12 mt-[6rem] lg:px-8">
+      <div className=" h-auto portrait:h-[60rem] sm:h-[60rem] md:h-[60rem] lg:h-[60rem] xl:h-[70rem] bg-pudding-background bg-cover bg-top rounded-sm opacity-80">
+      <div className="flex min-h-full justify-center px-6 py-12  lg:px-8">
           
           {/* Image & Login */}
           <div className="shadow-2xl rounded-md bg-gray-100 w-[22rem] h-[35rem]">
@@ -23,7 +24,7 @@ const AdminLogin: React.FC = () => {
             <img
               alt="Pride-Land"
               src={logo}
-              className="mx-auto my-0 h-40 "
+              className="mx-auto my-0 h-32 p-5 mb-4"
             />
             <h2 className=" text-center text-2xl font-bold text-gray-900">
             ログイン
@@ -88,6 +89,7 @@ const AdminLogin: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </>
     )

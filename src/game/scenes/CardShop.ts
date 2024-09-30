@@ -36,12 +36,25 @@ export class CardShop extends Scene
         this.shopBell.play();
         //set-up shop background and close button 
         this.shopBackground = this.add.image(512, 450, 'cardshopbackground').setScale(1.5);
-        let xButton = this.add.text(282, 180, 'X', {color: "#000000", fontSize: 55, fontFamily: 'Helvetica-Bold' }).setInteractive().setOrigin(0);
+        
+        let xButton = this.add.image(304, 210, 'exitbutton').setScale(0.2).setInteractive();
         xButton.on('pointerover', () => {
-            xButton.setStyle({color: '#FFFFFF'} );
+            this.tweens.add({
+                targets: xButton,
+                scale: {
+                    value: 0.25
+                },
+                duration: 50
+            });
         })
         .on('pointerout', () => {
-            xButton.setStyle({color: "#ff0000" });
+            this.tweens.add({
+                targets: xButton,
+                scale: {
+                    value: 0.2
+                },
+                duration: 50
+            });
         });
         xButton.on('pointerdown', () => {
             this.scene.setVisible(false);
