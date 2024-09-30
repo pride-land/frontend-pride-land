@@ -21,11 +21,13 @@ const AdminLogin: React.FC = () => {
           {/* Image & Login */}
           <div className="shadow-2xl rounded-md bg-gray-100 w-[22rem] h-[35rem]">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <a href="/">
             <img
               alt="Pride-Land"
               src={logo}
               className="mx-auto my-0 h-32 p-5 mb-4"
             />
+            </a>
             <h2 className=" text-center text-2xl font-bold text-gray-900">
             ログイン
             </h2>
