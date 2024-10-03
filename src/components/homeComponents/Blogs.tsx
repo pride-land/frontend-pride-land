@@ -43,7 +43,7 @@ const Blogs = () => {
                       {blog.description}
                     </p>
                   </div>
-                  <div className="font-light line-clamp-4 sm:line-clamp-6">
+                  <div className="font-light line-clamp-1 sm:line-clamp-3">
                     {parse(blog.content)}
                   </div>
                 </div>
