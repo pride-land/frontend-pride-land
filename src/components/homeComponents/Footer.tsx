@@ -1,4 +1,4 @@
-import { FaFacebookF, FaYoutube, FaGithub } from "react-icons/fa6";
+import { FaFacebookF, FaYoutube, FaGithub, FaInstagram } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 
 export default function Footer() {
@@ -27,6 +27,10 @@ export default function Footer() {
                 className="cursor-pointer duration-150 flex items-center text-white hover:text-yellow-300 transition-colors ">
                 <FaYoutube className="text-3xl mr-2" />
                 {/* <h1>{t("footer.Youtube")}</h1> */}
+              </a>
+              <a href="https://www.instagram.com/prideland4all/"
+                className="cursor-pointer duration-150 flex items-center text-white hover:text-yellow-300 transition-colors ">
+                <FaInstagram  className="text-3xl mr-2 "/>
               </a>
             </div>
           </div>
