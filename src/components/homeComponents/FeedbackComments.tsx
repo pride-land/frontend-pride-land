@@ -46,9 +46,9 @@ const FeedbackComments: React.FC = () => {
     // }
     
     const createFeedbackCards = feedbacks.map((feedback, index) => {
-        return <div id={"feedback-" + String(index+1)} key={feedback.name + index} className="min-h-56 min-w-72  bg-white max-h-10 rounded overflow-hidden shadow-lg m-12">
-          <div className="px-6 py-4">
-          <div className="font-semibold line-clamp-6 mb-2">{feedback.comment}</div>
+        return <div id={"feedback-" + String(index+1)} key={feedback.name + index} className="min-h-56 min-w-72 max-h-10 rounded overflow-hidden shadow-lg m-12">
+          <div className="px-4 py-2">
+          <div className="font-semibold line-clamp-4 mb-2">{feedback.comment}</div>
           <p className="text-gray-700 text-xs">
           {feedback.name}
     </p>
