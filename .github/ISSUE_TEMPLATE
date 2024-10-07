@@ -2,10 +2,10 @@
   [Type of Issue]
 
 ## Problem
-  [Describe what the problem we are trying yo solve.]
+  [Describe the problem we are trying to solve.]
 
 ## Success
-  [What this task should accomplish when it's considered completed.]
+  [What should this task accomplish when it's considered completed.]
 
 ### Requirements
 
@@ -13,8 +13,12 @@
 - [ ] Requirements
 - [ ] here
 
+### Screenshot (If Applicable)
+  [If applicable, consider including screenshots to provide a clearer visual representation of the issue 
+  (example: bug, future features, etc) to enhance understanding and easy code review. Delete this statement after use.]
+
 ## Implementation notes
  [Suggest how this might be implmented.]
 
 
-### Screenshot (If Applicable)
+
