@@ -78,7 +78,7 @@ One of ぷらいどらんど 's missions is to highlight inclusivity at the farm
 to have batches of farmland that are all right next to each other. One of their biggest harvests are Shiitake mushrooms, but it is in a location that is very difficult to reach for a person with a mobility impairment.
 
 ### Our solution
-We wanted to create a game that mimics the process of growing and harvesting Shiitake mushrooms, giving everyone an enganging experience while also allowing players to learn about the farm.
+We wanted to create a game that mimics the process of growing and harvesting Shiitake mushrooms, giving everyone an engaging experience while also allowing players to learn about the farm.
 
 ## 🎲 The gameplay loop
 1. Water the log by tapping/pressing on the screen to fill up the bar
