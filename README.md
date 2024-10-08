@@ -1,11 +1,11 @@
 # 🌻 Project-Pride-Land
 
 ## 🐐 Goal
-This is the front-end repository for our project Pride Farm! Our mission is to assist the farm NPO ぷらいどらんど in making a website for its community;
-a place where anyone and everyone can come together and particpate in farming regardless of their health conditions.
+This is the front-end repository for our project Pride Farm! Our mission is to assist the farm NPO ぷらいどらんど in making a website for its community:
+a place where everyone can come together and particpate in farming regardless of their health conditions.
 
 ## 💬 Mission
-We want to be able to express what ぷらいどらんど stands for and ensure that their message of companionship, acceptance, and community is displayed. Not only that, but we also strive to make this website easy to maintain and understand for the staff at the NPO.
+We aim to clearly express what ぷらいどらんど stands for and ensure that its message of companionship, acceptance, and community is conveyed. Additionally, we strive to make this website easy for the NPO staff to maintain and understand.
 
 ## 💻 Built with:
 
@@ -18,16 +18,19 @@ Our Front-End Tech stack: <br>
 • PHASER
 ``` 
 # 👷 Contributing
-Make sure to fork our repo, and fill out the informaiton in the PR message template! If you have any questions feel free to reach out to any of our members.
+Make sure to clone our repo, and fill out the information in the PR message template! If you have any questions feel free to reach out to any of our members.
 
 # 🔧 Setting up Development
 
-Here's a quick guide and run down on how to setup environment and start developing the project.
+Here's a quick guide and run down on how to setup the environment and start contributing to the project.
 
 ### Prerequisites
 ```
 • Node / NPM
-• Plugins for React and Tailwind, such as Tailwind CSS IntelliSense
+```
+### Nice to Have
+```
+• VS Code extensions for React and Tailwind, such as Tailwind CSS IntelliSense
 ```
 
 ### Initial Setup:
@@ -36,7 +39,7 @@ Here's a quick guide and run down on how to setup environment and start developi
 # install dependencies
 $ npm install
 
-# start a dev server running with auto-reloading on localhost:5173 
+# run the development server with hot-reloading on localhost:5173 
 $ npm run dev
 ```
 
