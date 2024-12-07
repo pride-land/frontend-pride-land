@@ -21,65 +21,76 @@ import MushroomGame from "./pages/MushroomGame";
 
 //protected route for admin routes
 const AdminProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuth(); 
+ const { user } = useAuth();
 
-  if (!user) {  //redirect to login if user not authenticated
-    return <Navigate to="/login" />;
-  }
-  return <>{children}</>; //allow access if authenticated
+ if (!user) {
+  //redirect to login if user not authenticated
+  return <Navigate to="/login" />;
+ }
+ return <>{children}</>; //allow access if authenticated
 };
 
 const App = () => {
-  let LanguageContext = createContext("");
-  const [currentLang, setCurrentLang] = useState("");
+ let LanguageContext = createContext("");
+ const [currentLang, setCurrentLang] = useState("");
 
-  // Get the language from local storage so it doesn't change on refresh
-  useEffect(() => {
-    const lang = sessionStorage.getItem("lang");
-    if (lang) {
-      setCurrentLang(lang); 
-      LanguageContext = createContext(lang);
-    } else {
-      setCurrentLang("jp");
-      LanguageContext = createContext("jp");
-    }
-  }, []);
+ // Get the language from local storage so it doesn't change on refresh
+ useEffect(() => {
+  const lang = sessionStorage.getItem("lang");
+  if (lang) {
+   setCurrentLang(lang);
+   LanguageContext = createContext(lang);
+  } else {
+   setCurrentLang("jp");
+   LanguageContext = createContext("jp");
+  }
+ }, []);
 
-  return (
-    <LanguageContext.Provider value={currentLang}>
-      <BrowserRouter>
-        <AuthProvider>
-          { currentLang && (
-            <Routes>
-              {/* Main User Interface */}
-              <Route path="/" element={<Layout setCurrentLang={setCurrentLang} currentLang={currentLang}/>}>
-                <Route index element={<Home />} />
-                <Route path="blogs" element={<BlogPage />} />
-                <Route path="contactus" element={<CommentsPage/>}/>
-                <Route path="aboutus" element={<AboutUsPage/>}/>
-                <Route path="volunteers" element={<VolunteerPage />} />
-                <Route path="pridefarmgame" element={<MushroomGame />} />
-              </Route>
+ return (
+  <LanguageContext.Provider value={currentLang}>
+   <BrowserRouter>
+    <AuthProvider>
+     {currentLang && (
+      <Routes>
+       {/* Main User Interface */}
+       <Route
+        path="/"
+        element={
+         <Layout setCurrentLang={setCurrentLang} currentLang={currentLang} />
+        }>
+        <Route index element={<Home />} />
+        <Route path="blogposts" element={<BlogPage />} />
+        <Route path="contactus" element={<CommentsPage />} />
+        <Route path="aboutus" element={<AboutUsPage />} />
+        <Route path="volunteersignup" element={<VolunteerPage />} />
+        <Route path="pridefarmgame" element={<MushroomGame />} />
+       </Route>
 
-              {/* Protected Routes */}
-              <Route path="/" element={ <AdminProtectedRoute><AdminLayout /></AdminProtectedRoute> }>
-                <Route path="admin-layout" element={<AdminDashboard/>} />
-                <Route path="admin-blogs" element={<AdminBlogs/>} />
-                <Route path="admin-volunteer" element={<AdminVolunteer/>} />
-                <Route path="admin-gallery" element={<AdminGallery/>} />
-                <Route path="admin-comments" element={<AdminComments/>} />
-                <Route path="admin-controls" element={<AdminControlDashboard/>} />
-              </Route>
+       {/* Protected Routes */}
+       <Route
+        path="/"
+        element={
+         <AdminProtectedRoute>
+          <AdminLayout />
+         </AdminProtectedRoute>
+        }>
+        <Route path="admin-layout" element={<AdminDashboard />} />
+        <Route path="admin-blogs" element={<AdminBlogs />} />
+        <Route path="admin-volunteer" element={<AdminVolunteer />} />
+        <Route path="admin-gallery" element={<AdminGallery />} />
+        <Route path="admin-comments" element={<AdminComments />} />
+        <Route path="admin-controls" element={<AdminControlDashboard />} />
+       </Route>
 
-              {/* Authentication Routes */}
-              <Route path="/login" element={<AdminLogin/>}/>
-              <Route path="/register" element={<AdminRegistration/>} />
-            </Routes>
-            )}
-        </AuthProvider>
-      </BrowserRouter>
-    </LanguageContext.Provider>
-  )
+       {/* Authentication Routes */}
+       <Route path="/login" element={<AdminLogin />} />
+       <Route path="/register" element={<AdminRegistration />} />
+      </Routes>
+     )}
+    </AuthProvider>
+   </BrowserRouter>
+  </LanguageContext.Provider>
+ );
 };
 
 export default App;
