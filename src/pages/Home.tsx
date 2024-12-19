@@ -31,10 +31,6 @@ function Home() {
    <AnimatedSection>
     <MissionStatement />
    </AnimatedSection>
-   {/* <section id="cards" className={"min-h-80 flex flex-col px-4"}>
-        <div className="flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
-        <CardGallery/>
-      </section> */}
    <section id="blogs" className={"min-h-80 flex flex-col px-4"}>
     <AnimatedSection>
      <div className="opacity-0 flex flex-col flex-1 max-w-[1400] mx-auto w-full"></div>
