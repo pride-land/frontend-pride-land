@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import * as jwt from 'jwt-decode';
+import { ReactNode } from "react";
+import * as jwt from "jwt-decode";
 interface AuthContextType {
     user: jwt.JwtPayload | null;
     authTokens: any;

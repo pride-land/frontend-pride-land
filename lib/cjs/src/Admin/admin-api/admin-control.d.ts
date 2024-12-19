@@ -1,1 +1,1 @@
-export declare const fetchAllStaff: () => Promise<[]>;
+export declare const fetchAllStaff: () => Promise<any>;
