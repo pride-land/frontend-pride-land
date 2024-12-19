@@ -23,7 +23,7 @@ const Navbar = ({ setCurrentLang, currentLang }: Langs) => {
  const handleLangChange = (lang: string) => {
   i18n.changeLanguage(lang);
   setCurrentLang(lang);
-  sessionStorage.setItem("lang", lang);
+  localStorage.setItem("lang", lang);
  };
 
  const navigation: Navigation[] = [

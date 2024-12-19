@@ -36,7 +36,7 @@ const App = () => {
 
  // Get the language from local storage so it doesn't change on refresh
  useEffect(() => {
-  const lang = sessionStorage.getItem("lang");
+  const lang = localStorage.getItem("lang");
   if (lang) {
    setCurrentLang(lang);
    LanguageContext = createContext(lang);

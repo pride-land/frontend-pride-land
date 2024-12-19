@@ -7,34 +7,33 @@ import de from "./i18n/locales/de.json";
 import pt from "./i18n/locales/pt.json";
 
 i18n.use(initReactI18next).init({
-   fallbackLng: checkSessionLang(),
-   debug: true,
-   resources: {
-      en: {
-         translation: en
-      },
-      jp: {
-         translation: jp
-      },
-      it: {
-         translation: it
-      },
-      de: {
-         translation: de
-      },
-      pt: {
-         translation: pt
-      }
-   },
+ fallbackLng: checkSessionLang(),
+ debug: true,
+ resources: {
+  en: {
+   translation: en,
+  },
+  jp: {
+   translation: jp,
+  },
+  it: {
+   translation: it,
+  },
+  de: {
+   translation: de,
+  },
+  pt: {
+   translation: pt,
+  },
+ },
 });
 
-
 function checkSessionLang() {
-   const lang = sessionStorage.getItem("lang");
-   if (lang) {
-      return lang;
-   } 
-      return "jp";
+ const lang = localStorage.getItem("lang");
+ if (lang) {
+  return lang;
+ }
+ return "jp";
 }
 
 export default i18n;
